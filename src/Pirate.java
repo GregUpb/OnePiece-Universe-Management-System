@@ -66,7 +66,9 @@ public class Pirate extends Character{
 
     public void SetBounty(int Bounty)
     {
-        this.Bounty = Bounty;
+        if (Bounty >= 0){
+            this.Bounty = Bounty;
+        }
     }
 
     public void SetPirateRole(String PirateRole)

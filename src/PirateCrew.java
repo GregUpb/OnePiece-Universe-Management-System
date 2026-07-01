@@ -74,14 +74,15 @@ public class PirateCrew {
         this.Captain = Captain;
     }
 
-    public void SetTotalCrewBounty(int TotalCrewBounty)
+    public void CalculateTotalCrewBounty(int TotalCrewBounty)
     {
+        TotalCrewBounty = 0;
+        for (Pirate p : crewMembers) {
+            if (p.getStatus().equals("Free")) {
+                total += p.getBounty();
+            }
+        }
         this.TotalCrewBounty = TotalCrewBounty;
-    }
-
-    public void AddTotalCrewBounty(int Amount)
-    {
-        this.TotalCrewBounty += Amount;
     }
 
     public void AddCrewMember(Pirate CrewMember)

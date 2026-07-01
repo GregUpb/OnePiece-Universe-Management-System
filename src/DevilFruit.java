@@ -81,7 +81,17 @@ public class DevilFruit{
 
     public void SetCurrentOwner(Character CurrentOwner)
     {
-        this.CurrentOwner = CurrentOwner;
+        if (this.CurrentOwner == null && CurrentOwner.GetDFPower() == null){
+            this.CurrentOwner = CurrentOwner;
+            CurrentOwner.SetDFPower(this);
+        }
+    }
+
+    public boolean HasCurrentOwner(){ // Validation checks for Character Constructor
+        if (this.CurrentOwner == null){
+            return false;
+        }
+        return true;
     }
 
     /* STUFF */
@@ -102,5 +112,19 @@ public class DevilFruit{
         }
     }
 
+    protected void GenerateID()
+    {
+        LocalDateTime rn = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yMdHms");//Year-Month-Day-Hours-Minutes-Seconds
+        this.FruitID = rn.format(formatter);
+    }
 
+    public void TriggerReinc()
+    {
+        if (this.CurrentOwner != null){
+            this.AddHistoricalOwner(this.CurrentOwner);
+            this.currentOwner = null;
+            this.currentOwner.setDevilFruitPower(null);
+        }
+    }
 }

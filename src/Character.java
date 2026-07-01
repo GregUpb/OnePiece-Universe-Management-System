@@ -1,6 +1,9 @@
 //Module 1: Characters
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 abstract class Character{
-    private int CharID; //
+    private int CharID;
     private String Name;
     private String Alias;
     private String Origin;
@@ -8,7 +11,7 @@ abstract class Character{
     private DevilFruit DFPower;
     private int Wallet;
 
-    abstract void displayProfile();
+    abstract String displayProfile();
     abstract void performDuty();
 
     public Character(String Name, String Alias, String Origin, String Status, int Wallet)
@@ -83,6 +86,10 @@ abstract class Character{
     public void SetStatus(String Status)
     {
         this.Status = Status;
+        //Reincarnation Trigger
+        if (this.Status.equals("Dead") && this.DFPower != null) {
+            this.DFPower.TriggerReinc();
+        }
     }
 
     public void SetDFPower(DevilFruit DFPower)
@@ -95,6 +102,12 @@ abstract class Character{
         this.Wallet = Wallet;
     }
 
+    protected void GenerateID()
+    {
+        LocalDateTime rn = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yMdHms");//Year-Month-Day-Hours-Minutes-Seconds
+        this.CharID = rn.format(formatter);
+    }
     
 
 }
