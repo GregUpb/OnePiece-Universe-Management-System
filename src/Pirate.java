@@ -92,7 +92,7 @@ public class Pirate extends Character{
 
     public void displayProfile()
     {
-
+        
     }
 
     public void performDuty()
