@@ -6,18 +6,18 @@ public class MarineCorp{
 
     private int CorpID;
     private String BaseLocation;
-    private Character CorpsCommander;
+    private Marine CorpsCommander;
     private int OperationalFunds;
-    private List<Character> CorpMembers = new ArrayList<>();
+    private List<Marine> CorpMembers = new ArrayList<>();
 
-    MarineCorp(String BaseLocation, Character CorpsCommander, int OperationalFunds)
+    MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds)
     {
         this.BaseLocation = BaseLocation;
         this.CorpsCommander = CorpsCommander;
         this.OperationalFunds = OperationalFunds;
     }
 
-    MarineCorp(String BaseLocation, Character CorpsCommander, int OperationalFunds, List<Character> CorpMembers)
+    MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds, List<Marine> CorpMembers)
     {
         this.BaseLocation = BaseLocation;
         this.CorpsCommander = CorpsCommander;
@@ -35,7 +35,7 @@ public class MarineCorp{
         return this.BaseLocation;
     }
 
-    public Character GetCorpsCommander()
+    public Marine GetCorpsCommander()
     {
         return this.CorpsCommander;
     }
@@ -45,7 +45,7 @@ public class MarineCorp{
         return this.OperationalFunds;
     }
 
-    public List<Character> GetCorpMembers()
+    public List<Marine> GetCorpMembers()
     {
         return this.CorpMembers;
     }
@@ -55,7 +55,7 @@ public class MarineCorp{
         this.BaseLocation = BaseLocation;
     }
 
-    public void SetCorpsCommander(Character CorpsCommander)
+    public void SetCorpsCommander(Marine CorpsCommander)
     {
         this.CorpsCommander = CorpsCommander;
     }
@@ -70,7 +70,7 @@ public class MarineCorp{
         this.OperationalFunds += Amount;
     }
 
-    public void AddCorpMember(Character CorpMember)
+    public void AddCorpMember(Marine CorpMember)
     {
         if (!(CorpMembers.contains(CorpMember)))
         {
@@ -78,7 +78,7 @@ public class MarineCorp{
         }
     }
 
-    public void RemoveCorpMember(Character CorpMember)
+    public void RemoveCorpMember(Marine CorpMember)
     {
         if (CorpMembers.contains(CorpMember))
         {

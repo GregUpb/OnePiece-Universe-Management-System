@@ -7,13 +7,12 @@ public class PirateCrew {
     private int CrewID;
     private String CrewName;
     private String ShipsName;
-    private String Captain;
-    private List<Character> CrewMembers = new ArrayList<>();
+    private Pirate Captain;
+    private List<Pirate> CrewMembers = new ArrayList<>();
     private int TotalCrewBounty;
 
-    /* Can A Pirate Hunter be the Captain of a Pirate Crew??? */
 
-    PirateCrew(String CrewName, String ShipsName, String Captain, int TotalCrewBounty)
+    PirateCrew(String CrewName, String ShipsName, Pirate Captain, int TotalCrewBounty)
     {
         this.CrewName = CrewName;
         this.ShipsName = ShipsName;
@@ -21,7 +20,7 @@ public class PirateCrew {
         this.TotalCrewBounty = TotalCrewBounty;
     }
     
-    PirateCrew(String CrewName, String ShipsName, String Captain, List<Character> CrewMembers, int TotalCrewBounty)
+    PirateCrew(String CrewName, String ShipsName, Pirate Captain, List<Pirate> CrewMembers, int TotalCrewBounty)
     {
         this.CrewName = CrewName;
         this.ShipsName = ShipsName;
@@ -45,12 +44,12 @@ public class PirateCrew {
         return this.ShipsName;
     }
 
-    public String GetCaptain()
+    public Pirate GetCaptain()
     {
         return this.Captain;
     }
 
-    public List<Character> GetCrewMembers()
+    public List<Pirate> GetCrewMembers()
     {
         return this.CrewMembers;
     }
@@ -70,7 +69,7 @@ public class PirateCrew {
         this.ShipsName = ShipsName;
     }
 
-    public void SetCaptain(String Captain)
+    public void SetCaptain(Pirate Captain)
     {
         this.Captain = Captain;
     }
@@ -85,7 +84,7 @@ public class PirateCrew {
         this.TotalCrewBounty += Amount;
     }
 
-    public void AddCrewMember(Character CrewMember)
+    public void AddCrewMember(Pirate CrewMember)
     {
         if (!(CrewMembers.contains(CrewMember)))
         {
@@ -93,7 +92,7 @@ public class PirateCrew {
         }
     }
 
-    public void RemoveCrewMember(Character CrewMember)
+    public void RemoveCrewMember(Pirate CrewMember)
     {
         if (CrewMembers.contains(CrewMember))
         {
