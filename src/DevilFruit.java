@@ -35,7 +35,7 @@ public class DevilFruit{
     DevilFruit(String FruitName, String Category, String PrimaryAbility, Character CurrentOwner, List<Character> HistoricalOwners)
     {
         this.GenerateID();
-        
+
         this.FruitName = FruitName;
         this.Category = Category;
         this.PrimaryAbility = PrimaryAbility;
@@ -128,12 +128,12 @@ public class DevilFruit{
         this.ID = Long.parseLong(rn.format(formatter));
     }
 
-    // public void TriggerReinc()
-    // {
-    //     if (this.CurrentOwner != null){
-    //         this.AddHistoricalOwner(this.CurrentOwner);
-    //         this.currentOwner = null;
-    //         this.currentOwner.setDevilFruitPower(null);
-    //     }
-    // }
+    public void TriggerReinc()
+    {
+        if (this.CurrentOwner != null){
+            this.AddHistoricalOwner(this.CurrentOwner);
+            this.CurrentOwner = null;
+            this.CurrentOwner.SetDFPower(null);
+        }
+    }
 }

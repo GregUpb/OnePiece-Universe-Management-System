@@ -27,7 +27,7 @@ public class PirateCrew {
     PirateCrew(String CrewName, String ShipsName, Pirate Captain, List<Pirate> CrewMembers, int TotalCrewBounty)
     {
         this.GenerateID();
-        
+
         this.CrewName = CrewName;
         this.ShipsName = ShipsName;
         this.Captain = Captain;
@@ -77,14 +77,17 @@ public class PirateCrew {
 
     public void SetCaptain(Pirate Captain)
     {
+        this.Captain.SetIsCaptain(false);
+        Captain.SetIsCaptain(true);
+
         this.Captain = Captain;
     }
 
-    public void CalculateTotalCrewBounty(int TotalCrewBounty)
+    public void CalculateTotalCrewBounty()
     {
-        TotalCrewBounty = 0;
+        int TotalCrewBounty = 0;
         for (Pirate p : CrewMembers) {
-            if (p.GetStatus().equals("Free")) {
+            if (p.GetStatus().equalsIgnoreCase("alive")) {
                 TotalCrewBounty += p.GetBounty();
             }
         }

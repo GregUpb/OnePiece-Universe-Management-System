@@ -87,14 +87,16 @@ abstract class Character{
         this.Origin = Origin;
     }
 
-    // public void SetStatus(String Status)
-    // {
-    //     this.Status = Status;
-    //     //Reincarnation Trigger
-    //     if (this.Status.equals("Dead") && this.DFPower != null) {
-    //         this.DFPower.TriggerReinc();
-    //     }
-    // }
+    public void SetStatus(String Status)
+    {
+        this.Status = Status;
+
+        //Reincarnation Trigger
+        if (this.Status.equalsIgnoreCase("dead") && this.DFPower != null) {
+            this.DFPower.TriggerReinc();
+        }
+
+    }
 
     public void SetDFPower(DevilFruit DFPower)
     {

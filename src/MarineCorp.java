@@ -23,7 +23,7 @@ public class MarineCorp{
 
     MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds, List<Marine> CorpMembers)
     {
-        this.GenerateID();
+        
         
         this.BaseLocation = BaseLocation;
         this.CorpsCommander = CorpsCommander;

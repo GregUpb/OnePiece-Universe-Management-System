@@ -86,6 +86,17 @@ public class Pirate extends Character{
         this.Crew = Crew;
     }
 
+    @Override
+    public void SetStatus(String Status)
+    {
+        super.SetStatus(Status);
+
+        if (this.GetStatus().equalsIgnoreCase("captured") && !(this.Crew.equals(null)))
+        {
+            this.Crew.CalculateTotalCrewBounty();
+        }
+    }
+
     /* STUFF */
     public void AddBounty(int Bounty)
     {
