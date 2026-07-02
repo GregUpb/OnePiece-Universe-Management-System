@@ -1,10 +1,12 @@
 //Module 2: Affiliation
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class PirateCrew {
 
-    private int CrewID;
+    private Long ID;
     private String CrewName;
     private String ShipsName;
     private Pirate Captain;
@@ -14,6 +16,8 @@ public class PirateCrew {
 
     PirateCrew(String CrewName, String ShipsName, Pirate Captain, int TotalCrewBounty)
     {
+        this.GenerateID();
+
         this.CrewName = CrewName;
         this.ShipsName = ShipsName;
         this.Captain = Captain;
@@ -22,6 +26,8 @@ public class PirateCrew {
     
     PirateCrew(String CrewName, String ShipsName, Pirate Captain, List<Pirate> CrewMembers, int TotalCrewBounty)
     {
+        this.GenerateID();
+        
         this.CrewName = CrewName;
         this.ShipsName = ShipsName;
         this.Captain = Captain;
@@ -29,9 +35,9 @@ public class PirateCrew {
         this.TotalCrewBounty = TotalCrewBounty;
     }
 
-    public int GetCrewID()
+    public Long GetCrewID()
     {
-        return this.CrewID;
+        return this.ID;
     }
 
     public String GetCrewName()
@@ -77,9 +83,9 @@ public class PirateCrew {
     public void CalculateTotalCrewBounty(int TotalCrewBounty)
     {
         TotalCrewBounty = 0;
-        for (Pirate p : crewMembers) {
-            if (p.getStatus().equals("Free")) {
-                total += p.getBounty();
+        for (Pirate p : CrewMembers) {
+            if (p.GetStatus().equals("Free")) {
+                TotalCrewBounty += p.GetBounty();
             }
         }
         this.TotalCrewBounty = TotalCrewBounty;
@@ -99,5 +105,12 @@ public class PirateCrew {
         {
             CrewMembers.remove(CrewMember);
         }
+    }
+
+    protected void GenerateID()
+    {
+        LocalDateTime rn = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yMdHms"); //Year-Month-Day-Hours-Minutes-Seconds
+        this.ID = Long.parseLong(rn.format(formatter));
     }
 }

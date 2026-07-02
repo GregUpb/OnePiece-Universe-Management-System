@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 abstract class Character{
-    private int CharID;
+    private long ID;
     private String Name;
     private String Alias;
     private String Origin;
@@ -11,11 +11,13 @@ abstract class Character{
     private DevilFruit DFPower;
     private int Wallet;
 
-    abstract String displayProfile();
+    abstract void displayProfile();
     abstract void performDuty();
 
     public Character(String Name, String Alias, String Origin, String Status, int Wallet)
     {
+        this.GenerateID();
+
         this.Name = Name;
         this.Alias = Alias;
         this.Origin = Origin;
@@ -25,6 +27,8 @@ abstract class Character{
 
     public Character(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet)
     {
+        this.GenerateID();
+
         this.Name = Name;
         this.Alias = Alias;
         this.Origin = Origin;
@@ -33,9 +37,9 @@ abstract class Character{
         this.Wallet = Wallet;
     }
 
-    public int GetCharID()
+    public long GetID()
     {
-        return this.CharID;
+        return this.ID;
     }
 
     public String GetName()
@@ -83,14 +87,14 @@ abstract class Character{
         this.Origin = Origin;
     }
 
-    public void SetStatus(String Status)
-    {
-        this.Status = Status;
-        //Reincarnation Trigger
-        if (this.Status.equals("Dead") && this.DFPower != null) {
-            this.DFPower.TriggerReinc();
-        }
-    }
+    // public void SetStatus(String Status)
+    // {
+    //     this.Status = Status;
+    //     //Reincarnation Trigger
+    //     if (this.Status.equals("Dead") && this.DFPower != null) {
+    //         this.DFPower.TriggerReinc();
+    //     }
+    // }
 
     public void SetDFPower(DevilFruit DFPower)
     {
@@ -105,8 +109,8 @@ abstract class Character{
     protected void GenerateID()
     {
         LocalDateTime rn = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yMdHms");//Year-Month-Day-Hours-Minutes-Seconds
-        this.CharID = rn.format(formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yMdHms"); //Year-Month-Day-Hours-Minutes-Seconds
+        this.ID = Long.parseLong(rn.format(formatter));
     }
     
 

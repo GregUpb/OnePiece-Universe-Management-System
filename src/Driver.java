@@ -54,6 +54,28 @@ public class Driver {
 
     }
 
+    public static void Characters()
+    {
+        Pirate pirate1 = new Pirate("F", "f", "home", "dead", 555, 1, "AAAA", true);
+        pirate1.displayProfile();
+    }
+
+    public static void DevilFruits()
+    {
+
+    }
+
+    public static void PirateCrews()
+    {
+
+    }
+    
+    public static void MarineCorps()
+    {
+
+    }
+
+    /* HELPER */
     public static int getChoice()
     {
         if (scanner.hasNextInt())
@@ -63,23 +85,6 @@ public class Driver {
         {
             return -1;
         }
-    }
-
-    public static void Characters()
-    {
-
-    }
-    public static void DevilFruits()
-    {
-
-    }
-    public static void PirateCrews()
-    {
-
-    }
-    public static void MarineCorps()
-    {
-
     }
 
 }

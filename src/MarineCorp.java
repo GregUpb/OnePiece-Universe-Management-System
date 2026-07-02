@@ -1,10 +1,12 @@
 //Module 2: Affiliation
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class MarineCorp{
 
-    private int CorpID;
+    private Long ID;
     private String BaseLocation;
     private Marine CorpsCommander;
     private int OperationalFunds;
@@ -12,6 +14,8 @@ public class MarineCorp{
 
     MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds)
     {
+        this.GenerateID();
+
         this.BaseLocation = BaseLocation;
         this.CorpsCommander = CorpsCommander;
         this.OperationalFunds = OperationalFunds;
@@ -19,15 +23,17 @@ public class MarineCorp{
 
     MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds, List<Marine> CorpMembers)
     {
+        this.GenerateID();
+        
         this.BaseLocation = BaseLocation;
         this.CorpsCommander = CorpsCommander;
         this.OperationalFunds = OperationalFunds;
         this.CorpMembers = CorpMembers;
     }
 
-    public int GetCorpID()
+    public Long GetCorpID()
     {
-        return this.CorpID;
+        return this.ID;
     }
 
     public String GetBaseLocation()
@@ -84,6 +90,13 @@ public class MarineCorp{
         {
             CorpMembers.remove(CorpMember);
         }
+    }
+
+    protected void GenerateID()
+    {
+        LocalDateTime rn = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yMdHms"); //Year-Month-Day-Hours-Minutes-Seconds
+        this.ID = Long.parseLong(rn.format(formatter));
     }
 
 }

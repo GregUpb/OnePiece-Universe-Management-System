@@ -94,7 +94,7 @@ public class Pirate extends Character{
 
     public void displayProfile()
     {
-        
+        System.out.println("ID: " + this.GetID());
     }
 
     public void performDuty()
