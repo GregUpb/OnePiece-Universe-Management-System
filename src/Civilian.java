@@ -32,7 +32,13 @@ public class Civilian extends Character{
 
     public void SetProfession(String Profession)
     {
-        this.Profession = Profession;
+        for (String[] s : this.GetRoles())
+        {
+            if (Profession.equalsIgnoreCase(s[0]))
+            {
+                this.Profession = s[0];  // Set to the requested rank but with a format
+            }
+        }
     }
 
     public void SetResidence(String Residence)
@@ -47,7 +53,13 @@ public class Civilian extends Character{
 
     public void performDuty()
     {
-
+        for (String[] s : this.GetRoles())
+        {
+            if (this.Profession.equalsIgnoreCase(s[0]))
+            {
+                System.out.println(s[1]);
+            }
+        }
     }
 
 

@@ -80,7 +80,13 @@ public class DevilFruit{
 
     public void SetCategory(String Category)
     {
-        this.Category = Category;
+        if (Category.equalsIgnoreCase("paramecia") || Category.equalsIgnoreCase("zoan") || Category.equalsIgnoreCase("logia"))
+        {
+            this.Category = Category;
+        } else
+        {
+            System.out.println("Invalid Devil Fruit Category");
+        }
     }
 
     public void SetPrimaryAbility(String PrimaryAbility)

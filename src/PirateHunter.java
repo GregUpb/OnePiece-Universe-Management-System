@@ -65,6 +65,6 @@ public class PirateHunter extends Character{
 
     public void performDuty()
     {
-
+        System.out.println("HUNTING");
     }
 }

@@ -1,6 +1,8 @@
 //Module 1: Characters
+import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 abstract class Character{
     private long ID;
@@ -10,6 +12,43 @@ abstract class Character{
     private String Status;
     private DevilFruit DFPower;
     private int Wallet;
+
+    private List<String[]> Roles = new ArrayList<>(List.of(
+        new String[] {"Captain", "I AM THE CAPTAIN NIGGERSSSSSSSSSS"}, 
+        new String[] {"First Mate", "COPY PASTE"},
+        new String[] {"Second Mate", "COPY PASTE"},
+        new String[] {"Boatswain", "COPY PASTE"},
+        new String[] {"Cook", "COPY PASTE"},
+        new String[] {"Doctor", "COPY PASTE"},
+        new String[] {"Navigator", "COPY PASTE"},
+        new String[] {"Shipwright", "COPY PASTE"},
+        new String[] {"Sniper", "COPY PASTE"},
+        new String[] {"Archaeologist", "COPY PASTE"},
+        new String[] {"Assassin", "COPY PASTE"},
+        new String[] {"Barber", "COPY PASTE"},
+        new String[] {"Beast Tamer", "COPY PASTE"},
+        new String[] {"Blacksmith", "COPY PASTE"},
+        new String[] {"Cabin Mate", "COPY PASTE"},
+        new String[] {"Chronicler", "COPY PASTE"},
+        new String[] {"Commando", "COPY PASTE"},
+        new String[] {"Devil Fruit Specialist", "COPY PASTE"},
+        new String[] {"Helmsman", "COPY PASTE"},
+        new String[] {"Infantry", "COPY PASTE"},
+        new String[] {"Instructor", "COPY PASTE"},
+        new String[] {"Janitor", "COPY PASTE"},
+        new String[] {"Lookout", "COPY PASTE"},
+        new String[] {"Quartermaster", "COPY PASTE"},
+        new String[] {"Martial Artist", "COPY PASTE"},
+        new String[] {"Merchant", "COPY PASTE"},
+        new String[] {"Musician", "COPY PASTE"},
+        new String[] {"Pet", "COPY PASTE"},
+        new String[] {"Rigger", "COPY PASTE"},
+        new String[] {"Scholar", "COPY PASTE"},
+        new String[] {"Staff", "COPY PASTE"},
+        new String[] {"Swashbuckler", "COPY PASTE"},
+        new String[] {"Swordsman", "COPY PASTE"},
+        new String[] {"Tailor", "COPY PASTE"}
+    ));
 
     abstract void displayProfile();
     abstract void performDuty();
@@ -70,6 +109,11 @@ abstract class Character{
     public int GetWallet()
     {
         return this.Wallet;
+    }
+
+    public List<String[]> GetRoles()
+    {
+        return this.Roles;
     }
 
     public void SetName(String Name)

@@ -73,7 +73,13 @@ public class Pirate extends Character{
 
     public void SetPirateRole(String PirateRole)
     {
-        this.PirateRole = PirateRole;
+        for (String[] s : this.GetRoles())
+        {
+            if (PirateRole.equalsIgnoreCase(s[0]))
+            {
+                this.PirateRole = s[0];  // Set to the requested rank but with a format
+            }
+        }
     }
 
     public void SetIsCaptain(Boolean IsCaptain)
@@ -106,11 +112,19 @@ public class Pirate extends Character{
     public void displayProfile()
     {
         System.out.println("ID: " + this.GetID());
+        System.out.println("Name: " + this.GetName());
+        System.out.println("Role: " + this.PirateRole);
     }
 
     public void performDuty()
     {
-
+        for (String[] s : this.GetRoles())
+        {
+            if (this.PirateRole.equalsIgnoreCase(s[0]))
+            {
+                System.out.println(s[1]);
+            }
+        }
     }
 
 }
