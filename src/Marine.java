@@ -92,9 +92,21 @@ public class Marine extends Character{
         this.MCorps = MCorps;
     }
 
+    @Override
     public void displayProfile()
     {
+        super.displayProfile();
 
+        System.out.println(""); // Buffer
+
+        System.out.println("Rank: " + this.Rank);
+        if (this.MCorps != null)
+        {
+            System.out.println("Corp Designated: " + this.MCorps.GetBaseLocation());
+        } else
+        {
+            System.out.println("Corp Designated: None");
+        }
     }
 
     public void performDuty()

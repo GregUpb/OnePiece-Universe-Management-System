@@ -109,11 +109,29 @@ public class Pirate extends Character{
         this.Bounty += Bounty;
     }
 
+    @Override
     public void displayProfile()
     {
-        System.out.println("ID: " + this.GetID());
-        System.out.println("Name: " + this.GetName());
+        super.displayProfile();
+
+        System.out.println(""); // Buffer
+
+        System.out.println("Bounty: " + this.Bounty);
         System.out.println("Role: " + this.PirateRole);
+        if (this.IsCaptain)
+        {
+            System.out.println("Captain: Yes");
+        } else
+        {
+            System.out.println("Captain: No");
+        }
+        if (this.Crew != null)
+        {
+            System.out.println("Crew: " + this.Crew.GetCrewName());
+        } else
+        {
+            System.out.println("Crew: None");
+        }
     }
 
     public void performDuty()

@@ -57,7 +57,8 @@ public class Driver {
     public static void Characters()
     {
         // NOT FINAL
-        Pirate pirate1 = new Pirate("F", "f", "home", "dead", 555, 1, "AAAA", true);
+        DevilFruit df = new DevilFruit("Sex Sex no Mi", "Logia", "Sex");
+        Pirate pirate1 = new Pirate("F", "f", "home", "dead", df, 555, 1, "AAAA", true);
         pirate1.SetPirateRole("captain");
         pirate1.displayProfile();
         pirate1.performDuty();

@@ -10,7 +10,7 @@ abstract class Character{
     private String Alias;
     private String Origin;
     private String Status;
-    private DevilFruit DFPower;
+    private DevilFruit DFPower = null;
     private int Wallet;
 
     private List<String[]> Roles = new ArrayList<>(List.of(
@@ -50,7 +50,6 @@ abstract class Character{
         new String[] {"Tailor", "COPY PASTE"}
     ));
 
-    abstract void displayProfile();
     abstract void performDuty();
 
     public Character(String Name, String Alias, String Origin, String Status, int Wallet)
@@ -150,6 +149,24 @@ abstract class Character{
     public void SetWallet(int Wallet)
     {
         this.Wallet = Wallet;
+    }
+
+    public void displayProfile()
+    {
+        System.out.println("===[ Profile ]===");
+        System.out.println("ID: " + this.GetID());
+        System.out.println("Name: " + this.GetName());
+        System.out.println("Alias: " + this.GetAlias());
+        System.out.println("Origin: " + this.GetOrigin());
+        if (this.GetDFPower() != null)
+        {
+            System.out.println("Devil Fruit: " + this.GetDFPower().GetFruitName());
+        } else
+        {
+            System.out.println("Devil Fruit: None");
+        }
+        System.out.println("Wallet: " + this.GetWallet());
+        System.out.println("Status: " + this.GetStatus());
     }
 
     protected void GenerateID()

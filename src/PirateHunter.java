@@ -58,9 +58,15 @@ public class PirateHunter extends Character{
         this.Captures += Amount;
     }
 
+    @Override
     public void displayProfile()
     {
+        super.displayProfile();
 
+        System.out.println(""); // Buffer
+
+        System.out.println("Combat Style: " + this.CombatStyle);
+        System.out.println("Captures: " + this.Captures);
     }
 
     public void performDuty()

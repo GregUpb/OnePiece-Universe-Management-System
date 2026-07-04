@@ -46,9 +46,15 @@ public class Civilian extends Character{
         this.Residence = Residence;
     }
 
+    @Override
     public void displayProfile()
     {
+        super.displayProfile();
 
+        System.out.println(""); // Buffer
+
+        System.out.println("Profession: " + this.Profession);
+        System.out.println("Residence: " + this.Residence);
     }
 
     public void performDuty()
