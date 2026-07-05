@@ -130,7 +130,7 @@ public class DevilFruit{
     protected void GenerateID()
     {
         LocalDateTime rn = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yMdHms"); //Year-Month-Day-Hours-Minutes-Seconds
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss"); //Year-Month-Day-Hours-Minutes-Seconds
         this.ID = Long.parseLong(rn.format(formatter));
     }
 
@@ -138,8 +138,8 @@ public class DevilFruit{
     {
         if (this.CurrentOwner != null){
             this.AddHistoricalOwner(this.CurrentOwner);
-            this.CurrentOwner = null;
             this.CurrentOwner.SetDFPower(null);
+            this.CurrentOwner = null;
         }
     }
 }

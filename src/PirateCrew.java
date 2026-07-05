@@ -77,7 +77,10 @@ public class PirateCrew {
 
     public void SetCaptain(Pirate Captain)
     {
-        this.Captain.SetIsCaptain(false);
+        if (this.Captain != null) { //Checks if there is already an existing captain
+            this.Captain.SetIsCaptain(false);
+            this.Captain.SetPirateRole("Crew Member");
+        }
         Captain.SetIsCaptain(true);
 
         this.Captain = Captain;
@@ -99,9 +102,16 @@ public class PirateCrew {
 
     public void AddCrewMember(Pirate CrewMember)
     {
+        //Check if pirate is already in the list
         if (!(CrewMembers.contains(CrewMember)))
         {
             CrewMembers.add(CrewMember);
+
+            //Update the Pirate object's crew pointer only if it isn't already set to this crew.
+            if (CrewMember.GetPirateCrew() != this)
+            {
+                CrewMember.setPirateCrew(this);
+            }
         }
     }
 
@@ -110,6 +120,11 @@ public class PirateCrew {
         if (CrewMembers.contains(CrewMember))
         {
             CrewMembers.remove(CrewMember);
+            // Clear Pirate object's crew pointer only if it's already pointing to this crew.
+            if (CrewMember.GetPirateCrew() == this)
+            {
+                CrewMember.setPirateCrew(null);
+            }
         }
     }
 

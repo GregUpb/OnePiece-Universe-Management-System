@@ -5,6 +5,42 @@ public class Pirate extends Character{
     private String PirateRole;
     private Boolean IsCaptain;
     private PirateCrew Crew = null;
+    private List<String[]> Roles = new ArrayList<>(List.of(
+            new String[] {"Captain", "I AM THE CAPTAIN NIGGERSSSSSSSSSS"},
+            new String[] {"First Mate", "COPY PASTE"},
+            new String[] {"Second Mate", "COPY PASTE"},
+            new String[] {"Boatswain", "COPY PASTE"},
+            new String[] {"Cook", "COPY PASTE"},
+            new String[] {"Doctor", "COPY PASTE"},
+            new String[] {"Navigator", "COPY PASTE"},
+            new String[] {"Shipwright", "COPY PASTE"},
+            new String[] {"Sniper", "COPY PASTE"},
+            new String[] {"Archaeologist", "COPY PASTE"},
+            new String[] {"Assassin", "COPY PASTE"},
+            new String[] {"Barber", "COPY PASTE"},
+            new String[] {"Beast Tamer", "COPY PASTE"},
+            new String[] {"Blacksmith", "COPY PASTE"},
+            new String[] {"Cabin Mate", "COPY PASTE"},
+            new String[] {"Chronicler", "COPY PASTE"},
+            new String[] {"Commando", "COPY PASTE"},
+            new String[] {"Devil Fruit Specialist", "COPY PASTE"},
+            new String[] {"Helmsman", "COPY PASTE"},
+            new String[] {"Infantry", "COPY PASTE"},
+            new String[] {"Instructor", "COPY PASTE"},
+            new String[] {"Janitor", "COPY PASTE"},
+            new String[] {"Lookout", "COPY PASTE"},
+            new String[] {"Quartermaster", "COPY PASTE"},
+            new String[] {"Martial Artist", "COPY PASTE"},
+            new String[] {"Merchant", "COPY PASTE"},
+            new String[] {"Musician", "COPY PASTE"},
+            new String[] {"Pet", "COPY PASTE"},
+            new String[] {"Rigger", "COPY PASTE"},
+            new String[] {"Scholar", "COPY PASTE"},
+            new String[] {"Staff", "COPY PASTE"},
+            new String[] {"Swashbuckler", "COPY PASTE"},
+            new String[] {"Swordsman", "COPY PASTE"},
+            new String[] {"Tailor", "COPY PASTE"}
+    ));
 
     Pirate(String Name, String Alias, String Origin, String Status, int Wallet, int Bounty, String PirateRole, Boolean IsCaptain)
     {
@@ -64,6 +100,11 @@ public class Pirate extends Character{
         return this.Crew;
     }
 
+    public List<String[]> GetRoles()
+    {
+        return this.Roles;
+    }
+
     public void SetBounty(int Bounty)
     {
         if (Bounty >= 0){
@@ -87,9 +128,19 @@ public class Pirate extends Character{
         this.IsCaptain = IsCaptain;
     }
 
-    public void setPirateCrew(PirateCrew Crew)
+    public void SetPirateCrew(PirateCrew Crew)
     {
+        // If they are already in a crew, remove them from the old crew's list first
+        if (this.Crew != null) {
+            this.Crew.RemoveCrewMember(this);
+        }
+
         this.Crew = Crew;
+
+        // Check that the new crew has this pirate in their list
+        if (this.Crew != null && !this.Crew.GetCrewMembers().contains(this)) {
+            this.Crew.AddCrewMember(this);
+        }
     }
 
     @Override
@@ -99,7 +150,7 @@ public class Pirate extends Character{
         {
             super.SetStatus(Status);
     
-            if (this.GetStatus().equalsIgnoreCase("captured") && !(this.Crew.equals(null)))
+            if (this.GetStatus().equalsIgnoreCase("captured") && this.Crew != null)))
             {
                 this.Crew.CalculateTotalCrewBounty();
             }
