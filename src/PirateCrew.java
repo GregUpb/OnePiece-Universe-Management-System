@@ -86,11 +86,14 @@ public class PirateCrew {
     public void CalculateTotalCrewBounty()
     {
         int TotalCrewBounty = 0;
+
         for (Pirate p : CrewMembers) {
-            if (p.GetStatus().equalsIgnoreCase("alive")) {
+            if (p.GetStatus().equalsIgnoreCase("alive"))
+            {
                 TotalCrewBounty += p.GetBounty();
             }
         }
+
         this.TotalCrewBounty = TotalCrewBounty;
     }
 

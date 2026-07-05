@@ -95,12 +95,19 @@ public class Pirate extends Character{
     @Override
     public void SetStatus(String Status)
     {
-        super.SetStatus(Status);
-
-        if (this.GetStatus().equalsIgnoreCase("captured") && !(this.Crew.equals(null)))
+        if (Status.equalsIgnoreCase("alive") || Status.equalsIgnoreCase("captured") || Status.equalsIgnoreCase("dead"))
         {
-            this.Crew.CalculateTotalCrewBounty();
+            super.SetStatus(Status);
+    
+            if (this.GetStatus().equalsIgnoreCase("captured") && !(this.Crew.equals(null)))
+            {
+                this.Crew.CalculateTotalCrewBounty();
+            }
+        } else
+        {
+            System.out.println("Invalid Status");
         }
+
     }
 
     /* STUFF */
