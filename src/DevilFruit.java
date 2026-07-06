@@ -112,17 +112,30 @@ public class DevilFruit{
 
     public void SetCurrentOwner(Character CurrentOwner)
     {
-        if (this.CurrentOwner == null && CurrentOwner.GetDFPower() == null){
-            this.CurrentOwner = CurrentOwner;
-            CurrentOwner.SetDFPower(this);
+        if (!(this.HistoricalOwners.contains(CurrentOwner)))
+        {
+            if (this.CurrentOwner == null && CurrentOwner.GetDFPower() == null)
+            {
+                this.CurrentOwner = CurrentOwner;
+                CurrentOwner.SetDFPower(this);
+            } else if (this.CurrentOwner == null && CurrentOwner.GetDFPower().equals(this))
+            {
+                this.CurrentOwner = CurrentOwner;
+            }
+        } else
+        {
+            System.out.println(CurrentOwner.GetName() + " is already a former " + this.FruitName + " user");
         }
     }
 
     public boolean HasCurrentOwner(){ // Validation checks for Character Constructor
-        if (this.CurrentOwner == null){
+        if (this.CurrentOwner == null)
+        {
             return false;
+        } else
+        {
+            return true;
         }
-        return true;
     }
 
     /* STUFF */

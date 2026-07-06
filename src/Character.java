@@ -115,18 +115,27 @@ abstract class Character{
 
     public void SetDFPower(DevilFruit DFPower)
     {
-        // Check if the Devil Fruit has a current owner
-        if (DFPower.HasCurrentOwner())
+        if (!(DFPower.GetHistoricalOwners().contains(this)))
         {
-            // make the owner a former
-            DFPower.AddHistoricalOwner(DFPower.GetCurrentOwner());
-            DFPower.SetCurrentOwner(this);  // set this character as the new current owner
-            this.DFPower = DFPower;
+            if (this.DFPower == null)
+            {
+                // Check if the Devil Fruit has a current owner
+                if (!(DFPower.HasCurrentOwner()))
+                {
+                    // set this character as the new current owner
+                    this.DFPower = DFPower;
+                    DFPower.SetCurrentOwner(this);
+                }
+            } if (DFPower == null)
+            {
+                this.DFPower = DFPower;
+            } else if (this.DFPower != DFPower)
+            {
+                System.out.println("Already have a devil fruit");
+            }
         } else
         {
-            // set this character as the new current owner
-            DFPower.SetCurrentOwner(this);
-            this.DFPower = DFPower;
+            System.out.println(this.Name + " is already a former " + DFPower.GetFruitName() + " user");
         }
 
     }

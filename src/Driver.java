@@ -48,6 +48,30 @@ public class Driver {
         "Tailor"
     ));
 
+    final static List<String> CivRoles = new ArrayList<>(List.of(
+        "None",
+        "Boatswain", 
+        "Cook", 
+        "Cleric",
+        "Clerk",
+        "Doctor", 
+        "Navigator", 
+        "Shipwright",  
+        "Archaeologist", 
+        "Assassin", 
+        "Barber", 
+        "Beast Tamer", 
+        "Blacksmith", 
+        "Instructor", 
+        "Janitor", 
+        "Martial Artist", 
+        "Merchant", 
+        "Musician", 
+        "Scholar", 
+        "Scientist",
+        "Tailor"
+    ));
+
     final static List<String> Ranks = new ArrayList<>(List.of(
         "None",
         "World Government Commander-In-Chief", 
@@ -179,7 +203,7 @@ public class Driver {
                     break;
             }
 
-        } while (input < 1 || input > 4);
+        } while (input < 1 || input > 5);
 
 
     }
@@ -314,11 +338,11 @@ public class Driver {
                     displayRole();
                     RoleIndex = getChoice();
 
-                    if (RoleIndex < 0 || RoleIndex > Roles.size())
+                    if (RoleIndex < 0 || RoleIndex > (Roles.size() - 1))
                     {
                         System.out.println("Invalid Index");
                     }
-                } while (RoleIndex < 0 || RoleIndex > Roles.size());
+                } while (RoleIndex < 0 || RoleIndex > (Roles.size() - 1));
 
                 // Captain
                 do {
@@ -378,10 +402,10 @@ public class Driver {
                     displayRank();
                     rankIndex = getChoice();
 
-                    if (rankIndex < 0 || rankIndex >= Ranks.size()) {
+                    if (rankIndex < 0 || rankIndex > (Ranks.size() - 1)) {
                         System.out.println("Invalid Index");
                     }
-                } while (rankIndex < 0 || rankIndex >= Ranks.size());
+                } while (rankIndex < 0 || rankIndex > (Ranks.size() - 1));
 
                 // Marine Corp Verification
                 do {
@@ -444,17 +468,30 @@ public class Driver {
                 break;
 
             case "Civilian":
-                String profession, residence;
+                String residence;
+                int civRoleIndex;
 
-                profession = getInput("Profession");
+                // Profession Verification
+                do {
+                    displayCivRole();
+                    System.out.print("> ");
+                    civRoleIndex = getChoice();
+
+                    if (civRoleIndex < 0 || civRoleIndex > (CivRoles.size() - 1 ))
+                    {
+                        System.out.println("Invalid Index");
+                    }
+
+                } while (civRoleIndex < 0 || civRoleIndex > (CivRoles.size() - 1 ));
+
                 residence = getInput("Residence");
 
                 Civilian tempCiv;
 
                 if (dfIndex == 0) {
-                    tempCiv = new Civilian(name, alias, origin, status, wallet, profession, residence);
+                    tempCiv = new Civilian(name, alias, origin, status, wallet, CivRoles.get(civRoleIndex), residence);
                 } else {
-                    tempCiv = new Civilian(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, profession, residence);
+                    tempCiv = new Civilian(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, CivRoles.get(civRoleIndex), residence);
                 }
 
                 CharacterList.add(tempCiv);
@@ -555,7 +592,6 @@ public class Driver {
 
         if (choice < 1 || choice > maxOptions) {
             System.out.println("Invalid option.");
-            return;
         }
 
         // 4. Process Universal Edits
@@ -623,12 +659,14 @@ public class Driver {
                     p.SetBounty(newBounty);
                 } else if (choice == 8) {
                     displayRole();
+                    System.out.print("> ");
                     int roleIndex = getChoice();
                     if (roleIndex > 0 && roleIndex < Roles.size()) {
                         p.SetPirateRole(Roles.get(roleIndex));
                     }
                 } else if (choice == 9) {
                     displayCrew();
+                    System.out.print("> ");
                     int crewIndex = getChoice();
                     if (crewIndex == 0) {
                         p.SetPirateCrew(null);
@@ -640,10 +678,12 @@ public class Driver {
                 Marine m = (Marine) selectedChar; //Downcasting, ChildClass <var_name> = (ChildClass) ParenClass **DELETE BEFORE SUBMISSION
                 if (choice == 7) {
                     displayRank();
+                    System.out.print("> ");
                     int rankIndex = getChoice();
                     if (rankIndex > 0 && rankIndex < Ranks.size()) m.SetRank(Ranks.get(rankIndex));
                 } else if (choice == 8) {
                     displayCorp();
+                    System.out.print("> ");
                     int corpIndex = getChoice();
                     if (corpIndex == 0) {
                         m.SetMCorps(null);
@@ -666,7 +706,19 @@ public class Driver {
             } else if (selectedChar instanceof Civilian) {
                 Civilian c = (Civilian) selectedChar;//Downcasting, ChildClass <var_name> = (ChildClass) ParenClass **DELETE BEFORE SUBMISSION
                 if (choice == 7) {
-                    c.SetProfession(getInput("New Profession"));
+                    
+                    int civRoleIndex;
+
+                    displayCivRole();
+                    System.out.print("> ");
+                    civRoleIndex = getChoice();
+
+                    if (civRoleIndex >= 0 && civRoleIndex < CivRoles.size())
+                    {
+                        c.SetProfession(CivRoles.get(civRoleIndex));
+                    }
+
+
                 } else if (choice == 8) {
                     c.SetResidence(getInput("New Residence"));
                 }
@@ -904,20 +956,22 @@ public class Driver {
             }
             
             // Display all former owners if it exist
+            System.out.print("Historical Owner: ");
+            if (temp.GetHistoricalOwners().isEmpty())
+            {
+                System.out.println("None");
+            } else
+            {
+
+            }
             for (Character c : temp.GetHistoricalOwners())
             {
-                if (c != null)
+                if (temp.GetHistoricalOwners().indexOf(c) == 0)
                 {
-                    if (temp.GetHistoricalOwners().indexOf(c) == 0)
-                    {
-                        System.out.println("Historical Owner/s: " + c.GetName());
-                    } else
-                    {
-                        System.out.printf("%20s%s\n", " ", c.GetName());
-                    }
+                    System.out.println(c.GetName());
                 } else
                 {
-                    System.out.println("Historical Owner: None");
+                    System.out.printf("%20s%s\n", " ", c.GetName());
                 }
             }
 
@@ -1011,6 +1065,16 @@ public class Driver {
         for (String s : Roles)
         {
             System.out.println("[" + Roles.indexOf(s) + "] - " + s);
+        }
+    }
+
+    public static void displayCivRole()
+    {
+        System.out.println("[ Profession ]");
+  
+        for (String s : CivRoles)
+        {
+            System.out.println("[" + CivRoles.indexOf(s) + "] - " + s);
         }
     }
 

@@ -8,6 +8,7 @@ public class Marine extends Character{
     private MarineCorp MCorps = null;
 
     final List<String[]> Ranks = new ArrayList<>(List.of(
+        new String[] {"None", "Doing nothing..."},
         new String[] {"World Government Commander-In-Chief", "KING KINGINA MO"},
         new String[] {"Fleet Admiral", "KING KINGINA MO"},
         new String[] {"Admiral", "KING KINGINA MO"},
