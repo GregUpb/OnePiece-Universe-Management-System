@@ -97,9 +97,6 @@ public class Driver {
                     Characters();
                     break;
                 case 2:
-
-                    CharacterList.get(0).displayProfile();
-
                     DevilFruits();
                     break;
                 case 3:
@@ -152,6 +149,37 @@ public class Driver {
 
     public static void DevilFruits()
     {
+        int input;
+
+        do {
+            System.out.println("===[ Devil Fruit ]===");
+            System.out.println("[1] - Create Devil Fruit");
+            System.out.println("[2] - View Devil Fruit");
+            System.out.println("[3] - Assign Devil Fruit");
+            System.out.println("[4] - Return");
+
+            input = getChoice();
+
+            switch (input) {
+                case 1:
+                    CreateDF();
+                    break;
+                case 2:
+                    ViewDF();
+                    break;
+                case 3:
+                    AssignDF();
+                    break;
+                case 4:
+                    break;
+            
+                default:
+                    System.out.println("Invalid Input");
+                    break;
+            }
+
+
+        } while (input < 1 || input > 4);
 
     }
 
@@ -515,9 +543,9 @@ public class Driver {
                     displayCrew();
                     int crewIndex = getChoice();
                     if (crewIndex == 0) {
-                        p.setPirateCrew(null);
+                        p.SetPirateCrew(null);
                     } else if (crewIndex > 0 && crewIndex <= PirateCrewList.size()) {
-                        p.setPirateCrew(PirateCrewList.get(crewIndex - 1));
+                        p.SetPirateCrew(PirateCrewList.get(crewIndex - 1));
                     }
                 }
             } else if (selectedChar instanceof Marine) {
@@ -599,6 +627,272 @@ public class Driver {
         // Remove from Global list
         CharacterList.remove(selectedChar);
         System.out.println("Character successfully deleted and unlinked from all systems.");
+    }
+
+    public static void CreateDF()
+    {
+        // Variables
+        String name, primaryAbility;
+        String category = "";
+        int temp;
+        int currOwnerIndex; // Index of the current owner in the CharacterList
+        List<Character> historicalOwner = new ArrayList<>(); // A list of the former owner in the CharacterList
+
+        System.out.println("=====[ Create Devil Fruit ]=====");
+        name = getInput("Name of the Devil Fruit"); // Get the name of the devil fruit
+
+        // Category Verification
+        do {
+            // Choices
+            System.out.println("[ Category ]");
+            System.out.println("[1] - Paramecia");
+            System.out.println("[2] - Logia");
+            System.out.println("[3] - Zoan");
+
+            System.out.print("> ");
+            temp = getChoice();
+            
+            // Check if the choice is within the boundary and sets the category
+            switch (temp) {
+                case 1:
+                    category = "Paramecia";
+                    break;
+
+                case 2:
+                    category = "Logia";
+                    break;
+
+                case 3:
+                    category = "Zoan";
+                    break;
+            
+                default:
+                    System.out.println("Invalid Index");
+                    break;
+            }
+
+        } while (temp < 1 || temp > 3);
+
+        primaryAbility = getInput("Primary Ability of the Devil Fruit");    // Get the Primary Ability
+
+        // Current Owner Verification
+        do {
+
+            System.out.println("[ Current Owner ]");
+            System.out.println("[0] - None");
+
+            for (Character c : CharacterList)
+            {
+                System.out.println("[" + (CharacterList.indexOf(c) + 1) + "] - " + c.GetName());
+            }
+
+            System.out.print("> ");
+            currOwnerIndex = getChoice();
+
+            if (currOwnerIndex < 0 || currOwnerIndex > CharacterList.size())
+            {
+                System.out.println("Invalid Index");
+            }
+
+        } while (currOwnerIndex < 0 || currOwnerIndex > CharacterList.size());
+
+        // Historical Owner Verification
+        do {
+            System.out.println("[ Historical Owner ]");
+            // Check if empty or not
+            if (historicalOwner.isEmpty())
+            {
+                System.out.println("[0] - None");
+            } else
+            {
+                System.out.println("[0] - Done");
+            }
+
+            // Loops through all characters in CharacterList
+            for (Character c : CharacterList)
+            {
+                System.out.println("[" + (CharacterList.indexOf(c) + 1) + "] - " + c.GetName());
+            }
+
+            System.out.print("> ");
+            temp = getChoice();
+
+            // Check if the inputted is within the range
+            if (temp >= 0 && temp <= CharacterList.size())
+            {
+                if (temp != 0)
+                {
+                    if (historicalOwner.contains(CharacterList.get(temp-1)))
+                    {
+                        System.out.println(CharacterList.get(temp-1).GetName() + " is already added");
+                    } else
+                    {
+                        historicalOwner.add(CharacterList.get(temp-1));
+                    }
+                }
+            } else
+            {
+                System.out.println("Invalid Index");
+            }
+
+        } while (temp != 0);
+
+        DevilFruit dfTemp;
+
+        // Creating the devil fruit based on the inputs
+        if (currOwnerIndex == 0 && historicalOwner.isEmpty())
+        {
+            dfTemp = new DevilFruit(name, category, primaryAbility);
+        } else if (currOwnerIndex > 0 && historicalOwner.isEmpty())
+        {
+            dfTemp = new DevilFruit(name, category, primaryAbility, CharacterList.get(currOwnerIndex));
+        } else if (currOwnerIndex == 0 && !(historicalOwner.isEmpty()))
+        {
+            dfTemp = new DevilFruit(name, category, primaryAbility, historicalOwner);
+        } else
+        {
+            dfTemp = new DevilFruit(name, category, primaryAbility, CharacterList.get(currOwnerIndex), historicalOwner);
+        }
+
+        // Add to the List
+        DevilFruitList.add(dfTemp);
+
+    }
+
+    public static void ViewDF()
+    {
+        DevilFruit temp;
+        int dfIndex;
+
+        if (!(DevilFruitList.isEmpty()))
+        {
+            // List all existing devil fruits and gets the users input
+            do {
+                // Display all devil fruit in the DevilFruitList
+                System.out.println("[ Devil Fruit ]");
+                for (DevilFruit df : DevilFruitList)
+                {
+                    System.out.println("[" + (DevilFruitList.indexOf(df)+1) + "] - " + df.GetFruitName());
+                }
+
+                System.out.print("> ");
+                dfIndex = getChoice();    // Get user input
+
+                // Check if the input is within the range
+                if (dfIndex < 1 || dfIndex > DevilFruitList.size())
+                {
+                    System.out.println("Invalid Index");
+                }
+
+            } while (dfIndex < 1 || dfIndex > DevilFruitList.size());
+            dfIndex -= 1; // Decrement since the list index starts with 0
+
+            temp = DevilFruitList.get(dfIndex);
+
+            // Display all info about the devil fruit
+            System.out.println("=[ " + temp.GetFruitName() + " ]=");
+            System.out.println("Name: " + temp.GetFruitName());
+            System.out.println("Category: " + temp.GetCategory());
+            System.out.println("Primary Ability: " + temp.GetPrimaryAbility());
+            
+            // Check and outputs the correct if there is a current owner
+            System.out.print("Current Owner: ");
+            if (temp.GetCurrentOwner() != null)
+            {
+                System.out.println(temp.GetCurrentOwner().GetName());
+            } else
+            {
+                System.out.println("None");
+            }
+            
+            // Display all former owners if it exist
+            for (Character c : temp.GetHistoricalOwners())
+            {
+                if (c != null)
+                {
+                    if (temp.GetHistoricalOwners().indexOf(c) == 0)
+                    {
+                        System.out.println("Historical Owner/s: " + c.GetName());
+                    } else
+                    {
+                        System.out.printf("%20s%s\n", " ", c.GetName());
+                    }
+                } else
+                {
+                    System.out.println("Historical Owner: None");
+                }
+            }
+
+        } else
+        {
+            System.out.println("No Existing Devil Fruit");
+        }
+    }
+
+    public static void AssignDF()
+    {
+        int dfIndex, charIndex;
+
+        if (!(DevilFruitList.isEmpty()))
+        {
+            // List all existing devil fruits and gets the users input
+            do {
+                // Display all devil fruit in the DevilFruitList
+                System.out.println("[ Devil Fruit ]");
+                for (DevilFruit df : DevilFruitList)
+                {
+                    System.out.println("[" + (DevilFruitList.indexOf(df)+1) + "] - " + df.GetFruitName());
+                }
+
+                System.out.print("> ");
+                dfIndex = getChoice();    // Get user input
+
+                // Check if the input is within the range
+                if (dfIndex < 1 || dfIndex > DevilFruitList.size())
+                {
+                    System.out.println("Invalid Index");
+                }
+
+            } while (dfIndex < 1 || dfIndex > DevilFruitList.size());
+            dfIndex -= 1; // Decrement since the list index starts with 0
+
+            // Character Verification
+            if (!(CharacterList.isEmpty()))
+            {
+                // List all existing character and gets the users input
+                do {
+                    // Display all character in the CharacterList
+                    System.out.println("[ Character ]");
+                    for (Character c : CharacterList)
+                    {
+                        System.out.println("[" + (CharacterList.indexOf(c)+1) + "] - " + c.GetName());
+                    }
+
+                    System.out.print("> ");
+                    charIndex = getChoice();    // Get user input
+
+                    // Check if the input is within the range
+                    if (charIndex < 1 || charIndex > CharacterList.size())
+                    {
+                        System.out.println("Invalid Index");
+                    }
+
+                } while (charIndex < 1 || charIndex > CharacterList.size());
+                charIndex -= 1; // Decrement since the list index starts with 0
+
+                System.out.println("Assigning " + CharacterList.get(charIndex).GetName() + " " + DevilFruitList.get(dfIndex).GetFruitName());
+                
+                CharacterList.get(charIndex).SetDFPower(DevilFruitList.get(dfIndex));   // Set Devil Fruit of the Character Picked
+
+            } else
+            {
+                System.out.println("No Existing Character");
+            }
+        } else
+        {
+            System.out.println("No Existing Devil Fruit");
+        }       
+
     }
 
     public static void displayDF()

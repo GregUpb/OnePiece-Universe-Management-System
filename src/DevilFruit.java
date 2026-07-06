@@ -10,7 +10,7 @@ public class DevilFruit{
     private String FruitName;
     private String Category;
     private String PrimaryAbility;
-    private Character CurrentOwner;
+    private Character CurrentOwner = null;
     private List<Character> HistoricalOwners = new ArrayList<>();
 
     DevilFruit(String FruitName, String Category, String PrimaryAbility)
@@ -30,6 +30,16 @@ public class DevilFruit{
         this.Category = Category;
         this.PrimaryAbility = PrimaryAbility;
         this.CurrentOwner = CurrentOwner;
+    }
+
+    DevilFruit(String FruitName, String Category, String PrimaryAbility, List<Character> HistoricalOwners)
+    {
+        this.GenerateID();
+
+        this.FruitName = FruitName;
+        this.Category = Category;
+        this.PrimaryAbility = PrimaryAbility;
+        this.HistoricalOwners = HistoricalOwners;
     }
 
     DevilFruit(String FruitName, String Category, String PrimaryAbility, Character CurrentOwner, List<Character> HistoricalOwners)

@@ -1,4 +1,6 @@
 //Module 1: Characters
+import java.util.List;
+import java.util.ArrayList;
 public class Pirate extends Character{
 
     private int Bounty;
@@ -150,7 +152,7 @@ public class Pirate extends Character{
         {
             super.SetStatus(Status);
     
-            if (this.GetStatus().equalsIgnoreCase("captured") && this.Crew != null)))
+            if (this.GetStatus().equalsIgnoreCase("captured") && this.Crew != null)
             {
                 this.Crew.CalculateTotalCrewBounty();
             }

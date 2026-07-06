@@ -110,7 +110,7 @@ public class PirateCrew {
             //Update the Pirate object's crew pointer only if it isn't already set to this crew.
             if (CrewMember.GetPirateCrew() != this)
             {
-                CrewMember.setPirateCrew(this);
+                CrewMember.SetPirateCrew(this);
             }
         }
     }
@@ -123,7 +123,7 @@ public class PirateCrew {
             // Clear Pirate object's crew pointer only if it's already pointing to this crew.
             if (CrewMember.GetPirateCrew() == this)
             {
-                CrewMember.setPirateCrew(null);
+                CrewMember.SetPirateCrew(null);
             }
         }
     }

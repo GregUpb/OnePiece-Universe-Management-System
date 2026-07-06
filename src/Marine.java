@@ -1,5 +1,4 @@
 //Module 1: Characters
-
 import java.util.ArrayList;
 import java.util.List;
 

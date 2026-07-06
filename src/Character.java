@@ -1,8 +1,6 @@
 //Module 1: Characters
-import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 abstract class Character{
     private long ID;
@@ -102,7 +100,20 @@ abstract class Character{
 
     public void SetDFPower(DevilFruit DFPower)
     {
-        this.DFPower = DFPower;
+        // Check if the Devil Fruit has a current owner
+        if (DFPower.HasCurrentOwner())
+        {
+            // make the owner a former
+            DFPower.AddHistoricalOwner(DFPower.GetCurrentOwner());
+            DFPower.SetCurrentOwner(this);  // set this character as the new current owner
+            this.DFPower = DFPower;
+        } else
+        {
+            // set this character as the new current owner
+            DFPower.SetCurrentOwner(this);
+            this.DFPower = DFPower;
+        }
+
     }
 
     public void SetWallet(int Wallet)

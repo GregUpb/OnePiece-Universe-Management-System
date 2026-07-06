@@ -1,4 +1,6 @@
 //Module 1: Characters
+import java.util.List;
+import java.util.ArrayList;
 public class Civilian extends Character{
 
     private String Profession;
@@ -56,6 +58,11 @@ public class Civilian extends Character{
     public String GetResidence()
     {
         return this.Residence;
+    }
+
+    public List<String[]> GetRoles()
+    {
+        return this.CivProfessions;
     }
 
     public void SetProfession(String Profession)
