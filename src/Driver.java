@@ -10,7 +10,7 @@ public class Driver {
     private static List<PirateCrew> PirateCrewList = new ArrayList<>();
     private static List<MarineCorp> MarineCorpList = new ArrayList<>(); 
 
-    private static List<String> Roles = new ArrayList<>(List.of(
+    final static List<String> Roles = new ArrayList<>(List.of(
         "None",
         "Captain", 
         "First Mate", 
@@ -48,7 +48,7 @@ public class Driver {
         "Tailor"
     ));
 
-    private static List<String> Ranks = new ArrayList<>(List.of(
+    final static List<String> Ranks = new ArrayList<>(List.of(
         "None",
         "World Government Commander-In-Chief", 
         "Fleet Admiral", 
@@ -119,32 +119,69 @@ public class Driver {
 
     public static void Characters()
     {
-        // int input;
+        int input;
 
-        System.out.println("[1] - Pirate");
-        System.out.println("[2] - Marine");
-        System.out.println("[3] - Pirate Hunter");
-        System.out.println("[4] - Civilian");
-        System.out.print("> ");
+        do {
 
-        switch (getChoice()) {
-            case 1: // Pirate
-                CreateCharacter("Pirate");
-                break;
-            case 2: // Marine
-                CreateCharacter("Marine");
-                break;
-            case 3: // Pirate Hunter
-                CreateCharacter("PirateHunter");
-                break;
-            case 4: // Civilian
-                CreateCharacter("Civilian");
-                break;
-        
-            default:
-                System.out.println("Invalid Input");
-                break;
-        }
+            System.out.println("==[ Characters ]==");
+            System.out.println("[1] - Create a new Character");
+            System.out.println("[2] - View Character");
+            System.out.println("[3] - Modify Character");
+            System.out.println("[4] - Delete Character");
+            System.out.println("[5] - Return");
+
+            System.out.print("> ");
+            input = getChoice();
+
+            switch (input) {
+                case 1:
+                    System.out.println("==[ Create Character ]==");
+                    System.out.println("[1] - Pirate");
+                    System.out.println("[2] - Marine");
+                    System.out.println("[3] - Pirate Hunter");
+                    System.out.println("[4] - Civilian");
+                    System.out.print("> ");
+
+                    switch (getChoice()) {
+                        case 1: // Pirate
+                            CreateCharacter("Pirate");
+                            break;
+                        case 2: // Marine
+                            CreateCharacter("Marine");
+                            break;
+                        case 3: // Pirate Hunter
+                            CreateCharacter("PirateHunter");
+                            break;
+                        case 4: // Civilian
+                            CreateCharacter("Civilian");
+                            break;
+                    
+                        default:
+                            System.out.println("Invalid Input");
+                            break;
+                    }
+
+                    input = 0;  // Reset input
+                    break;
+                case 2:
+                    ViewCharacter();
+                    break;
+                case 3:
+                    ModifyCharacter();
+                    break;
+                case 4:
+                    DeleteCharacter();
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("Invalid Input");
+                    break;
+            }
+
+        } while (input < 1 || input > 4);
+
+
     }
 
     public static void DevilFruits()
@@ -200,9 +237,25 @@ public class Driver {
         String name, alias, origin, status;
         int dfIndex, wallet;
 
-        name = getInput("Name");
+        // Name Verification
+        do {
+            name = getInput("Name");
+            if (name.isBlank())
+            {
+                System.out.println("Name cannot be empty");
+            }
+        } while (name.isBlank());
+
         alias = getInput("Alias (leave blank if none)");
-        origin = getInput("Origin");
+        
+        // Origin Verification
+        do {
+            origin = getInput("Origin");
+            if (origin.isBlank())
+            {
+                System.out.println("Origin cannot be empty");
+            }
+        } while (origin.isBlank());
 
         // Status Verification
         do {
@@ -312,6 +365,8 @@ public class Driver {
                 }
 
                 CharacterList.add(temp);
+                System.out.println();
+                System.out.println("Pirate successfully registered.");
 
                 break;
 
@@ -409,6 +464,39 @@ public class Driver {
             default:
                 break;
         }
+    }
+
+    public static void ViewCharacter()
+    {
+        int input;
+
+        if (!(CharacterList.isEmpty()))
+        {
+            do {
+                System.out.println("===[ View Character ]===");
+    
+                for (Character c : CharacterList)
+                {
+                    System.out.println("[" + (CharacterList.indexOf(c) + 1) + "] - " + c.GetName());
+                }
+    
+                System.out.print("> ");
+                input = getChoice();
+
+                if (input < 1 || input > CharacterList.size())
+                {
+                    System.out.println("Invalid Index");
+                }
+                
+            } while (input < 1 || input > CharacterList.size());
+
+            CharacterList.get(input-1).displayProfile();
+
+        } else
+        {
+            System.out.println("No Existing Character");
+        }
+
     }
 
     public static void ModifyCharacter() {
@@ -639,7 +727,15 @@ public class Driver {
         List<Character> historicalOwner = new ArrayList<>(); // A list of the former owner in the CharacterList
 
         System.out.println("=====[ Create Devil Fruit ]=====");
-        name = getInput("Name of the Devil Fruit"); // Get the name of the devil fruit
+
+        // Name Verification
+        do {
+            name = getInput("Name of the Devil Fruit"); // Get the name of the devil fruit
+            if (name.isBlank())
+            {
+                System.out.println("Name cannot be empty");
+            }
+        } while (name.isBlank());
 
         // Category Verification
         do {
@@ -756,6 +852,8 @@ public class Driver {
 
         // Add to the List
         DevilFruitList.add(dfTemp);
+
+        System.out.println(dfTemp.GetFruitName() + " has been created.");
 
     }
 
@@ -881,7 +979,7 @@ public class Driver {
                 charIndex -= 1; // Decrement since the list index starts with 0
 
                 System.out.println("Assigning " + CharacterList.get(charIndex).GetName() + " " + DevilFruitList.get(dfIndex).GetFruitName());
-                
+
                 CharacterList.get(charIndex).SetDFPower(DevilFruitList.get(dfIndex));   // Set Devil Fruit of the Character Picked
 
             } else

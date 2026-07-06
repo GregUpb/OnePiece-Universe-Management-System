@@ -50,7 +50,10 @@ public class PirateHunter extends Character{
 
     public void SetCaptures(int Captures)
     {
-        this.Captures = Captures;
+        if (Captures >= 0)
+        {
+            this.Captures = Captures;
+        }   
     }
 
     public void AddCaptures(int Amount)

@@ -74,7 +74,13 @@ abstract class Character{
 
     public void SetName(String Name)
     {
-        this.Name = Name;
+        if (Name.isBlank())
+        {
+            System.out.println("Name cannot be blank");
+        } else
+        {
+            this.Name = Name;
+        }
     }
 
     public void SetAlias(String Alias)
@@ -84,12 +90,21 @@ abstract class Character{
 
     public void SetOrigin(String Origin)
     {
-        this.Origin = Origin;
+        if (Origin.isBlank())
+        {
+            System.out.println("Origin cannot be blank");
+        } else
+        {
+            this.Origin = Origin;
+        }
     }
 
     public void SetStatus(String Status)
     {
-        this.Status = Status;
+        if (Status.equalsIgnoreCase("alive") || Status.equalsIgnoreCase("captured") || Status.equalsIgnoreCase("dead"))
+        {
+            this.Status = Status;
+        }
 
         //Reincarnation Trigger
         if (this.Status.equalsIgnoreCase("dead") && this.DFPower != null) {
@@ -118,7 +133,10 @@ abstract class Character{
 
     public void SetWallet(int Wallet)
     {
-        this.Wallet = Wallet;
+        if (Wallet >= 0)
+        {
+            this.Wallet = Wallet;
+        }
     }
 
     public void displayProfile()

@@ -85,7 +85,13 @@ public class DevilFruit{
 
     public void SetFruitName(String FruitName)
     {
-        this.FruitName = FruitName;
+        if (FruitName.isBlank())
+        {
+            System.out.println("Devil Fruit Name cannot be empty");
+        } else
+        {
+            this.FruitName = FruitName;
+        }
     }
 
     public void SetCategory(String Category)

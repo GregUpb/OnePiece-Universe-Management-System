@@ -7,7 +7,7 @@ public class Pirate extends Character{
     private String PirateRole;
     private Boolean IsCaptain;
     private PirateCrew Crew = null;
-    private List<String[]> Roles = new ArrayList<>(List.of(
+    final List<String[]> Roles = new ArrayList<>(List.of(
             new String[] {"Captain", "I AM THE CAPTAIN NIGGERSSSSSSSSSS"},
             new String[] {"First Mate", "COPY PASTE"},
             new String[] {"Second Mate", "COPY PASTE"},

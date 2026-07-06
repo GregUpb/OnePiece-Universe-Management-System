@@ -8,7 +8,7 @@ public class MarineCorp{
 
     private Long ID;
     private String BaseLocation;
-    private Marine CorpsCommander;
+    private Marine CorpsCommander = null;
     private int OperationalFunds;
     private List<Marine> CorpMembers = new ArrayList<>();
 
@@ -58,7 +58,13 @@ public class MarineCorp{
 
     public void SetBaseLocation(String BaseLocation)
     {
-        this.BaseLocation = BaseLocation;
+        if (BaseLocation.isBlank())
+        {
+            System.out.println("Base Location cannot be empty");
+        } else
+        {
+            this.BaseLocation = BaseLocation;
+        }
     }
 
     public void SetCorpsCommander(Marine CorpsCommander)
@@ -68,7 +74,10 @@ public class MarineCorp{
 
     public void SetOperationalFunds(int OperationalFunds)
     {
-        this.OperationalFunds = OperationalFunds;
+        if (OperationalFunds >= 0)
+        {
+            this.OperationalFunds = OperationalFunds;
+        }
     }
 
     public void AddOperationalFunds(int Amount)

@@ -67,12 +67,24 @@ public class PirateCrew {
 
     public void SetCrewName(String CrewName)
     {
-        this.CrewName = CrewName;
+        if (CrewName.isBlank())
+        {
+            System.out.println("Crew Name cannot be empty");
+        } else
+        {
+            this.CrewName = CrewName;
+        }
     }
 
     public void SetShipsName(String ShipsName)
     {
-        this.ShipsName = ShipsName;
+        if (ShipsName.isBlank())
+        {
+            System.out.println("Ships Name cannot be empty");
+        } else
+        {
+            this.ShipsName = ShipsName;
+        }
     }
 
     public void SetCaptain(Pirate Captain)

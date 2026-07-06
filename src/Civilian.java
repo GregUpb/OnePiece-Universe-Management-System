@@ -5,7 +5,7 @@ public class Civilian extends Character{
 
     private String Profession;
     private String Residence;
-    private List<String[]> CivProfessions = new ArrayList<>(List.of(
+    final List<String[]> CivProfessions = new ArrayList<>(List.of(
             new String[] {"Captain", "I AM THE CAPTAIN NIGGERSSSSSSSSSS"},
             new String[] {"First Mate", "COPY PASTE"},
             new String[] {"Second Mate", "COPY PASTE"},
@@ -78,7 +78,13 @@ public class Civilian extends Character{
 
     public void SetResidence(String Residence)
     {
-        this.Residence = Residence;
+        if (Residence.isBlank())
+        {
+            System.out.println("Residence cannot be blank");
+        } else
+        {
+            this.Residence = Residence;
+        }
     }
 
     @Override
