@@ -51,7 +51,10 @@ public class Civilian extends Character{
         return this.CivProfessions;
     }
 
-    public String GetProfession() { return this.Profession; }
+    public String GetProfession()
+    { 
+        return this.Profession; 
+    }
 
     public String GetResidence()
     {

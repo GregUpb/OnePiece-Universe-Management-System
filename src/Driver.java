@@ -21,6 +21,7 @@ public class Driver {
         "Navigator", 
         "Shipwright", 
         "Sniper", 
+        "Crew Member",
         "Archaeologist", 
         "Assassin", 
         "Barber", 
@@ -246,11 +247,77 @@ public class Driver {
 
     public static void PirateCrews()
     {
+        int input;
+
+        do {
+            System.out.println("===[ Pirate Crew ]===");
+            System.out.println("[1] - Create Pirate Crew");
+            System.out.println("[2] - View Pirate Crew");
+            System.out.println("[3] - Modify Pirate Crew");
+            System.out.println("[4] - Add/Remove Pirate from Crew");
+            System.out.println("[5] - Return");
+
+            input = getChoice();
+
+            switch (input) {
+                case 1:
+                    CreatePirateCrew();
+                    break;
+                case 2:
+                    ViewPirateCrew();
+                    break;
+                case 3:
+                    // ModifyPirateCrew();
+                    break;
+                case 4:
+                    // AddRemovePirateFromCrew();
+                    break;
+                case 5:
+                    break;
+            
+                default:
+                    System.out.println("Invalid Input");
+                    break;
+            }
+
+
+        } while (input < 1 || input > 4);
 
     }
     
     public static void MarineCorps()
     {
+        int input;
+
+        do {
+            System.out.println("===[ Devil Fruit ]===");
+            System.out.println("[1] - Create Devil Fruit");
+            System.out.println("[2] - View Devil Fruit");
+            System.out.println("[3] - Assign Devil Fruit");
+            System.out.println("[4] - Return");
+
+            input = getChoice();
+
+            switch (input) {
+                case 1:
+                    CreateDF();
+                    break;
+                case 2:
+                    ViewDF();
+                    break;
+                case 3:
+                    AssignDF();
+                    break;
+                case 4:
+                    break;
+            
+                default:
+                    System.out.println("Invalid Input");
+                    break;
+            }
+
+
+        } while (input < 1 || input > 4);
 
     }
 
@@ -962,16 +1029,15 @@ public class Driver {
                 System.out.println("None");
             } else
             {
-
-            }
-            for (Character c : temp.GetHistoricalOwners())
-            {
-                if (temp.GetHistoricalOwners().indexOf(c) == 0)
+                for (Character c : temp.GetHistoricalOwners())
                 {
-                    System.out.println(c.GetName());
-                } else
-                {
-                    System.out.printf("%20s%s\n", " ", c.GetName());
+                    if (temp.GetHistoricalOwners().indexOf(c) == 0)
+                    {
+                        System.out.println(c.GetName());
+                    } else
+                    {
+                        System.out.printf("%20s%s\n", " ", c.GetName());
+                    }
                 }
             }
 
@@ -1045,6 +1111,223 @@ public class Driver {
             System.out.println("No Existing Devil Fruit");
         }       
 
+    }
+
+    public static void CreatePirateCrew()
+    {
+        String crewName, shipName;
+        int capIndex, crewIndex;
+        int i;
+        List<Pirate> members = new ArrayList<>();
+        List<Integer> pirateIndex = new ArrayList<>();
+
+        System.out.println("=[ Create Pirate Crew ]=");
+
+        // Crew Name Verification
+        do {
+            crewName = getInput("Name of the Pirate Crew");
+            if (crewName.isBlank())
+            {
+                System.out.println("Pirate Crew Name cannot be empty");
+            }
+        } while (crewName.isBlank());
+
+        // Ship Name Verification
+        do {
+            shipName = getInput("Name of the ship");
+            if (shipName.isBlank())
+            {
+                System.out.println("Ship's Name cannot be empty");
+            }
+        } while (shipName.isBlank());
+
+        // Captain Verification
+        do {
+            System.out.println("[ Pirate Captain ]");
+            System.out.println("[0] - None");
+            if (!(pirateIndex.contains(0)))
+            {
+                pirateIndex.add(0);
+            }
+
+            // List all pirate existed in the CharacterList
+            i = 0;
+            for (Character c : CharacterList)
+            {
+                if (c instanceof Pirate && ((Pirate)c).GetPirateCrew() == null)
+                {
+                    i++;
+                    System.out.println("[" + i + "] - " + c.GetName());
+
+                    if (!(pirateIndex.contains(CharacterList.indexOf(c))))
+                    {
+                        pirateIndex.add(CharacterList.indexOf(c));
+                    }
+                }
+            }
+
+            System.out.print("> ");
+            capIndex = getChoice();
+
+            if (capIndex < 0 || capIndex > i)
+            {
+                System.out.println("Invalid Index");
+            }
+        } while ((capIndex < 0 || capIndex > i));
+        
+        // Members Verification
+        pirateIndex.clear();
+        do {
+            System.out.println("[ Pirate Members ]");
+
+            if (members.isEmpty())
+            {
+                System.out.println("[0] - None");
+            } else
+            {
+                System.out.println("[0] - Done");
+            }
+
+            if (!(pirateIndex.contains(0)))
+            {
+                pirateIndex.add(0);
+            }
+
+            // List all pirate existed in the CharacterList
+            i = 0;
+            for (Character c : CharacterList)
+            {
+                if (c instanceof Pirate && ((Pirate)c).GetPirateCrew() == null)
+                {
+                    i++;
+                    System.out.println("[" + i + "] - " + c.GetName());
+
+                    if (!(pirateIndex.contains(CharacterList.indexOf(c))))
+                    {
+                        pirateIndex.add(CharacterList.indexOf(c));
+                    }
+                }
+            }
+
+            System.out.print("> ");
+            crewIndex = getChoice();
+
+            if (crewIndex < 0 || crewIndex > i)
+            {
+                System.out.println("Invalid Index");
+            } else
+            {
+                members.add((Pirate)CharacterList.get(pirateIndex.get(crewIndex-1)));
+            }
+        } while ((crewIndex < 0 || crewIndex > i));
+
+        PirateCrew crew;
+
+        // Create Pirate Crew based on the inputs
+        if (capIndex == 0 && members.isEmpty())
+        {
+            crew = new PirateCrew(crewName, shipName);
+        } else if (capIndex != 0 && members.isEmpty())
+        {
+            crew = new PirateCrew(crewName, shipName, (Pirate)CharacterList.get(pirateIndex.get(capIndex)));
+        } else if (capIndex == 0 && !(members.isEmpty()))
+        {
+            crew = new PirateCrew(crewName, shipName, members);
+        } else 
+        {
+            crew = new PirateCrew(crewName, shipName, (Pirate)CharacterList.get(pirateIndex.get(capIndex)), members);
+        }
+
+        PirateCrewList.add(crew);
+        
+    }
+
+    public static void ViewPirateCrew()
+    {
+        int input;
+        String name;
+
+        // List Pirate Crew to view
+        do {
+
+            System.out.println("[ View Pirate Crew ]");
+            System.out.println("[0] - Return");
+            for (PirateCrew pc : PirateCrewList)
+            {
+                System.out.println("[" + (PirateCrewList.indexOf(pc)+1) + "] - " + pc.GetCrewName());
+            }
+
+            System.out.print("> ");
+            input = getChoice();
+
+            if (input < 0 || input > PirateCrewList.size())
+            {
+                System.out.println("Invalid Index");
+            }
+
+        } while (input < 0 || input > PirateCrewList.size());
+
+        if (input > 0)
+        {
+            do {
+                displayCrewInfo(PirateCrewList.get(input-1));
+
+                name = getInput("Pirate Name to display info (or \"exit\" to exit)");
+
+                if (!(name.equalsIgnoreCase("exit")))
+                {
+                    for (Pirate p : PirateCrewList.get(input-1).GetCrewMembers())
+                    {
+                        if (p.GetName().equalsIgnoreCase(name))
+                        {
+                            p.displayProfile();
+                            scanner.nextLine();
+                        }
+                    }
+                }
+            } while (!(name.equalsIgnoreCase("exit")));
+        }
+    }
+
+    public static void displayCrewInfo(PirateCrew pc)
+    {
+        Boolean first = true;
+
+        System.out.println("[ " + pc.GetCrewName() + " ]");
+        System.out.println("Crew ID: " + pc.GetCrewID());
+        System.out.println("Crew Name: " + pc.GetCrewName());
+        System.out.println("Ship's Name: " + pc.GetShipsName());
+
+        if (pc.GetCaptain() != null)
+        {
+            System.out.println("Captain: " + pc.GetCaptain().GetName());
+        } else
+        {
+            System.out.println("Captain: None");
+        }
+        System.out.print("Members: ");
+        if (pc.GetCrewMembers().isEmpty())
+        {
+            System.out.println("None");
+        } else
+        {
+            for (Pirate p : pc.GetCrewMembers())
+            {
+                if (p != pc.GetCaptain())
+                {
+                    if (first)
+                    {
+                        System.out.println(p.GetName());
+                        first = false;
+                    } else
+                    {
+                        System.out.printf("%9s%s\n", " ", p.GetName());
+                    }
+                }
+            }
+        }
+
+        System.out.println("Total Crew Bounty: " + pc.GetTotalCrewBounty());
     }
 
     public static void displayDF()

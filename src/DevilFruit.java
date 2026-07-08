@@ -118,7 +118,7 @@ public class DevilFruit{
             {
                 this.CurrentOwner = CurrentOwner;
                 CurrentOwner.SetDFPower(this);
-            } else if (this.CurrentOwner == null && CurrentOwner.GetDFPower().equals(this))
+            } else if (this.CurrentOwner == null && CurrentOwner.GetDFPower() == this)
             {
                 this.CurrentOwner = CurrentOwner;
             }
@@ -145,14 +145,12 @@ public class DevilFruit{
         if (!(HistoricalOwners.contains(HistoricalOwner)))
         {
             HistoricalOwners.add(HistoricalOwner);
-        }
-    }
-
-    public void RemoveHistoricalOwner(Character HistoricalOwner)
-    {
-        if (HistoricalOwners.contains(HistoricalOwner))
+        } else if (CurrentOwner == HistoricalOwner && CurrentOwner.GetStatus().equalsIgnoreCase("dead"))
         {
-            HistoricalOwners.remove(HistoricalOwner);
+            this.TriggerReinc();
+        } else
+        {
+            System.out.println(HistoricalOwner.GetName() + " is already a former " + this.FruitName + " user");
         }
     }
 

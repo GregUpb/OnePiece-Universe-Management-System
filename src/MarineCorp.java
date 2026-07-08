@@ -23,7 +23,7 @@ public class MarineCorp{
 
     MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds, List<Marine> CorpMembers)
     {
-        
+        this.GenerateID();
         
         this.BaseLocation = BaseLocation;
         this.CorpsCommander = CorpsCommander;
@@ -69,7 +69,13 @@ public class MarineCorp{
 
     public void SetCorpsCommander(Marine CorpsCommander)
     {
-        this.CorpsCommander = CorpsCommander;
+        if (CorpsCommander.GetMCorps() == this)
+        {
+            this.CorpsCommander = CorpsCommander;
+        } else
+        {
+            System.out.println(CorpsCommander.GetName() + " is not part of the Marine Corp " + this.BaseLocation + " HQ");
+        }
     }
 
     public void SetOperationalFunds(int OperationalFunds)
@@ -77,6 +83,9 @@ public class MarineCorp{
         if (OperationalFunds >= 0)
         {
             this.OperationalFunds = OperationalFunds;
+        } else
+        {
+            System.out.println("Operational Funds cannot be negative");
         }
     }
 
@@ -89,6 +98,12 @@ public class MarineCorp{
     {
         if (!(CorpMembers.contains(CorpMember)))
         {
+            if (CorpMember.GetMCorps() != this)
+            {
+                CorpMember.GetMCorps().RemoveCorpMember(CorpMember);
+            }
+
+            CorpMember.SetMCorps(this);
             CorpMembers.add(CorpMember);
         }
     }
@@ -98,6 +113,7 @@ public class MarineCorp{
         if (CorpMembers.contains(CorpMember))
         {
             CorpMembers.remove(CorpMember);
+            CorpMember.SetMCorps(null);
         }
     }
 

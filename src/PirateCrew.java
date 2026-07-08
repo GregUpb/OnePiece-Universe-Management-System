@@ -9,30 +9,53 @@ public class PirateCrew {
     private Long ID;
     private String CrewName;
     private String ShipsName;
-    private Pirate Captain;
+    private Pirate Captain = null;
     private List<Pirate> CrewMembers = new ArrayList<>();
     private int TotalCrewBounty;
 
+    PirateCrew(String CrewName, String ShipsName)
+    {
+        this.GenerateID();
 
-    PirateCrew(String CrewName, String ShipsName, Pirate Captain, int TotalCrewBounty)
+        this.CrewName = CrewName;
+        this.ShipsName = ShipsName;
+    }
+
+    PirateCrew(String CrewName, String ShipsName, Pirate Captain)
     {
         this.GenerateID();
 
         this.CrewName = CrewName;
         this.ShipsName = ShipsName;
         this.Captain = Captain;
-        this.TotalCrewBounty = TotalCrewBounty;
+        CrewMembers.add(Captain);
+        
+        CalculateTotalCrewBounty();
+    }
+
+    PirateCrew(String CrewName, String ShipsName, List<Pirate> CrewMembers)
+    {
+        this.GenerateID();
+
+        this.CrewName = CrewName;
+        this.ShipsName = ShipsName;
+        this.CrewMembers = CrewMembers;
+        
+        CalculateTotalCrewBounty();
     }
     
-    PirateCrew(String CrewName, String ShipsName, Pirate Captain, List<Pirate> CrewMembers, int TotalCrewBounty)
+    PirateCrew(String CrewName, String ShipsName, Pirate Captain, List<Pirate> CrewMembers)
     {
         this.GenerateID();
 
         this.CrewName = CrewName;
         this.ShipsName = ShipsName;
         this.Captain = Captain;
+        CrewMembers.add(Captain);
+
         this.CrewMembers = CrewMembers;
-        this.TotalCrewBounty = TotalCrewBounty;
+        
+        CalculateTotalCrewBounty();
     }
 
     public Long GetCrewID()
@@ -89,19 +112,41 @@ public class PirateCrew {
 
     public void SetCaptain(Pirate Captain)
     {
-        if (this.Captain != null) { //Checks if there is already an existing captain
-            this.Captain.SetIsCaptain(false);
-            this.Captain.SetPirateRole("Crew Member");
+        // Checks whether the supposed new captain is not in a crew or is already part of the crew
+        if (Captain.GetPirateCrew() == null || Captain.GetPirateCrew() == this)
+        {
+            if (this.Captain != Captain)
+            {
+                if (this.Captain != null) { //Checks if there is already an existing captain
+                    this.Captain.SetIsCaptain(false);
+                    this.Captain.SetPirateRole("Crew Member");
+        
+                }
+                // Checks if the new captain is not null
+                if (Captain != null)
+                {
+                    Captain.SetIsCaptain(true);
+                    Captain.SetPirateRole("Captain");
+                }
+                
+                Captain.SetPirateCrew(this);
+                this.Captain = Captain;
+            } else
+            {
+                System.out.println(this.Captain.GetName() + " is already the Captain");
+            }
+        } else
+        {
+            System.out.println(Captain.GetName() + " is not part of " + this.CrewName);
         }
-        Captain.SetIsCaptain(true);
 
-        this.Captain = Captain;
     }
 
     public void CalculateTotalCrewBounty()
     {
         int TotalCrewBounty = 0;
 
+        // Add all the bounty of the crew members
         for (Pirate p : CrewMembers) {
             if (p.GetStatus().equalsIgnoreCase("alive"))
             {
@@ -114,16 +159,24 @@ public class PirateCrew {
 
     public void AddCrewMember(Pirate CrewMember)
     {
-        //Check if pirate is already in the list
+        //Check if pirate is not in the list
         if (!(CrewMembers.contains(CrewMember)))
         {
+            // Overwrite its crew with the new crew
+            if (CrewMember.GetPirateCrew() != null && CrewMember.GetPirateCrew() != this)
+            {
+                CrewMember.GetPirateCrew().RemoveCrewMember(CrewMember);
+            }
+            
             CrewMembers.add(CrewMember);
 
-            //Update the Pirate object's crew pointer only if it isn't already set to this crew.
-            if (CrewMember.GetPirateCrew() != this)
-            {
-                CrewMember.SetPirateCrew(this);
-            }
+            // Set the crew and role
+            CrewMember.SetPirateCrew(this);
+            CrewMember.SetPirateRole("Crew Member");
+
+        } else
+        {
+            System.out.println(CrewMember.GetName() + " is already part of the " + this.CrewName);
         }
     }
 
@@ -131,12 +184,18 @@ public class PirateCrew {
     {
         if (CrewMembers.contains(CrewMember))
         {
-            CrewMembers.remove(CrewMember);
-            // Clear Pirate object's crew pointer only if it's already pointing to this crew.
-            if (CrewMember.GetPirateCrew() == this)
+            // Check if the member is a captain, remove it
+            if (CrewMember.IsCaptain())
             {
-                CrewMember.SetPirateCrew(null);
+                CrewMember.SetIsCaptain(false);
             }
+            
+            CrewMember.SetPirateRole("None");
+            CrewMember.SetPirateCrew(null);
+            CrewMembers.remove(CrewMember);
+        } else
+        {
+            System.out.println(CrewMember.GetName() + " is not part of the " + this.CrewName);
         }
     }
 

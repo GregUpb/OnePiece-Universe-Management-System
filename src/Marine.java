@@ -89,7 +89,21 @@ public class Marine extends Character{
 
     public void SetMCorps(MarineCorp MCorps)
     {
+        // If they are already in a crew, remove them from the old crew's list first
+        if (this.MCorps != null) {
+            this.MCorps.RemoveCorpMember(this);
+        }
+
         this.MCorps = MCorps;
+
+        // If they are not part of the crew then add
+        if (MCorps != null)
+        {
+            if (!(MCorps.GetCorpMembers().contains(this)))
+            {
+                MCorps.AddCorpMember(this);
+            }
+        }
     }
 
     @Override

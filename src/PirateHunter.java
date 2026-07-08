@@ -1,7 +1,7 @@
 //Module 1: Characters
 public class PirateHunter extends Character{
-    private String CombatStyle;
-    private int Captures;
+    private String CombatStyle = "None";
+    private int Captures = 0;
 
     PirateHunter(String Name, String Alias, String Origin, String Status, int Wallet, int Captures)
     {
@@ -45,7 +45,13 @@ public class PirateHunter extends Character{
 
     public void SetCombatStyle(String CombatStyle)
     {
-        this.CombatStyle = CombatStyle;
+        if (CombatStyle.isBlank())
+        {
+            this.CombatStyle = "None";
+        } else
+        {
+            this.CombatStyle = CombatStyle;
+        }
     }
 
     public void SetCaptures(int Captures)
@@ -53,7 +59,10 @@ public class PirateHunter extends Character{
         if (Captures >= 0)
         {
             this.Captures = Captures;
-        }   
+        } else
+        {
+            System.out.println("Captures cannot be negative");
+        }
     }
 
     public void AddCaptures(int Amount)
@@ -74,6 +83,6 @@ public class PirateHunter extends Character{
 
     public void performDuty()
     {
-        System.out.println("HUNTING");
+        System.out.println("Bounty Hunting...");
     }
 }

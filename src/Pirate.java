@@ -5,7 +5,7 @@ public class Pirate extends Character{
 
     private int Bounty;
     private String PirateRole;
-    private Boolean IsCaptain;
+    private Boolean IsCaptain = false;
     private PirateCrew Crew = null;
     final List<String[]> Roles = new ArrayList<>(List.of(
             new String[] {"None", "Doing nothing..."},
@@ -18,6 +18,7 @@ public class Pirate extends Character{
             new String[] {"Navigator", "Checking the map..."},
             new String[] {"Shipwright", "Repairing the ship..."},
             new String[] {"Sniper", "Training marksmanship..."},
+            new String[] {"Crew Member", "Obeying captain's orders..."},
             new String[] {"Archaeologist", "Examining artifacts..."},
             new String[] {"Assassin", "Hiding..."},
             new String[] {"Barber", "Cutting hair..."},
@@ -112,6 +113,9 @@ public class Pirate extends Character{
     {
         if (Bounty >= 0){
             this.Bounty = Bounty;
+        } else
+        {
+            System.out.println("Bounty cannot be negative");
         }
     }
 
@@ -128,7 +132,18 @@ public class Pirate extends Character{
 
     public void SetIsCaptain(Boolean IsCaptain)
     {
-        this.IsCaptain = IsCaptain;
+        if (this.Crew != null)
+        {
+            this.IsCaptain = IsCaptain;
+            // If IsCaptain is true
+            if (IsCaptain)
+            {
+                this.GetPirateCrew().SetCaptain(this);
+            }
+        } else if (this.Crew == null & IsCaptain == true)
+        {
+            System.out.println(this.GetName() + " cannot be a captain without a crew");
+        }
     }
 
     public void SetPirateCrew(PirateCrew Crew)
@@ -140,10 +155,15 @@ public class Pirate extends Character{
 
         this.Crew = Crew;
 
-        // Check that the new crew has this pirate in their list
-        if (this.Crew != null && !this.Crew.GetCrewMembers().contains(this)) {
-            this.Crew.AddCrewMember(this);
+        // If they are not part of the crew then add
+        if (Crew != null)
+        {
+            if (!(Crew.GetCrewMembers().contains(this)))
+            {
+                Crew.AddCrewMember(this);
+            }
         }
+
     }
 
     @Override

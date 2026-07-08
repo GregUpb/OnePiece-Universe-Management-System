@@ -126,9 +126,9 @@ abstract class Character{
                     this.DFPower = DFPower;
                     DFPower.SetCurrentOwner(this);
                 }
-            } if (DFPower == null)
+            } else if (DFPower == null)
             {
-                this.DFPower = DFPower;
+                System.out.println("Cannot remove devil fruit from " + this.Name);
             } else if (this.DFPower != DFPower)
             {
                 System.out.println("Already have a devil fruit");
@@ -145,6 +145,9 @@ abstract class Character{
         if (Wallet >= 0)
         {
             this.Wallet = Wallet;
+        } else
+        {
+            System.out.println("Wallet cannot be negative");
         }
     }
 
