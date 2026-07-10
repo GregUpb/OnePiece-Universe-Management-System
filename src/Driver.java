@@ -141,7 +141,7 @@ public class Driver {
         } while (choice != 5);
 
     }
-
+    // Displays the Character management menu and directs its program flow
     public static void Characters()
     {
         int input;
@@ -208,7 +208,7 @@ public class Driver {
 
 
     }
-
+    // Displays the Devil Fruit management menu and directs its program flow
     public static void DevilFruits()
     {
         int input;
@@ -245,6 +245,7 @@ public class Driver {
 
     }
 
+    // Displays the Pirate Crews management menu and directs its program flow
     public static void PirateCrews()
     {
         int input;
@@ -284,7 +285,8 @@ public class Driver {
         } while (input < 1 || input > 4);
 
     }
-    
+
+    // Displays the Marine Corps management menu and directs its program flow
     public static void MarineCorps()
     {
         int input;
@@ -321,10 +323,11 @@ public class Driver {
 
     }
 
-    
+    /* CHARACTER MANAGEMENT OPERATIONS */
+
+    // Handles the creation and data entry for a new character
     public static void CreateCharacter(String type)
     {
-        // 
         String name, alias, origin, status;
         int dfIndex, wallet;
 
@@ -570,6 +573,7 @@ public class Driver {
         }
     }
 
+    // Handles the retrieval and display of character profiles
     public static void ViewCharacter()
     {
         int input;
@@ -603,6 +607,7 @@ public class Driver {
 
     }
 
+    // Handles the selection and updating of character attributes
     public static void ModifyCharacter() {
         if (CharacterList.isEmpty()) {
             System.out.println("No characters available to modify.");
@@ -795,6 +800,7 @@ public class Driver {
         System.out.println("Modification complete!");
     }
 
+    // Handles the unlinking and removal of a character from the system
     public static void DeleteCharacter() {
         if (CharacterList.isEmpty()) {
             System.out.println("No characters available to delete.");
@@ -836,6 +842,9 @@ public class Driver {
         System.out.println("Character successfully deleted and unlinked from all systems.");
     }
 
+    /* DEVIL FRUIT MANAGEMENT OPERATIONS */
+
+    // Handles the creation and data entry for a new devil fruit
     public static void CreateDF()
     {
         // Variables
@@ -976,6 +985,7 @@ public class Driver {
 
     }
 
+    // Handles the retrieval and display of devil fruit profiles
     public static void ViewDF()
     {
         DevilFruit temp;
@@ -1046,7 +1056,7 @@ public class Driver {
             System.out.println("No Existing Devil Fruit");
         }
     }
-
+    // Handles assignment of devil fruit to character
     public static void AssignDF()
     {
         int dfIndex, charIndex;
@@ -1112,7 +1122,9 @@ public class Driver {
         }       
 
     }
+    /* PIRATE CREW MANAGEMENT OPERATIONS */
 
+    // Handles the creation and data entry for a new pirate crew
     public static void CreatePirateCrew()
     {
         String crewName, shipName;
@@ -1174,8 +1186,9 @@ public class Driver {
                 System.out.println("Invalid Index");
             }
         } while ((capIndex < 0 || capIndex > i));
-        
+
         // Members Verification
+        marineIndex.clear(); // NOTE: You used marineIndex in CreateMCorp but pirateIndex here. Clearing pirateIndex.
         pirateIndex.clear();
         do {
             System.out.println("[ Pirate Members ]");
@@ -1193,12 +1206,17 @@ public class Driver {
                 pirateIndex.add(0);
             }
 
-            // List all pirate existed in the CharacterList
+            // List all pirates existing in the CharacterList not in a crew
             i = 0;
             for (Character c : CharacterList)
             {
                 if (c instanceof Pirate && ((Pirate)c).GetPirateCrew() == null)
                 {
+                    // Prevent displaying the pirate already selected as Captain
+                    if (capIndex != 0 && CharacterList.indexOf(c) == pirateIndex.get(capIndex)) {
+                        continue;
+                    }
+
                     i++;
                     System.out.println("[" + i + "] - " + c.GetName());
 
@@ -1215,12 +1233,17 @@ public class Driver {
             if (crewIndex < 0 || crewIndex > i)
             {
                 System.out.println("Invalid Index");
-            } else
+            } else if (crewIndex > 0)
             {
-                members.add((Pirate)CharacterList.get(pirateIndex.get(crewIndex-1)));
+                Pirate selectedPirate = (Pirate)CharacterList.get(pirateIndex.get(crewIndex));
+                if (!members.contains(selectedPirate)) {
+                    members.add(selectedPirate);
+                    System.out.println(selectedPirate.GetName() + " added to the crew roster.");
+                } else {
+                    System.out.println(selectedPirate.GetName() + " is already selected.");
+                }
             }
-        } while ((crewIndex < 0 || crewIndex > i));
-
+        } while (crewIndex != 0);
         PirateCrew crew;
 
         // Create Pirate Crew based on the inputs
@@ -1242,6 +1265,7 @@ public class Driver {
         
     }
 
+    // Handles the retrieval and display of pirate crew profiles
     public static void ViewPirateCrew()
     {
         int input;
@@ -1286,6 +1310,506 @@ public class Driver {
                     }
                 }
             } while (!(name.equalsIgnoreCase("exit")));
+        }
+    }
+
+    // Handles the selection and updating of pirate crew attributes
+    public static void ModifyPirateCrew()
+    {
+        int input;
+        //Checks if there are any existing Pirate Crews
+        if (PirateCrewList.isEmpty()) {
+            System.out.println("No Pirate Crews available to modify.");
+            return;
+        }
+        //Lists all existing Pirate Crew
+        do {
+            System.out.println("[ Modify Pirate Crew ]");
+            System.out.println("[0] - Return");
+            for (PirateCrew pc : PirateCrewList)
+            {
+                System.out.println("[" + (PirateCrewList.indexOf(pc)+1) + "] - " + pc.GetCrewName());
+            }
+
+            System.out.print("> ");
+            input = getChoice();
+
+            if (input < 0 || input > PirateCrewList.size())
+            {
+                System.out.println("Invalid Index");
+            }
+        } while (input < 0 || input > PirateCrewList.size());
+        // After choosing a Pirate Crew to modify, user is asked to choose which attribute will be modified
+        if (input > 0) {
+            PirateCrew selectedCrew = PirateCrewList.get(input - 1);
+            int modChoice;
+
+            do {
+                System.out.println("\nModifying: " + selectedCrew.GetCrewName());
+                System.out.println("[1] - Crew Name");
+                System.out.println("[2] - Ship's Name");
+                System.out.println("[3] - Assign Captain");
+                System.out.println("[4] - Return");
+                System.out.print("> ");
+
+                modChoice = getChoice();
+
+                switch (modChoice) {
+                    case 1:
+                        String newCrewName;
+                        do {
+                            newCrewName = getInput("New Crew Name");
+                            if (newCrewName.isBlank()) {
+                                System.out.println("Crew Name cannot be empty.");
+                            }
+                        } while (newCrewName.isBlank());
+                        selectedCrew.SetCrewName(newCrewName);
+                        break;
+                    case 2:
+                        String newShipName;
+                        do {
+                            newShipName = getInput("New Ship's Name");
+                            if (newShipName.isBlank()) {
+                                System.out.println("Ship's Name cannot be empty.");
+                            }
+                        } while (newShipName.isBlank());
+                        selectedCrew.SetShipsName(newShipName);
+                        break;
+                    case 3:
+                        if (selectedCrew.GetCrewMembers().isEmpty()) {
+                            System.out.println("This Crew has no members to promote to Captain.");
+                        } else {
+                            System.out.println("[ Assign Captain ]");
+                            System.out.println("[0] - Cancel");
+                            for (int j = 0; j < selectedCrew.GetCrewMembers().size(); j++) {
+                                System.out.println("[" + (j + 1) + "] - " + selectedCrew.GetCrewMembers().get(j).GetName());
+                            }
+                            System.out.print("> ");
+                            int cmdChoice = getChoice();
+
+                            if (cmdChoice > 0 && cmdChoice <= selectedCrew.GetCrewMembers().size()) {
+                                // SetCaptain in PirateCrew.java handles demoting the old captain and setting roles
+                                selectedCrew.SetCaptain(selectedCrew.GetCrewMembers().get(cmdChoice - 1));
+                                System.out.println("Captain updated.");
+                            } else if (cmdChoice != 0) {
+                                System.out.println("Invalid selection.");
+                            }
+                        }
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        System.out.println("Invalid option.");
+                        break;
+                }
+            } while (modChoice != 4);
+        }
+    }
+
+    // Handles the unlinking and removal of a pirate crew from the system
+    public static void DeletePirateCrew()
+    {
+        int input;
+
+        if (PirateCrewList.isEmpty()) {
+            System.out.println("No Pirate Crews available to delete.");
+            return;
+        }
+
+        do {
+            System.out.println("[ Disband Pirate Crew ]");
+            System.out.println("[0] - Return");
+            for (PirateCrew pc : PirateCrewList)
+            {
+                System.out.println("[" + (PirateCrewList.indexOf(pc)+1) + "] - " + pc.GetCrewName());
+            }
+
+            System.out.print("> ");
+            input = getChoice();
+
+            if (input < 0 || input > PirateCrewList.size())
+            {
+                System.out.println("Invalid Index");
+            }
+        } while (input < 0 || input > PirateCrewList.size());
+
+        if (input > 0) {
+            PirateCrew selectedCrew = PirateCrewList.get(input - 1);
+
+
+            List<Pirate> membersToUnlink = new ArrayList<>(selectedCrew.GetCrewMembers());
+            for (Pirate p : membersToUnlink) {
+                selectedCrew.RemoveCrewMember(p);
+            }
+
+            PirateCrewList.remove(selectedCrew);
+            System.out.println("Pirate Crew successfully disbanded.");
+        }
+    }
+
+    /* MARINE CORP MANAGEMENT OPERATIONS */
+
+    // Handles the creation and data entry for a new marine corp
+    public static void CreateMCorp()
+    {
+        String baseLocation;
+        int funds;
+        int commIndex, corpIndex;
+        int i;
+        List<Marine> members = new ArrayList<>();
+        List<Integer> marineIndex = new ArrayList<>();
+
+        System.out.println("=[ Create Marine Corp ]=");
+
+        // Base Location Verification
+        do {
+            baseLocation = getInput("Base Location");
+            if (baseLocation.isBlank())
+            {
+                System.out.println("Base Location cannot be empty");
+            }
+        } while (baseLocation.isBlank());
+
+        // Operational Funds Verification
+        do {
+            System.out.print("Enter Operational Funds: ");
+            funds = getChoice();
+
+            if (funds < 0)
+            {
+                System.out.println("Operational Funds cannot be negative");
+            }
+        } while (funds < 0);
+
+        // Commander Verification
+        do {
+            System.out.println("[ Corps Commander ]");
+            System.out.println("[0] - None");
+            if (!(marineIndex.contains(0)))
+            {
+                marineIndex.add(0);
+            }
+
+            // List all marines existing in the CharacterList not in a corp
+            i = 0;
+            for (Character c : CharacterList)
+            {
+                if (c instanceof Marine && ((Marine)c).GetMCorps() == null)
+                {
+                    i++;
+                    System.out.println("[" + i + "] - " + c.GetName());
+
+                    if (!(marineIndex.contains(CharacterList.indexOf(c))))
+                    {
+                        marineIndex.add(CharacterList.indexOf(c));
+                    }
+                }
+            }
+
+            System.out.print("> ");
+            commIndex = getChoice();
+
+            if (commIndex < 0 || commIndex > i)
+            {
+                System.out.println("Invalid Index");
+            }
+        } while (commIndex < 0 || commIndex > i);
+
+        // Members Verification
+        marineIndex.clear();
+        do {
+            System.out.println("[ Marine Members ]");
+
+            if (members.isEmpty())
+            {
+                System.out.println("[0] - None");
+            } else
+            {
+                System.out.println("[0] - Done");
+            }
+
+            if (!(marineIndex.contains(0)))
+            {
+                marineIndex.add(0);
+            }
+
+            // List all marines existing in the CharacterList not in a corp
+            i = 0;
+            for (Character c : CharacterList)
+            {
+                if (c instanceof Marine && ((Marine)c).GetMCorps() == null)
+                {
+                    i++;
+                    System.out.println("[" + i + "] - " + c.GetName());
+
+                    if (!(marineIndex.contains(CharacterList.indexOf(c))))
+                    {
+                        marineIndex.add(CharacterList.indexOf(c));
+                    }
+                }
+            }
+
+            System.out.print("> ");
+            corpIndex = getChoice();
+
+            if (corpIndex < 0 || corpIndex > i)
+            {
+                System.out.println("Invalid Index");
+            } else if (corpIndex > 0)
+            {
+                Marine selectedMarine = (Marine)CharacterList.get(marineIndex.get(corpIndex));
+                if (!members.contains(selectedMarine)) {
+                    members.add(selectedMarine);
+                } else {
+                    System.out.println(selectedMarine.GetName() + " is already selected.");
+                }
+            }
+        } while (corpIndex != 0);
+
+        MarineCorp corp;
+
+        // Create Marine Corp based on the inputs
+        if (commIndex == 0 && members.isEmpty())
+        {
+            corp = new MarineCorp(baseLocation, null, funds);
+        } else if (commIndex != 0 && members.isEmpty())
+        {
+            Marine commander = (Marine)CharacterList.get(marineIndex.get(commIndex));
+            corp = new MarineCorp(baseLocation, commander, funds);
+        } else if (commIndex == 0 && !(members.isEmpty()))
+        {
+            corp = new MarineCorp(baseLocation, null, funds, members);
+        } else
+        {
+            Marine commander = (Marine)CharacterList.get(marineIndex.get(commIndex));
+            corp = new MarineCorp(baseLocation, commander, funds, members);
+        }
+
+        MarineCorpList.add(corp);
+        System.out.println("Marine Corp successfully registered.");
+    }
+
+    // Handles the retrieval and display of marine corp profiles
+    public static void ViewMCorp()
+    {
+        int input;
+        String name;
+
+        // List Marine Corps to view
+        do {
+            System.out.println("[ View Marine Corp ]");
+            System.out.println("[0] - Return");
+            for (MarineCorp mc : MarineCorpList)
+            {
+                System.out.println("[" + (MarineCorpList.indexOf(mc)+1) + "] - " + mc.GetBaseLocation());
+            }
+
+            System.out.print("> ");
+            input = getChoice();
+
+            if (input < 0 || input > MarineCorpList.size())
+            {
+                System.out.println("Invalid Index");
+            }
+
+        } while (input < 0 || input > MarineCorpList.size());
+
+        if (input > 0)
+        {
+            do {
+                displayCorpInfo(MarineCorpList.get(input-1));
+
+                name = getInput("Marine Name to display info (or \"exit\" to exit)");
+
+                if (!(name.equalsIgnoreCase("exit")))
+                {
+                    for (Marine m : MarineCorpList.get(input-1).GetCorpMembers())
+                    {
+                        if (m.GetName().equalsIgnoreCase(name))
+                        {
+                            m.displayProfile();
+                            System.out.print("Press Enter to continue...");
+                            scanner.nextLine();
+                        }
+                    }
+                }
+            } while (!(name.equalsIgnoreCase("exit")));
+        }
+    }
+
+    // Handles the selection and updating of marine corp attributes
+    public static void ModifyMCorp()
+    {
+        int input;
+        //Checks if there are any existing Marine Corps
+        if (MarineCorpList.isEmpty()) {
+            System.out.println("No Marine Corps available to modify.");
+            return;
+        }
+        //Lists all existing Marine Corps
+        do {
+            System.out.println("[ Modify Marine Corp ]");
+            System.out.println("[0] - Return");
+            for (MarineCorp mc : MarineCorpList)
+            {
+                System.out.println("[" + (MarineCorpList.indexOf(mc)+1) + "] - " + mc.GetBaseLocation());
+            }
+
+            System.out.print("> ");
+            input = getChoice();
+
+            if (input < 0 || input > MarineCorpList.size())
+            {
+                System.out.println("Invalid Index");
+            }
+        } while (input < 0 || input > MarineCorpList.size());
+        // After choosing a Marine Corp to modify, user is asked to choose which attribute will be modified
+        if (input > 0) {
+            MarineCorp selectedCorp = MarineCorpList.get(input - 1);
+            int modChoice;
+
+            do {
+                System.out.println("\nModifying: " + selectedCorp.GetBaseLocation());
+                System.out.println("[1] - Base Location");
+                System.out.println("[2] - Operational Funds");
+                System.out.println("[3] - Assign Corps Commander");
+                System.out.println("[4] - Return");
+                System.out.print("> ");
+
+                modChoice = getChoice();
+
+                switch (modChoice) {
+                    case 1:
+                        String newLocation;
+                        do {
+                            newLocation = getInput("New Base Location");
+                            if (newLocation.isBlank()) {
+                                System.out.println("Base Location cannot be empty.");
+                            }
+                        } while (newLocation.isBlank());
+                        selectedCorp.SetBaseLocation(newLocation);
+                        break;
+                    case 2:
+                        int newFunds;
+                        do {
+                            System.out.print("Enter New Operational Funds: ");
+                            newFunds = getChoice();
+                            if (newFunds < 0) {
+                                System.out.println("Funds cannot be negative.");
+                            }
+                        } while (newFunds < 0);
+                        selectedCorp.SetOperationalFunds(newFunds);
+                        break;
+                    case 3:
+                        // List members of the corp to promote
+                        if (selectedCorp.GetCorpMembers().isEmpty()) {
+                            System.out.println("This Corp has no members to promote.");
+                        } else {
+                            System.out.println("[ Assign Commander ]");
+                            System.out.println("[0] - Remove Current Commander");
+                            for (int j = 0; j < selectedCorp.GetCorpMembers().size(); j++) {
+                                System.out.println("[" + (j + 1) + "] - " + selectedCorp.GetCorpMembers().get(j).GetName());
+                            }
+                            System.out.print("> ");
+                            int cmdChoice = getChoice();
+
+                            if (cmdChoice == 0) {
+                                selectedCorp.SetCorpsCommander(null);
+                            } else if (cmdChoice > 0 && cmdChoice <= selectedCorp.GetCorpMembers().size()) {
+                                selectedCorp.SetCorpsCommander(selectedCorp.GetCorpMembers().get(cmdChoice - 1));
+                            } else {
+                                System.out.println("Invalid selection.");
+                            }
+                        }
+                        break;
+                    case 4:
+                        break;
+                    default:
+                        System.out.println("Invalid option.");
+                        break;
+                }
+            } while (modChoice != 4);
+        }
+    }
+
+    // Handles the unlinking and removal of a marine corp from the system
+    public static void DeleteMCorp()
+    {
+        int input;
+
+        if (MarineCorpList.isEmpty()) {
+            System.out.println("No Marine Corps available to delete.");
+            return;
+        }
+
+        do {
+            System.out.println("[ Disband Marine Corp ]");
+            System.out.println("[0] - Return");
+            for (MarineCorp mc : MarineCorpList)
+            {
+                System.out.println("[" + (MarineCorpList.indexOf(mc)+1) + "] - " + mc.GetBaseLocation());
+            }
+
+            System.out.print("> ");
+            input = getChoice();
+
+            if (input < 0 || input > MarineCorpList.size())
+            {
+                System.out.println("Invalid Index");
+            }
+        } while (input < 0 || input > MarineCorpList.size());
+
+        if (input > 0) {
+            MarineCorp selectedCorp = MarineCorpList.get(input - 1);
+
+            List<Marine> membersToUnlink = new ArrayList<>(selectedCorp.GetCorpMembers());
+            for (Marine m : membersToUnlink) {
+                selectedCorp.RemoveCorpMember(m);
+            }
+
+            selectedCorp.SetCorpsCommander(null);
+            MarineCorpList.remove(selectedCorp);
+            System.out.println("Marine Corp successfully disbanded.");
+        }
+    }
+
+    public static void displayCorpInfo(MarineCorp mc)
+    {
+        Boolean first = true;
+
+        System.out.println("\n[ " + mc.GetBaseLocation() + " ]");
+        System.out.println("Corp ID: " + mc.GetCorpID());
+        System.out.println("Base Location: " + mc.GetBaseLocation());
+        System.out.println("Operational Funds: " + mc.GetOperationalFunds());
+
+        if (mc.GetCorpsCommander() != null)
+        {
+            System.out.println("Commander: " + mc.GetCorpsCommander().GetName());
+        } else
+        {
+            System.out.println("Commander: None");
+        }
+
+        System.out.print("Members: ");
+        if (mc.GetCorpMembers().isEmpty())
+        {
+            System.out.println("None");
+        } else
+        {
+            for (Marine m : mc.GetCorpMembers())
+            {
+                if (m != mc.GetCorpsCommander())
+                {
+                    if (first)
+                    {
+                        System.out.println(m.GetName());
+                        first = false;
+                    } else
+                    {
+                        System.out.printf("%9s%s\n", " ", m.GetName());
+                    }
+                }
+            }
         }
     }
 
