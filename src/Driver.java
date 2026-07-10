@@ -255,7 +255,7 @@ public class Driver {
             System.out.println("[1] - Create Pirate Crew");
             System.out.println("[2] - View Pirate Crew");
             System.out.println("[3] - Modify Pirate Crew");
-            System.out.println("[4] - Add/Remove Pirate from Crew");
+            System.out.println("[4] - Disband Pirate Crew");
             System.out.println("[5] - Return");
 
             input = getChoice();
@@ -268,10 +268,10 @@ public class Driver {
                     ViewPirateCrew();
                     break;
                 case 3:
-                    // ModifyPirateCrew();
+                    ModifyPirateCrew();
                     break;
                 case 4:
-                    // AddRemovePirateFromCrew();
+                    DeletePirateCrew();/*AddRemovePirateFromCrew();*/
                     break;
                 case 5:
                     break;
@@ -292,35 +292,36 @@ public class Driver {
         int input;
 
         do {
-            System.out.println("===[ Devil Fruit ]===");
-            System.out.println("[1] - Create Devil Fruit");
-            System.out.println("[2] - View Devil Fruit");
-            System.out.println("[3] - Assign Devil Fruit");
-            System.out.println("[4] - Return");
+            System.out.println("===[ Marine Corp ]===");
+            System.out.println("[1] - Create Marine Corp");
+            System.out.println("[2] - View Marine Corp");
+            System.out.println("[3] - Modify Marine Corp");
+            System.out.println("[4] - Disband Marine Corp");
+            System.out.println("[5] - Return");
 
+            System.out.print("> ");
             input = getChoice();
 
             switch (input) {
                 case 1:
-                    CreateDF();
+                    CreateMCorp();
                     break;
                 case 2:
-                    ViewDF();
+                    ViewMCorp();
                     break;
                 case 3:
-                    AssignDF();
+                    ModifyMCorp();
                     break;
                 case 4:
+                    DeleteMCorp();
                     break;
-            
+                case 5:
+                    break;
                 default:
                     System.out.println("Invalid Input");
                     break;
             }
-
-
-        } while (input < 1 || input > 4);
-
+        } while (input != 5);
     }
 
     /* CHARACTER MANAGEMENT OPERATIONS */
@@ -1188,7 +1189,6 @@ public class Driver {
         } while ((capIndex < 0 || capIndex > i));
 
         // Members Verification
-        marineIndex.clear(); // NOTE: You used marineIndex in CreateMCorp but pirateIndex here. Clearing pirateIndex.
         pirateIndex.clear();
         do {
             System.out.println("[ Pirate Members ]");
