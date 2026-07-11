@@ -846,9 +846,12 @@ public class Driver {
             if (currOwnerIndex < 0 || currOwnerIndex > CharacterList.size())
             {
                 System.out.println("Invalid Index");
-            } else if (CharacterList.get(currOwnerIndex-1).GetDFPower() != null)
+            } else if (currOwnerIndex > 0)
             {
-                System.out.println(CharacterList.get(currOwnerIndex-1).GetName() + " already have a devil fruit");
+                if (CharacterList.get(currOwnerIndex-1).GetDFPower() != null)
+                {
+                    System.out.println(CharacterList.get(currOwnerIndex-1).GetName() + " already have a devil fruit");
+                }
             }
 
         } while ((currOwnerIndex < 0 || currOwnerIndex > CharacterList.size()) || CharacterList.get(currOwnerIndex-1).GetDFPower() != null);
