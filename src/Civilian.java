@@ -46,11 +46,6 @@ public class Civilian extends Character{
         this.Residence = Residence;
     }
 
-    public List<String[]> GetCivProfessions()
-    {
-        return CivProfessions;
-    }
-
     public String GetProfession()
     { 
         return this.Profession;
@@ -63,7 +58,7 @@ public class Civilian extends Character{
 
     public void SetProfession(String Profession)
     {
-        for (String[] s : this.GetCivProfessions())
+        for (String[] s : CivProfessions)
         {
             if (Profession.equalsIgnoreCase(s[0]))
             {
@@ -96,7 +91,7 @@ public class Civilian extends Character{
 
     public void performDuty()
     {
-        for (String[] s : this.GetCivProfessions())
+        for (String[] s : CivProfessions)
         {
             if (this.Profession.equalsIgnoreCase(s[0]))
             {

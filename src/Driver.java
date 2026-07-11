@@ -617,19 +617,12 @@ public class Driver {
                         newBounty = numberVerify("New Bounty");
                         p.SetBounty(newBounty);
                     } else if (choice == 8) {
-                        int roleIndex;
-                        do {
-                            displayRole();
-                            System.out.print("> ");
-                            roleIndex = getChoice();
-
-                            if (roleIndex < 0 || roleIndex > (Pirate.Roles.size()-1))
-                            {
-                                System.out.println("Invalid Index");
-                            }
-                            
-                        } while (roleIndex < 0 || roleIndex > (Pirate.Roles.size()-1));
-                        p.SetPirateRole(Pirate.Roles.get(roleIndex)[0]);
+                        displayRole();
+                        System.out.print("> ");
+                        int roleIndex = getChoice();
+                        if (roleIndex > 0 && roleIndex < Pirate.Roles.size()) {
+                            p.SetPirateRole(Pirate.Roles.get(roleIndex)[0]);
+                        }
                     } else if (choice == 9) {
                         displayCrew();
                         System.out.print("> ");
@@ -662,11 +655,7 @@ public class Driver {
                     if (choice == 7) {
                         ph.SetCombatStyle(getInput("New Combat Style"));
                     } else if (choice == 8) {
-                        int caps;
-                        do {
-                            System.out.print("Enter New Captures: ");
-                            caps = getChoice();
-                        } while (caps < 0);
+                        int caps = numberVerify("New Captures");
                         ph.SetCaptures(caps);
                     }
                 } else if (selectedChar instanceof Civilian) {
@@ -701,7 +690,7 @@ public class Driver {
             System.out.println("No characters available to delete.");
             return;
         }
-        System.out.println("=====[ Delete Character ]=====");
+        System.out.println("==[ Delete Character ]==");
         for (int i = 0; i < CharacterList.size(); i++) {
             System.out.println("[" + (i + 1) + "] - " + CharacterList.get(i).GetName() + " (" + CharacterList.get(i).getClass().getSimpleName() + ")");
         }
@@ -749,7 +738,7 @@ public class Driver {
         int currOwnerIndex; // Index of the current owner in the CharacterList
         List<Character> historicalOwner = new ArrayList<>(); // A list of the former owner in the CharacterList
 
-        System.out.println("=====[ Create Devil Fruit ]=====");
+        System.out.println("====[ Create Devil Fruit ]====");
 
         // Name Verification
         do {

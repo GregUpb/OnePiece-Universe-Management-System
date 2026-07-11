@@ -75,9 +75,9 @@ public class Marine extends Character{
         return this.MCorps;
     }
 
-    public List<String[]> GetRanks()
+    public boolean GetIsCorpCommander()
     {
-        return Ranks;
+        return this.isCorpCommander;
     }
 
     public void SetRank(String Rank)
@@ -118,6 +118,15 @@ public class Marine extends Character{
         System.out.println(); // Buffer
 
         System.out.println("Rank: " + this.Rank);
+        System.out.print("Corp Commander: ");
+        if (isCorpCommander)
+        {
+            System.out.println("Yes");
+        } else
+        {
+            System.out.println("No");
+        }
+        
         if (this.MCorps != null)
         {
             System.out.println("Corp Designated: " + this.MCorps.GetBaseLocation());

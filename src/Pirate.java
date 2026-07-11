@@ -89,11 +89,6 @@ public class Pirate extends Character{
         return this.Bounty;
     }
 
-    public String GetPirateRole()
-    {
-        return this.PirateRole;
-    }
-
     public Boolean IsCaptain()
     {
         return this.IsCaptain;
