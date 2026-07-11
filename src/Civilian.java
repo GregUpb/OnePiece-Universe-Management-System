@@ -87,6 +87,10 @@ public class Civilian extends Character{
 
         System.out.println("Profession: " + this.Profession);
         System.out.println("Residence: " + this.Residence);
+        
+        System.out.println();
+        System.out.print(this.GetName() + " is ");
+        performDuty();
     }
 
     public void performDuty()

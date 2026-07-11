@@ -19,6 +19,8 @@ public class MarineCorp{
         this.BaseLocation = BaseLocation;
         this.CorpsCommander = CorpsCommander;
         this.OperationalFunds = OperationalFunds;
+
+        CorpMembers.add(CorpsCommander);
     }
 
     MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds, List<Marine> CorpMembers)
@@ -29,6 +31,8 @@ public class MarineCorp{
         this.CorpsCommander = CorpsCommander;
         this.OperationalFunds = OperationalFunds;
         this.CorpMembers = CorpMembers;
+
+        CorpMembers.add(CorpsCommander);
     }
 
     public Long GetCorpID()
@@ -56,6 +60,31 @@ public class MarineCorp{
         return this.CorpMembers;
     }
 
+    public void SetCorpCommander(Marine CorpCommander)
+    {
+        // Checks whether the supposed new captain is not in a crew or is already part of the crew
+        if (CorpCommander.GetMCorps() == null || CorpCommander.GetMCorps() == this)
+        {
+            if (this.CorpsCommander != CorpCommander)
+            {
+                if (this.CorpsCommander != null) { //Checks if there is already an existing captain
+                    this.CorpsCommander.SetIsCorpCommander(false);
+        
+                }
+                this.CorpsCommander = CorpCommander;
+                CorpCommander.SetIsCorpCommander(true);
+                CorpCommander.SetMCorps(this);
+            } else
+            {
+                System.out.println(this.CorpsCommander.GetName() + " is already the Corps Commander");
+            }
+        } else
+        {
+            System.out.println(CorpCommander.GetName() + " is not part of " + this.BaseLocation + " Marine Base");
+        }
+
+    }
+
     public void SetBaseLocation(String BaseLocation)
     {
         if (BaseLocation.isBlank())
@@ -64,17 +93,6 @@ public class MarineCorp{
         } else
         {
             this.BaseLocation = BaseLocation;
-        }
-    }
-
-    public void SetCorpsCommander(Marine CorpsCommander)
-    {
-        if (CorpsCommander.GetMCorps() == this)
-        {
-            this.CorpsCommander = CorpsCommander;
-        } else
-        {
-            System.out.println(CorpsCommander.GetName() + " is not part of the Marine Corp " + this.BaseLocation + " HQ");
         }
     }
 
@@ -98,13 +116,17 @@ public class MarineCorp{
     {
         if (!(CorpMembers.contains(CorpMember)))
         {
-            if (CorpMember.GetMCorps() != this)
+            if (CorpMember.GetMCorps() != null && CorpMember.GetMCorps() != this)
             {
                 CorpMember.GetMCorps().RemoveCorpMember(CorpMember);
             }
 
-            CorpMember.SetMCorps(this);
             CorpMembers.add(CorpMember);
+
+            if (CorpMember.GetMCorps() != this)
+            {
+                CorpMember.SetMCorps(this);
+            }
         }
     }
 
@@ -112,6 +134,12 @@ public class MarineCorp{
     {
         if (CorpMembers.contains(CorpMember))
         {
+            if (CorpMember.GetIsCorpCommander())
+            {
+                CorpMember.SetIsCorpCommander(false);
+                this.CorpsCommander = null;
+            }
+
             CorpMembers.remove(CorpMember);
             CorpMember.SetMCorps(null);
         }

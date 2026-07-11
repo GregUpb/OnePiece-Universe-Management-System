@@ -101,9 +101,18 @@ public abstract class Character{
 
     public void SetStatus(String Status)
     {
-        if (Status.equalsIgnoreCase("alive") || Status.equalsIgnoreCase("captured") || Status.equalsIgnoreCase("dead"))
+        if (this instanceof Pirate)
         {
-            this.Status = Status;
+            if (Status.equalsIgnoreCase("alive") || Status.equalsIgnoreCase("captured") || Status.equalsIgnoreCase("dead"))
+            {
+                this.Status = Status;
+            }
+        } else
+        {
+            if (Status.equalsIgnoreCase("alive") || Status.equalsIgnoreCase("dead"))
+            {
+                this.Status = Status;
+            }
         }
 
         //Reincarnation Trigger

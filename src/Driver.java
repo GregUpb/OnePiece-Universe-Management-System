@@ -110,17 +110,21 @@ public class Driver {
             System.out.println("[3] - Assign Devil Fruit");
             System.out.println("[4] - Return");
 
+            System.out.print("> ");
             input = getChoice();
 
             switch (input) {
                 case 1:
                     CreateDF();
+                    input = 0;  // Reset  
                     break;
                 case 2:
                     ViewDF();
+                    input = 0;  // Reset  
                     break;
                 case 3:
                     AssignDF();
+                    input = 0;  // Reset  
                     break;
                 case 4:
                     break;
@@ -148,21 +152,25 @@ public class Driver {
             System.out.println("[4] - Disband Pirate Crew");
             System.out.println("[5] - Return");
 
-            System.out.println("> ");
+            System.out.print("> ");
             input = getChoice();
 
             switch (input) {
                 case 1:
                     CreatePirateCrew();
+                    input = 0;  // Reset  
                     break;
                 case 2:
                     ViewPirateCrew();
+                    input = 0;  // Reset  
                     break;
                 case 3:
                     ModifyPirateCrew();
+                    input = 0;  // Reset  
                     break;
                 case 4:
                     DeletePirateCrew();/*AddRemovePirateFromCrew();*/
+                    input = 0;  // Reset  
                     break;
                 case 5:
                     break;
@@ -196,15 +204,19 @@ public class Driver {
             switch (input) {
                 case 1:
                     CreateMCorp();
+                    input = 0;  // Reset  
                     break;
                 case 2:
                     ViewMCorp();
+                    input = 0;  // Reset  
                     break;
                 case 3:
                     ModifyMCorp();
+                    input = 0;  // Reset  
                     break;
                 case 4:
                     DeleteMCorp();
+                    input = 0;  // Reset  
                     break;
                 case 5:
                     break;
@@ -255,11 +267,21 @@ public class Driver {
         do {
             status = getInput("Status");
 
-            if (!(status.equalsIgnoreCase("alive") || status.equalsIgnoreCase("captured") || status.equalsIgnoreCase("dead")))
+            if (type == 1)
             {
-                System.out.println("Status can only be \"Alive\", \"Captured\" or \"Dead\".");
+                if (!(status.equalsIgnoreCase("alive") || status.equalsIgnoreCase("captured") || status.equalsIgnoreCase("dead")))
+                {
+                    System.out.println("Status can only be \"Alive\", \"Captured\" or \"Dead\".");
+                }
+            } else
+            {
+                if (!(status.equalsIgnoreCase("alive") || status.equalsIgnoreCase("dead")))
+                {
+                    System.out.println("Status can only be \"Alive\", or \"Dead\".");
+                }
             }
-        } while (!(status.equalsIgnoreCase("alive") || status.equalsIgnoreCase("captured") || status.equalsIgnoreCase("dead")));
+        } while ((!(status.equalsIgnoreCase("alive") || status.equalsIgnoreCase("captured") || status.equalsIgnoreCase("dead")) && type == 1) ||
+                (!(status.equalsIgnoreCase("alive") || status.equalsIgnoreCase("dead")) && type != 1));
         
         // Devil Fruit Selection
         do {
@@ -280,7 +302,7 @@ public class Driver {
             case 1:
 
                 int Bounty, RoleIndex, CrewIndex;
-                boolean IsCaptain = true;
+                boolean IsCaptain = false;
 
                 // Bounty Verification
                 Bounty = numberVerify("Bounty");
@@ -304,16 +326,27 @@ public class Driver {
                     if (RoleIndex < 0 || RoleIndex > (Pirate.ROLES.size() - 1))
                     {
                         System.out.println("Invalid Index");
-                    } else if (RoleIndex > 0 && RoleIndex < 3)
+                    } else if (RoleIndex > 0 && RoleIndex < 4)
                     {
                         if (CrewIndex == 0)
                         {
                             System.out.println("Need a crew to be " + Pirate.ROLES.get(RoleIndex)[0]);
+                        } else if (PirateCrewList.get(CrewIndex).GetCaptain() != null)
+                        {
+                            if (RoleIndex == 1)
+                            {
+                                System.out.println("The crew already have a captain");
+                            }
                         }
                     }
 
-                } while ((RoleIndex < 0 || RoleIndex > (Pirate.ROLES.size() - 1)) || ((RoleIndex > 0 && RoleIndex < 3) && CrewIndex == 0));
+                } while ((RoleIndex < 0 || RoleIndex > (Pirate.ROLES.size() - 1)) || ((RoleIndex > 0 && RoleIndex < 4) && CrewIndex == 0) || (RoleIndex == 1 && PirateCrewList.get(CrewIndex).GetCaptain() != null));
 
+
+                if (RoleIndex == 1)
+                {
+                    IsCaptain = true;
+                }
 
                 Pirate tempPirate;
                 // Selection of modified creation
@@ -363,26 +396,29 @@ public class Driver {
 
                 if (mCorpIndex != 0)
                 {
-                    do {
-                        System.out.println("[ Corp Commander ]");
-                        System.out.println("[1] - Yes");
-                        System.out.println("[2] - No");
-                        System.out.println("> ");
-
-                        temp = getChoice();
-
-                        if (temp == 1)
-                        {
-                            isCorpCommander = true;
-                        } else if (temp == 2)
-                        {
-                            isCorpCommander = false;
-                        } else
-                        {
-                            System.out.println("Invalid input");
-                        }
-
-                    } while (temp < 1 || temp > 2);
+                    if (MarineCorpList.get(mCorpIndex - 1).GetCorpsCommander() == null)
+                    {
+                        do {
+                            System.out.println("[ Corp Commander ]");
+                            System.out.println("[1] - Yes");
+                            System.out.println("[2] - No");
+                            System.out.println("> ");
+    
+                            temp = getChoice();
+    
+                            if (temp == 1)
+                            {
+                                isCorpCommander = true;
+                            } else if (temp == 2)
+                            {
+                                isCorpCommander = false;
+                            } else
+                            {
+                                System.out.println("Invalid input");
+                            }
+    
+                        } while (temp < 1 || temp > 2);
+                    }
                 }
 
                 Marine tempMarine;
@@ -574,11 +610,21 @@ public class Driver {
                 case 4:
                     String newStatus;
                     do {
-                        newStatus = getInput("New Status (Alive/Captured/Dead)");
-                        if (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("captured") || newStatus.equalsIgnoreCase("dead"))) {
-                            System.out.println("Invalid status.");
+                        if (selectedChar instanceof Pirate)
+                        {
+                            newStatus = getInput("New Status (Alive/Captured/Dead)");
+                            if (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("captured") || newStatus.equalsIgnoreCase("dead"))) {
+                                System.out.println("Invalid status.");
+                            }
+                        } else
+                        {
+                            newStatus = getInput("New Status (Alive/Dead)");
+                            if (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("dead"))) {
+                                System.out.println("Invalid status.");
+                            }
                         }
-                    } while (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("captured") || newStatus.equalsIgnoreCase("dead")));
+                    } while ((!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("captured") || newStatus.equalsIgnoreCase("dead")) && selectedChar instanceof Pirate) ||
+                            (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("dead")) && !(selectedChar instanceof Pirate)));
                     selectedChar.SetStatus(newStatus);
                     break;
                 case 5:
@@ -781,7 +827,7 @@ public class Driver {
 
         } while (temp < 1 || temp > 3);
 
-        primaryAbility = getInput("Primary Ability of the Devil Fruit");    // Get the Primary Ability
+        primaryAbility = stringVerify("Primary Ability of the Devil Fruit");    // Get the Primary Ability
 
         // Current Owner Verification
         do {
@@ -800,9 +846,12 @@ public class Driver {
             if (currOwnerIndex < 0 || currOwnerIndex > CharacterList.size())
             {
                 System.out.println("Invalid Index");
+            } else if (CharacterList.get(currOwnerIndex-1).GetDFPower() != null)
+            {
+                System.out.println(CharacterList.get(currOwnerIndex-1).GetName() + " already have a devil fruit");
             }
 
-        } while (currOwnerIndex < 0 || currOwnerIndex > CharacterList.size());
+        } while ((currOwnerIndex < 0 || currOwnerIndex > CharacterList.size()) || CharacterList.get(currOwnerIndex-1).GetDFPower() != null);
 
         // Historical Owner Verification
         do {
@@ -830,7 +879,10 @@ public class Driver {
             {
                 if (temp != 0)
                 {
-                    if (historicalOwner.contains(CharacterList.get(temp-1)))
+                    if (CharacterList.get(currOwnerIndex-1) == CharacterList.get(temp-1))
+                    {
+                        System.out.println("Current Owner cannot be a Historical Owner");
+                    } else if (historicalOwner.contains(CharacterList.get(temp-1)))
                     {
                         System.out.println(CharacterList.get(temp-1).GetName() + " is already added");
                     } else
@@ -853,13 +905,13 @@ public class Driver {
             dfTemp = new DevilFruit(name, category, primaryAbility);
         } else if (currOwnerIndex > 0 && historicalOwner.isEmpty())
         {
-            dfTemp = new DevilFruit(name, category, primaryAbility, CharacterList.get(currOwnerIndex));
+            dfTemp = new DevilFruit(name, category, primaryAbility, CharacterList.get(currOwnerIndex-1));
         } else if (currOwnerIndex == 0)
         {
             dfTemp = new DevilFruit(name, category, primaryAbility, historicalOwner);
         } else
         {
-            dfTemp = new DevilFruit(name, category, primaryAbility, CharacterList.get(currOwnerIndex), historicalOwner);
+            dfTemp = new DevilFruit(name, category, primaryAbility, CharacterList.get(currOwnerIndex-1), historicalOwner);
         }
 
         // Add to the List
@@ -992,9 +1044,19 @@ public class Driver {
                 } while (charIndex < 1 || charIndex > CharacterList.size());
                 charIndex -= 1; // Decrement since the list index starts with 0
 
-                System.out.println("Assigning " + CharacterList.get(charIndex).GetName() + " " + DevilFruitList.get(dfIndex).GetFruitName());
+                if (CharacterList.get(charIndex).GetDFPower() == null)
+                {
+                    System.out.println("Assigning " + CharacterList.get(charIndex).GetName() + " " + DevilFruitList.get(dfIndex).GetFruitName());
 
-                CharacterList.get(charIndex).SetDFPower(DevilFruitList.get(dfIndex));   // Set Devil Fruit of the Character Picked
+                    CharacterList.get(charIndex).SetDFPower(DevilFruitList.get(dfIndex));   // Set Devil Fruit of the Character Picked
+                } else if (CharacterList.get(charIndex).GetDFPower() == DevilFruitList.get(dfIndex))
+                {
+                    System.out.println(CharacterList.get(charIndex).GetName() + " already have " + DevilFruitList.get(dfIndex).GetFruitName());
+                } else
+                {
+                    System.out.println(CharacterList.get(charIndex).GetName() + " already have a devil fruit");
+                }
+
 
             } else
             {
@@ -1014,6 +1076,7 @@ public class Driver {
         String crewName, shipName;
         int capIndex, crewIndex;
         int i;
+        Pirate captain = null;
         List<Pirate> members = new ArrayList<>();
         List<Integer> pirateIndex = new ArrayList<>();
 
@@ -1070,10 +1133,14 @@ public class Driver {
                 System.out.println("Invalid Index");
             }
         } while ((capIndex < 0 || capIndex > i));
+        if (capIndex > 0)
+        {
+            captain = (Pirate)CharacterList.get(pirateIndex.get(capIndex-1));
+        }
 
         // Members Verification
-        pirateIndex.clear();
         do {
+            pirateIndex.clear();
             System.out.println("[ Pirate Members ]");
 
             if (members.isEmpty())
@@ -1084,27 +1151,26 @@ public class Driver {
                 System.out.println("[0] - Done");
             }
 
-            if (!(pirateIndex.contains(0)))
-            {
-                pirateIndex.add(0);
-            }
+            pirateIndex.add(0);
 
             // List all pirates existing in the CharacterList not in a crew
             i = 0;
             for (Character c : CharacterList)
             {
-                if (c instanceof Pirate && ((Pirate)c).GetPirateCrew() == null)
+                if (capIndex > 0)
                 {
-                    // Prevent displaying the pirate already selected as Captain
-                    if (capIndex != 0 && CharacterList.indexOf(c) == pirateIndex.get(capIndex)) {
-                        continue;
-                    }
-
-                    i++;
-                    System.out.println("[" + i + "] - " + c.GetName());
-
-                    if (!(pirateIndex.contains(CharacterList.indexOf(c))))
+                    if (c instanceof Pirate && ((Pirate)c).GetPirateCrew() == null && c != CharacterList.get(capIndex-1))
                     {
+                        i++;
+                        System.out.println("[" + i + "] - " + c.GetName());
+                        pirateIndex.add(CharacterList.indexOf(c));
+                    }
+                } else
+                {
+                    if (c instanceof Pirate && ((Pirate)c).GetPirateCrew() == null)
+                    {
+                        i++;
+                        System.out.println("[" + i + "] - " + c.GetName());
                         pirateIndex.add(CharacterList.indexOf(c));
                     }
                 }
@@ -1135,13 +1201,13 @@ public class Driver {
             crew = new PirateCrew(crewName, shipName);
         } else if (capIndex != 0 && members.isEmpty())
         {
-            crew = new PirateCrew(crewName, shipName, (Pirate)CharacterList.get(pirateIndex.get(capIndex)));
+            crew = new PirateCrew(crewName, shipName, captain);
         } else if (capIndex == 0)
         {
             crew = new PirateCrew(crewName, shipName, members);
         } else 
         {
-            crew = new PirateCrew(crewName, shipName, (Pirate)CharacterList.get(pirateIndex.get(capIndex)), members);
+            crew = new PirateCrew(crewName, shipName, captain, members);
         }
 
         PirateCrewList.add(crew);
@@ -1273,7 +1339,6 @@ public class Driver {
 
                             if (cmdChoice > 0 && cmdChoice <= selectedCrew.GetCrewMembers().size()) {
                                 selectedCrew.SetCaptain(selectedCrew.GetCrewMembers().get(cmdChoice - 1));
-                                System.out.println("Captain updated.");
                             } else if (cmdChoice != 0) {
                                 System.out.println("Invalid selection.");
                             }
@@ -1388,6 +1453,7 @@ public class Driver {
         int funds;
         int commIndex, corpIndex;
         int i;
+        Marine corpCommander = null;
         List<Marine> members = new ArrayList<>();
         List<Integer> marineIndex = new ArrayList<>();
 
@@ -1446,10 +1512,14 @@ public class Driver {
                 System.out.println("Invalid Index");
             }
         } while (commIndex < 0 || commIndex > i);
+        if (commIndex > 0)
+        {
+            corpCommander = (Marine)CharacterList.get(marineIndex.get(commIndex-1));
+        }
 
         // Members Verification
-        marineIndex.clear();
         do {
+            marineIndex.clear();
             System.out.println("[ Marine Members ]");
 
             if (members.isEmpty())
@@ -1460,22 +1530,26 @@ public class Driver {
                 System.out.println("[0] - Done");
             }
 
-            if (!(marineIndex.contains(0)))
-            {
-                marineIndex.add(0);
-            }
+            marineIndex.add(0);
 
             // List all marines existing in the CharacterList not in a corp
             i = 0;
             for (Character c : CharacterList)
             {
-                if (c instanceof Marine && ((Marine)c).GetMCorps() == null)
+                if (commIndex > 0)
                 {
-                    i++;
-                    System.out.println("[" + i + "] - " + c.GetName());
-
-                    if (!(marineIndex.contains(CharacterList.indexOf(c))))
+                    if (c instanceof Marine && ((Marine)c).GetMCorps() == null && c != CharacterList.get(commIndex-1))
                     {
+                        i++;
+                        System.out.println("[" + i + "] - " + c.GetName());
+                        marineIndex.add(CharacterList.indexOf(c));
+                    }
+                } else
+                {
+                    if (c instanceof Marine && ((Marine)c).GetMCorps() == null)
+                    {
+                        i++;
+                        System.out.println("[" + i + "] - " + c.GetName());
                         marineIndex.add(CharacterList.indexOf(c));
                     }
                 }
@@ -1506,15 +1580,13 @@ public class Driver {
             corp = new MarineCorp(baseLocation, null, funds);
         } else if (commIndex != 0 && members.isEmpty())
         {
-            Marine commander = (Marine)CharacterList.get(marineIndex.get(commIndex));
-            corp = new MarineCorp(baseLocation, commander, funds);
+            corp = new MarineCorp(baseLocation, corpCommander, funds);
         } else if (commIndex == 0)
         {
             corp = new MarineCorp(baseLocation, null, funds, members);
         } else
         {
-            Marine commander = (Marine)CharacterList.get(marineIndex.get(commIndex));
-            corp = new MarineCorp(baseLocation, commander, funds, members);
+            corp = new MarineCorp(baseLocation, corpCommander, funds, members);
         }
 
         MarineCorpList.add(corp);
@@ -1646,9 +1718,9 @@ public class Driver {
                             int cmdChoice = getChoice();
 
                             if (cmdChoice == 0) {
-                                selectedCorp.SetCorpsCommander(null);
+                                selectedCorp.SetCorpCommander(null);
                             } else if (cmdChoice > 0 && cmdChoice <= selectedCorp.GetCorpMembers().size()) {
-                                selectedCorp.SetCorpsCommander(selectedCorp.GetCorpMembers().get(cmdChoice - 1));
+                                selectedCorp.SetCorpCommander(selectedCorp.GetCorpMembers().get(cmdChoice - 1));
                             } else {
                                 System.out.println("Invalid selection.");
                             }
@@ -1742,13 +1814,12 @@ public class Driver {
 
         if (input > 0) {
             MarineCorp selectedCorp = MarineCorpList.get(input - 1);
-
             List<Marine> membersToUnlink = new ArrayList<>(selectedCorp.GetCorpMembers());
+
             for (Marine m : membersToUnlink) {
                 selectedCorp.RemoveCorpMember(m);
             }
 
-            selectedCorp.SetCorpsCommander(null);
             MarineCorpList.remove(selectedCorp);
             System.out.println("Marine Corp successfully disbanded.");
         }
@@ -1789,6 +1860,9 @@ public class Driver {
                     {
                         System.out.printf("%9s%s\n", " ", m.GetName());
                     }
+                } else
+                {
+                    System.out.println("None");
                 }
             }
         }
@@ -1828,6 +1902,9 @@ public class Driver {
                     {
                         System.out.printf("%9s%s\n", " ", p.GetName());
                     }
+                } else
+                {
+                    System.out.println("None");
                 }
             }
         }

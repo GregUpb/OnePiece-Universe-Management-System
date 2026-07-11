@@ -133,7 +133,10 @@ public class Pirate extends Character{
             // If IsCaptain is true
             if (IsCaptain)
             {
-                this.GetPirateCrew().SetCaptain(this);
+                if (this.GetPirateCrew().GetCaptain() != this)
+                {
+                    this.GetPirateCrew().SetCaptain(this);
+                }
             }
         } else if (IsCaptain)
         {
@@ -144,10 +147,10 @@ public class Pirate extends Character{
     public void SetPirateCrew(PirateCrew Crew)
     {
         // If they are already in a crew, remove them from the old crew's list first
-        if (this.Crew != null) {
+        if (this.Crew != null && this.Crew.GetCrewMembers().contains(this) && this.Crew != Crew) {
             this.Crew.RemoveCrewMember(this);
         }
-
+        
         this.Crew = Crew;
 
         // If they are not part of the crew then add
@@ -172,6 +175,7 @@ public class Pirate extends Character{
             {
                 this.Crew.CalculateTotalCrewBounty();
             }
+
         } else
         {
             System.out.println("Invalid Status");
@@ -208,6 +212,10 @@ public class Pirate extends Character{
         {
             System.out.println("Crew: None");
         }
+
+        System.out.println();
+        System.out.print(this.GetName() + " is ");
+        performDuty();
     }
 
     public void performDuty()

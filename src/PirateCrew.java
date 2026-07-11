@@ -120,12 +120,14 @@ public class PirateCrew {
                 if (this.Captain != null) { //Checks if there is already an existing captain
                     this.Captain.SetIsCaptain(false);
                     this.Captain.SetPirateRole("Crew Member");
-        
+                    
                 }
+                this.Captain = Captain;
                 Captain.SetIsCaptain(true);
                 Captain.SetPirateRole("Captain");
                 Captain.SetPirateCrew(this);
-                this.Captain = Captain;
+
+                System.out.println(Captain.GetName() + " is now the captain of " + this.CrewName);
             } else
             {
                 System.out.println(this.Captain.GetName() + " is already the Captain");
@@ -166,8 +168,13 @@ public class PirateCrew {
             CrewMembers.add(CrewMember);
 
             // Set the crew and role
-            CrewMember.SetPirateCrew(this);
+            if (CrewMember.GetPirateCrew() != this)
+            {
+                CrewMember.SetPirateCrew(this);
+            }
             CrewMember.SetPirateRole("Crew Member");
+
+            CalculateTotalCrewBounty();
 
         } else
         {
@@ -183,11 +190,14 @@ public class PirateCrew {
             if (CrewMember.IsCaptain())
             {
                 CrewMember.SetIsCaptain(false);
+                this.Captain = null;
             }
             
             CrewMember.SetPirateRole("None");
-            CrewMember.SetPirateCrew(null);
             CrewMembers.remove(CrewMember);
+            CrewMember.SetPirateCrew(null);
+
+            CalculateTotalCrewBounty();
         } else
         {
             System.out.println(CrewMember.GetName() + " is not part of the " + this.CrewName);

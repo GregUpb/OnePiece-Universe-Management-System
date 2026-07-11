@@ -79,6 +79,10 @@ public class PirateHunter extends Character{
 
         System.out.println("Combat Style: " + this.CombatStyle);
         System.out.println("Captures: " + this.Captures);
+
+        System.out.println();
+        System.out.print(this.GetName() + " is ");
+        performDuty();
     }
 
     public void performDuty()
