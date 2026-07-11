@@ -156,7 +156,7 @@ public abstract class Character{
 
     public void displayProfile()
     {
-        System.out.println("===[ Profile ]===");
+        System.out.println("=[ Profile ]=");
         System.out.println("ID: " + this.GetID());
         System.out.println("Name: " + this.GetName());
         System.out.println("Alias: " + this.GetAlias());

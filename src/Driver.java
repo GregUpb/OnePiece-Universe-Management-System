@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -61,7 +60,7 @@ public class Driver {
 
         do {
 
-            System.out.println("==[ Characters ]==");
+            System.out.println("====[ Characters ]====");
             System.out.println("[1] - Create a new Character");
             System.out.println("[2] - View Character");
             System.out.println("[3] - Modify Character");
@@ -73,42 +72,20 @@ public class Driver {
 
             switch (input) {
                 case 1:
-                    System.out.println("==[ Create Character ]==");
-                    System.out.println("[1] - Pirate");
-                    System.out.println("[2] - Marine");
-                    System.out.println("[3] - Pirate Hunter");
-                    System.out.println("[4] - Civilian");
-                    System.out.print("> ");
-
-                    switch (getChoice()) {
-                        case 1: // Pirate
-                            CreateCharacter("Pirate");
-                            break;
-                        case 2: // Marine
-                            CreateCharacter("Marine");
-                            break;
-                        case 3: // Pirate Hunter
-                            CreateCharacter("PirateHunter");
-                            break;
-                        case 4: // Civilian
-                            CreateCharacter("Civilian");
-                            break;
-                    
-                        default:
-                            System.out.println("Invalid Input");
-                            break;
-                    }
-
-                    input = 0;  // Reset input
+                    CreateCharacter();
+                    input = 0;  // Reset
                     break;
                 case 2:
                     ViewCharacter();
+                    input = 0;  // Reset
                     break;
                 case 3:
                     ModifyCharacter();
+                    input = 0;  // Reset
                     break;
                 case 4:
                     DeleteCharacter();
+                    input = 0;  // Reset    
                     break;
                 case 5:
                     break;
@@ -164,13 +141,14 @@ public class Driver {
         int input;
 
         do {
-            System.out.println("===[ Pirate Crew ]===");
+            System.out.println("====[ Pirate Crew ]====");
             System.out.println("[1] - Create Pirate Crew");
             System.out.println("[2] - View Pirate Crew");
             System.out.println("[3] - Modify Pirate Crew");
             System.out.println("[4] - Disband Pirate Crew");
             System.out.println("[5] - Return");
 
+            System.out.println("> ");
             input = getChoice();
 
             switch (input) {
@@ -195,7 +173,7 @@ public class Driver {
             }
 
 
-        } while (input < 1 || input > 4);
+        } while (input < 1 || input > 5);
 
     }
 
@@ -240,30 +218,38 @@ public class Driver {
     /* CHARACTER MANAGEMENT OPERATIONS */
 
     // Handles the creation and data entry for a new character
-    public static void CreateCharacter(String type)
+    public static void CreateCharacter()
     {
+        int type;
+
+        // Menu
+        do {
+            System.out.println("==[ Create Character ]==");
+            System.out.println("[1] - Pirate");
+            System.out.println("[2] - Marine");
+            System.out.println("[3] - Pirate Hunter");
+            System.out.println("[4] - Civilian");
+            System.out.print("> ");
+            type = getChoice();
+    
+            if (type < 1 || type > 4)
+            {
+                System.out.println("Invalid Input");
+            }
+
+        } while (type < 1 || type > 4);
+
+        // Creation
         String name, alias, origin, status;
         int dfIndex, wallet;
 
         // Name Verification
-        do {
-            name = getInput("Name");
-            if (name.isBlank())
-            {
-                System.out.println("Name cannot be empty");
-            }
-        } while (name.isBlank());
+        name = stringVerify("Name");
 
         alias = getInput("Alias (leave blank if none)");
         
         // Origin Verification
-        do {
-            origin = getInput("Origin");
-            if (origin.isBlank())
-            {
-                System.out.println("Origin cannot be empty");
-            }
-        } while (origin.isBlank());
+        origin = stringVerify("Origin");
 
         // Status Verification
         do {
@@ -287,63 +273,17 @@ public class Driver {
         } while (dfIndex < 0 || dfIndex > DevilFruitList.size());
 
         // Wallet Verification
-        do {
-            System.out.print("Enter Wallet:");
-            wallet = getChoice();
-
-            if (wallet < 0)
-            {
-                System.out.println("Wallet cannot be negative");
-            }
-        } while (wallet < 0);
+        wallet = numberVerify("Wallet");
 
         // Type specific
         switch (type) {
-            case "Pirate":
+            case 1:
 
                 int Bounty, RoleIndex, CrewIndex;
                 boolean IsCaptain = true;
-                String buffer;
 
                 // Bounty Verification
-                do {
-                    System.out.print("Enter Bounty:");
-                    Bounty = getChoice();
-
-                    if (Bounty < 0)
-                    {
-                        System.out.println("Bounty cannot be negative");
-                    }
-                } while (Bounty < 0);
-
-
-                // Role Verification
-                do {
-                    displayRole();
-                    RoleIndex = getChoice();
-
-                    if (RoleIndex < 0 || RoleIndex > (Pirate.Roles.size() - 1))
-                    {
-                        System.out.println("Invalid Index");
-                    }
-                } while (RoleIndex < 0 || RoleIndex > (Pirate.Roles.size() - 1));
-
-                // Captain
-                do {
-                    System.out.print("Captain (Y/N): ");
-                    
-                    buffer = scanner.nextLine();
-                    if (buffer.equalsIgnoreCase("Y"))
-                    {
-                        IsCaptain = true;
-                    } else if (buffer.equalsIgnoreCase("N"))
-                    {
-                        IsCaptain = false;
-                    } else
-                    {
-                        System.out.println("Answer with Y or N");
-                    }
-                } while (!(buffer.equalsIgnoreCase("Y") || buffer.equalsIgnoreCase("N")));
+                Bounty = numberVerify("Bounty");
 
                 // Crew Verification
                 do {
@@ -356,30 +296,50 @@ public class Driver {
                     }
                 } while (CrewIndex < 0 || CrewIndex > PirateCrewList.size());
 
-                Pirate temp;
+                // Role Verification
+                do {
+                    displayRole();
+                    RoleIndex = getChoice();
+
+                    if (RoleIndex < 0 || RoleIndex > (Pirate.Roles.size() - 1))
+                    {
+                        System.out.println("Invalid Index");
+                    } else if (RoleIndex > 0 && RoleIndex < 3)
+                    {
+                        if (CrewIndex == 0)
+                        {
+                            System.out.println("Need a crew to be " + Pirate.Roles.get(RoleIndex)[0]);
+                        }
+                    }
+
+                } while ((RoleIndex < 0 || RoleIndex > (Pirate.Roles.size() - 1)) || ((RoleIndex > 0 && RoleIndex < 3) && CrewIndex == 0));
+
+
+                Pirate tempPirate;
                 // Selection of modified creation
                 if (dfIndex == 0 && CrewIndex == 0)
                 {
-                    temp = new Pirate(name, alias, origin, status, wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain);
+                    tempPirate = new Pirate(name, alias, origin, status, wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain);
                 } else if (dfIndex > 0 && CrewIndex == 0)
                 {
-                    temp = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain);
+                    tempPirate = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain);
                 } else if (dfIndex == 0)
                 {
-                    temp = new Pirate(name, alias, origin, status, wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain, PirateCrewList.get(CrewIndex));
+                    tempPirate = new Pirate(name, alias, origin, status, wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain, PirateCrewList.get(CrewIndex));
                 } else
                 {
-                    temp = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain, PirateCrewList.get(CrewIndex));
+                    tempPirate = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain, PirateCrewList.get(CrewIndex));
                 }
 
-                CharacterList.add(temp);
+                CharacterList.add(tempPirate);
                 System.out.println();
                 System.out.println("Pirate successfully registered.");
 
                 break;
 
-            case "Marine":
-                int rankIndex, mCorpIndex;
+            case 2:
+                int rankIndex, mCorpIndex, temp;
+                boolean isCorpCommander = false;
 
                 // Rank Verification
                 do {
@@ -401,18 +361,42 @@ public class Driver {
                     }
                 } while (mCorpIndex < 0 || mCorpIndex > MarineCorpList.size());
 
+                if (mCorpIndex != 0)
+                {
+                    do {
+                        System.out.println("[ Corp Commander ]");
+                        System.out.println("[1] - Yes");
+                        System.out.println("[2] - No");
+                        System.out.println("> ");
+
+                        temp = getChoice();
+
+                        if (temp == 1)
+                        {
+                            isCorpCommander = true;
+                        } else if (temp == 2)
+                        {
+                            isCorpCommander = false;
+                        } else
+                        {
+                            System.out.println("Invalid input");
+                        }
+
+                    } while (temp < 1 || temp > 2);
+                }
+
                 Marine tempMarine;
                 String selectedRank = Marine.Ranks.get(rankIndex)[0];
 
                 // Selection of modified creation
                 if (dfIndex == 0 && mCorpIndex == 0) {
-                    tempMarine = new Marine(name, alias, origin, status, wallet, selectedRank);
+                    tempMarine = new Marine(name, alias, origin, status, wallet, selectedRank, isCorpCommander);
                 } else if (dfIndex > 0 && mCorpIndex == 0) {
-                    tempMarine = new Marine(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, selectedRank);
+                    tempMarine = new Marine(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, selectedRank, isCorpCommander);
                 } else if (dfIndex == 0) {
-                    tempMarine = new Marine(name, alias, origin, status, wallet, selectedRank, MarineCorpList.get(mCorpIndex - 1));
+                    tempMarine = new Marine(name, alias, origin, status, wallet, selectedRank, MarineCorpList.get(mCorpIndex - 1), isCorpCommander);
                 } else {
-                    tempMarine = new Marine(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, selectedRank, MarineCorpList.get(mCorpIndex - 1));
+                    tempMarine = new Marine(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, selectedRank, MarineCorpList.get(mCorpIndex - 1), isCorpCommander);
                 }
 
                 CharacterList.add(tempMarine);
@@ -421,21 +405,14 @@ public class Driver {
 
                 break;
 
-            case "PirateHunter":
+            case 3:
                 String combatStyle;
                 int captures;
 
                 combatStyle = getInput("Combat Style");
 
                 // Captures Verification
-                do {
-                    System.out.print("Enter Confirmed Captures: ");
-                    captures = getChoice();
-
-                    if (captures < 0) {
-                        System.out.println("Captures cannot be negative.");
-                    }
-                } while (captures < 0);
+                captures = numberVerify("Captures");
 
                 PirateHunter tempHunter;
 
@@ -451,7 +428,7 @@ public class Driver {
 
                 break;
 
-            case "Civilian":
+            case 4:
                 String residence;
                 int civRoleIndex;
 
@@ -479,7 +456,8 @@ public class Driver {
                 }
 
                 CharacterList.add(tempCiv);
-                System.out.println("\nCivilian successfully registered.");
+                System.out.println();
+                System.out.println("Civilian successfully registered.");
                 break;
         
             default:
@@ -495,7 +473,7 @@ public class Driver {
         if (!(CharacterList.isEmpty()))
         {
             do {
-                System.out.println("===[ View Character ]===");
+                System.out.println("==[ View Character ]==");
     
                 for (Character c : CharacterList)
                 {
@@ -533,6 +511,7 @@ public class Driver {
         for (int i = 0; i < CharacterList.size(); i++) {
             System.out.println("[" + (i + 1) + "] - " + CharacterList.get(i).GetName() + " (" + CharacterList.get(i).getClass().getSimpleName() + ")");
         }
+        System.out.print("> ");
         int charIndex = getChoice();
 
         if (charIndex < 1 || charIndex > CharacterList.size()) {
@@ -574,144 +553,146 @@ public class Driver {
             maxOptions = 8;
         }
 
+        System.out.print("> ");
         int choice = getChoice();
 
         if (choice < 1 || choice > maxOptions) {
             System.out.println("Invalid option.");
-        }
+        } else
+        {
+            // 4. Process Universal Edits
+            switch (choice) {
+                case 1:
+                    selectedChar.SetName(stringVerify("New Name"));
+                    break;
+                case 2:
+                    selectedChar.SetAlias(getInput("New Alias"));
+                    break;
+                case 3:
+                    selectedChar.SetOrigin(stringVerify("New Origin"));
+                    break;
+                case 4:
+                    String newStatus;
+                    do {
+                        newStatus = getInput("New Status (Alive/Captured/Dead)");
+                        if (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("captured") || newStatus.equalsIgnoreCase("dead"))) {
+                            System.out.println("Invalid status.");
+                        }
+                    } while (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("captured") || newStatus.equalsIgnoreCase("dead")));
+                    selectedChar.SetStatus(newStatus);
+                    break;
+                case 5:
+                    int newWallet;
+                    newWallet = numberVerify("New Wallet");
+                    selectedChar.SetWallet(newWallet);
+                    break;
+                case 6:
+                    // "One Fruit, One Soul" Rule
+                    if (selectedChar.GetDFPower() != null) {
+                        System.out.println("Cannot reassign. Character already has a Devil Fruit. They must be 'Dead' to relinquish it.");
+                    } else {
+                        displayDF();
+                        System.out.print("> ");
+                        int dfIndex = getChoice();
 
-        // 4. Process Universal Edits
-        switch (choice) {
-            case 1:
-                selectedChar.SetName(getInput("New Name"));
-                break;
-            case 2:
-                selectedChar.SetAlias(getInput("New Alias"));
-                break;
-            case 3:
-                selectedChar.SetOrigin(getInput("New Origin"));
-                break;
-            case 4:
-                String newStatus;
-                do {
-                    newStatus = getInput("New Status (Alive/Captured/Dead)");
-                    if (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("captured") || newStatus.equalsIgnoreCase("dead"))) {
-                        System.out.println("Invalid status.");
-                    }
-                } while (!(newStatus.equalsIgnoreCase("alive") || newStatus.equalsIgnoreCase("captured") || newStatus.equalsIgnoreCase("dead")));
-                selectedChar.SetStatus(newStatus);
-                break;
-            case 5:
-                int newWallet;
-                do {
-                    System.out.print("Enter New Wallet: ");
-                    newWallet = getChoice();
-                    if (newWallet < 0) {
-                        System.out.println("Wallet cannot be negative.");
-                    }
-                } while (newWallet < 0);
-                selectedChar.SetWallet(newWallet);
-                break;
-            case 6:
-                // "One Fruit, One Soul" Rule
-                if (selectedChar.GetDFPower() != null) {
-                    System.out.println("Cannot reassign. Character already has a Devil Fruit. They must be 'Dead' to relinquish it.");
-                } else {
-                    displayDF();
-                    int dfIndex = getChoice();
-                    if (dfIndex > 0 && dfIndex <= DevilFruitList.size()) {
-                        DevilFruit selectedFruit = DevilFruitList.get(dfIndex - 1);
-                        if (selectedFruit.HasCurrentOwner()) {
-                            System.out.println("This Devil Fruit is already owned by another character.");
-                        } else {
-                            selectedFruit.SetCurrentOwner(selectedChar);
-                            System.out.println("Devil Fruit successfully assigned.");
+                        if (dfIndex > 0 && dfIndex <= DevilFruitList.size()) {
+                            DevilFruit selectedFruit = DevilFruitList.get(dfIndex - 1);
+                            if (selectedFruit.HasCurrentOwner()) {
+                                System.out.println("This Devil Fruit is already owned by another character.");
+                            } else {
+                                selectedFruit.SetCurrentOwner(selectedChar);
+                                System.out.println("Devil Fruit successfully assigned.");
+                            }
                         }
                     }
-                }
-                break;
-        }
+                    break;
+            }
 
-        // Sub-class Specific Modifications
-        if (choice > 6) {
-            if (selectedChar instanceof Pirate) {
-                Pirate p = (Pirate) selectedChar; //Downcasting, ChildClass <var_name> = (ChildClass) ParenClass
-                if (choice == 7) {
-                    int newBounty;
-                    do {
-                        System.out.print("Enter New Bounty: ");
-                        newBounty = getChoice();
-                    } while (newBounty < 0);
-                    p.SetBounty(newBounty);
-                } else if (choice == 8) {
-                    displayRole();
-                    System.out.print("> ");
-                    int roleIndex = getChoice();
-                    if (roleIndex > 0 && roleIndex < Pirate.Roles.size()) {
+            // Sub-class Specific Modifications
+            if (choice > 6) {
+                if (selectedChar instanceof Pirate) {
+                    Pirate p = (Pirate) selectedChar; //Downcasting, ChildClass <var_name> = (ChildClass) ParenClass
+                    if (choice == 7) {
+                        int newBounty;
+                        newBounty = numberVerify("New Bounty");
+                        p.SetBounty(newBounty);
+                    } else if (choice == 8) {
+                        int roleIndex;
+                        do {
+                            displayRole();
+                            System.out.print("> ");
+                            roleIndex = getChoice();
+
+                            if (roleIndex < 0 || roleIndex > (Pirate.Roles.size()-1))
+                            {
+                                System.out.println("Invalid Index");
+                            }
+                            
+                        } while (roleIndex < 0 || roleIndex > (Pirate.Roles.size()-1));
                         p.SetPirateRole(Pirate.Roles.get(roleIndex)[0]);
+                    } else if (choice == 9) {
+                        displayCrew();
+                        System.out.print("> ");
+                        int crewIndex = getChoice();
+                        if (crewIndex == 0) {
+                            p.SetPirateCrew(null);
+                        } else if (crewIndex > 0 && crewIndex <= PirateCrewList.size()) {
+                            p.SetPirateCrew(PirateCrewList.get(crewIndex - 1));
+                        }
                     }
-                } else if (choice == 9) {
-                    displayCrew();
-                    System.out.print("> ");
-                    int crewIndex = getChoice();
-                    if (crewIndex == 0) {
-                        p.SetPirateCrew(null);
-                    } else if (crewIndex > 0 && crewIndex <= PirateCrewList.size()) {
-                        p.SetPirateCrew(PirateCrewList.get(crewIndex - 1));
+                } else if (selectedChar instanceof Marine) {
+                    Marine m = (Marine) selectedChar; //Downcasting, ChildClass <var_name> = (ChildClass) ParenClass
+                    if (choice == 7) {
+                        displayRank();
+                        System.out.print("> ");
+                        int rankIndex = getChoice();
+                        if (rankIndex > 0 && rankIndex < Marine.Ranks.size()) m.SetRank(Marine.Ranks.get(rankIndex)[0]);
+                    } else if (choice == 8) {
+                        displayCorp();
+                        System.out.print("> ");
+                        int corpIndex = getChoice();
+                        if (corpIndex == 0) {
+                            m.SetMCorps(null);
+                        } else if (corpIndex > 0 && corpIndex <= MarineCorpList.size()) {
+                            m.SetMCorps(MarineCorpList.get(corpIndex - 1));
+                        }
                     }
-                }
-            } else if (selectedChar instanceof Marine) {
-                Marine m = (Marine) selectedChar; //Downcasting, ChildClass <var_name> = (ChildClass) ParenClass
-                if (choice == 7) {
-                    displayRank();
-                    System.out.print("> ");
-                    int rankIndex = getChoice();
-                    if (rankIndex > 0 && rankIndex < Marine.Ranks.size()) m.SetRank(Marine.Ranks.get(rankIndex)[0]);
-                } else if (choice == 8) {
-                    displayCorp();
-                    System.out.print("> ");
-                    int corpIndex = getChoice();
-                    if (corpIndex == 0) {
-                        m.SetMCorps(null);
-                    } else if (corpIndex > 0 && corpIndex <= MarineCorpList.size()) {
-                        m.SetMCorps(MarineCorpList.get(corpIndex - 1));
+                } else if (selectedChar instanceof PirateHunter) {
+                    PirateHunter ph = (PirateHunter) selectedChar; //Downcasting, ChildClass <var_name> = (ChildClass) ParenClass
+                    if (choice == 7) {
+                        ph.SetCombatStyle(getInput("New Combat Style"));
+                    } else if (choice == 8) {
+                        int caps;
+                        do {
+                            System.out.print("Enter New Captures: ");
+                            caps = getChoice();
+                        } while (caps < 0);
+                        ph.SetCaptures(caps);
                     }
-                }
-            } else if (selectedChar instanceof PirateHunter) {
-                PirateHunter ph = (PirateHunter) selectedChar; //Downcasting, ChildClass <var_name> = (ChildClass) ParenClass
-                if (choice == 7) {
-                    ph.SetCombatStyle(getInput("New Combat Style"));
-                } else if (choice == 8) {
-                    int caps;
-                    do {
-                        System.out.print("Enter New Captures: ");
-                        caps = getChoice();
-                    } while (caps < 0);
-                    ph.SetCaptures(caps);
-                }
-            } else if (selectedChar instanceof Civilian) {
-                Civilian c = (Civilian) selectedChar;//Downcasting, ChildClass <var_name> = (ChildClass) ParenClass
-                if (choice == 7) {
-                    
-                    int civRoleIndex;
+                } else if (selectedChar instanceof Civilian) {
+                    Civilian c = (Civilian) selectedChar;//Downcasting, ChildClass <var_name> = (ChildClass) ParenClass
+                    if (choice == 7) {
+                        
+                        int civRoleIndex;
 
-                    displayCivRole();
-                    System.out.print("> ");
-                    civRoleIndex = getChoice();
+                        displayCivRole();
+                        System.out.print("> ");
+                        civRoleIndex = getChoice();
 
-                    if (civRoleIndex >= 0 && civRoleIndex < Civilian.CivProfessions.size())
-                    {
-                        c.SetProfession(Civilian.CivProfessions.get(civRoleIndex)[0]);
+                        if (civRoleIndex >= 0 && civRoleIndex < Civilian.CivProfessions.size())
+                        {
+                            c.SetProfession(Civilian.CivProfessions.get(civRoleIndex)[0]);
+                        }
+
+
+                    } else if (choice == 8) {
+                        c.SetResidence(getInput("New Residence"));
                     }
-
-
-                } else if (choice == 8) {
-                    c.SetResidence(getInput("New Residence"));
                 }
             }
-        }
 
-        System.out.println("Modification complete!");
+            System.out.println("Modification complete!");
+        }
     }
 
     // Handles the unlinking and removal of a character from the system
@@ -1946,5 +1927,41 @@ public class Driver {
     {
         System.out.print("Enter " + text + ": ");
         return scanner.nextLine();
+    }
+
+    public static String stringVerify(String text)
+    {
+        String input;
+
+        do {
+
+            input = getInput(text);
+            if (input.isBlank())
+            {
+                System.out.println(text + " cannot be empty");
+            }
+
+        } while (input.isBlank());
+
+        return input;
+    }
+
+    public static int numberVerify(String text)
+    {
+        int input;
+
+        do {
+
+            System.out.print("Enter " + text + ": ");
+            input = getChoice();
+
+            if (input < 0)
+            {
+                System.out.println(text + " cannot be negative");
+            }
+
+        } while (input < 0);
+
+        return input;
     }
 }

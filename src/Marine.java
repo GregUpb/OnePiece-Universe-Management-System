@@ -6,6 +6,7 @@ public class Marine extends Character{
 
     private String Rank;
     private MarineCorp MCorps = null;
+    private boolean isCorpCommander;
 
     public static final List<String[]> Ranks = new ArrayList<>(List.of(
         new String[] {"None", "Doing nothing..."},
@@ -30,34 +31,38 @@ public class Marine extends Character{
         new String[] {"Chore Boy", "KING KINGINA MO"}
     ));
 
-    Marine(String Name, String Alias, String Origin, String Status, int Wallet, String Rank)
+    Marine(String Name, String Alias, String Origin, String Status, int Wallet, String Rank, boolean isCorpCommander)
     {
         super(Name, Alias, Origin, Status, Wallet);
 
         this.Rank = Rank;
+        this.isCorpCommander = isCorpCommander;
     }
     
-    Marine(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Rank)
+    Marine(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Rank, boolean isCorpCommander)
     {
         super(Name, Alias, Origin, Status, DFPower, Wallet);
 
         this.Rank = Rank;
+        this.isCorpCommander = isCorpCommander;
     }
 
-    Marine(String Name, String Alias, String Origin, String Status, int Wallet, String Rank, MarineCorp MCorps)
+    Marine(String Name, String Alias, String Origin, String Status, int Wallet, String Rank, MarineCorp MCorps, boolean isCorpCommander)
     {
         super(Name, Alias, Origin, Status, Wallet);
 
         this.Rank = Rank;
         this.MCorps = MCorps;
+        this.isCorpCommander = isCorpCommander;
     }
     
-    Marine(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Rank, MarineCorp MCorps)
+    Marine(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Rank, MarineCorp MCorps, boolean isCorpCommander)
     {
         super(Name, Alias, Origin, Status, DFPower, Wallet);
 
         this.Rank = Rank;
         this.MCorps = MCorps;
+        this.isCorpCommander = isCorpCommander;
     }
 
     public String GetRank()
