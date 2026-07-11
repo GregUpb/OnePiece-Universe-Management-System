@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class Driver {
     
-    private static List<Character> CharacterList = new ArrayList<>();
-    private static List<DevilFruit> DevilFruitList = new ArrayList<>();
-    private static List<PirateCrew> PirateCrewList = new ArrayList<>();
-    private static List<MarineCorp> MarineCorpList = new ArrayList<>(); 
+    private static final List<Character> CharacterList = new ArrayList<>();
+    private static final List<DevilFruit> DevilFruitList = new ArrayList<>();
+    private static final List<PirateCrew> PirateCrewList = new ArrayList<>();
+    private static final List<MarineCorp> MarineCorpList = new ArrayList<>();
 
     final static List<String> Roles = new ArrayList<>(List.of(
         "None",
@@ -101,7 +101,7 @@ public class Driver {
 
     public static void main(String[] args)
     {
-        int choice = 0;
+        int choice;
 
         /* NOT FINAL */
 
@@ -451,7 +451,7 @@ public class Driver {
                 } else if (dfIndex > 0 && CrewIndex == 0)
                 {
                     temp = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Roles.get(RoleIndex), IsCaptain);
-                } else if (dfIndex == 0 && CrewIndex > 0)
+                } else if (dfIndex == 0)
                 {
                     temp = new Pirate(name, alias, origin, status, wallet, Bounty, Roles.get(RoleIndex), IsCaptain, PirateCrewList.get(CrewIndex));
                 } else
@@ -496,7 +496,7 @@ public class Driver {
                     tempMarine = new Marine(name, alias, origin, status, wallet, selectedRank);
                 } else if (dfIndex > 0 && mCorpIndex == 0) {
                     tempMarine = new Marine(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, selectedRank);
-                } else if (dfIndex == 0 && mCorpIndex > 0) {
+                } else if (dfIndex == 0) {
                     tempMarine = new Marine(name, alias, origin, status, wallet, selectedRank, MarineCorpList.get(mCorpIndex - 1));
                 } else {
                     tempMarine = new Marine(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, selectedRank, MarineCorpList.get(mCorpIndex - 1));
@@ -971,7 +971,7 @@ public class Driver {
         } else if (currOwnerIndex > 0 && historicalOwner.isEmpty())
         {
             dfTemp = new DevilFruit(name, category, primaryAbility, CharacterList.get(currOwnerIndex));
-        } else if (currOwnerIndex == 0 && !(historicalOwner.isEmpty()))
+        } else if (currOwnerIndex == 0)
         {
             dfTemp = new DevilFruit(name, category, primaryAbility, historicalOwner);
         } else
@@ -1253,7 +1253,7 @@ public class Driver {
         } else if (capIndex != 0 && members.isEmpty())
         {
             crew = new PirateCrew(crewName, shipName, (Pirate)CharacterList.get(pirateIndex.get(capIndex)));
-        } else if (capIndex == 0 && !(members.isEmpty()))
+        } else if (capIndex == 0)
         {
             crew = new PirateCrew(crewName, shipName, members);
         } else 
@@ -1349,7 +1349,8 @@ public class Driver {
                 System.out.println("[1] - Crew Name");
                 System.out.println("[2] - Ship's Name");
                 System.out.println("[3] - Assign Captain");
-                System.out.println("[4] - Return");
+                System.out.println("[4] - Add/Remove Member");
+                System.out.println("[5] - Return");
                 System.out.print("> ");
 
                 modChoice = getChoice();
@@ -1388,7 +1389,6 @@ public class Driver {
                             int cmdChoice = getChoice();
 
                             if (cmdChoice > 0 && cmdChoice <= selectedCrew.GetCrewMembers().size()) {
-                                // SetCaptain in PirateCrew.java handles demoting the old captain and setting roles
                                 selectedCrew.SetCaptain(selectedCrew.GetCrewMembers().get(cmdChoice - 1));
                                 System.out.println("Captain updated.");
                             } else if (cmdChoice != 0) {
@@ -1397,12 +1397,61 @@ public class Driver {
                         }
                         break;
                     case 4:
+                        System.out.println("\n[ Add / Remove Member ]");
+                        System.out.println("[1] - Add Member");
+                        System.out.println("[2] - Remove Member");
+                        System.out.println("[0] - Cancel");
+                        System.out.print("> ");
+
+                        int action = getChoice();
+                        if (action == 1) { // Add
+                            List<Pirate> availablePirates = new ArrayList<>();
+                            for (Character c : CharacterList) {
+                                // Find pirates not currently in this specific crew
+                                if (c instanceof Pirate && ((Pirate)c).GetPirateCrew() != selectedCrew) {
+                                    availablePirates.add((Pirate)c);
+                                }
+                            }
+                            if (availablePirates.isEmpty()) {
+                                System.out.println("No available Pirates to add.");
+                            } else {
+                                System.out.println("[ Select Pirate to Add ]");
+                                System.out.println("[0] - Cancel");
+                                for (int p = 0; p < availablePirates.size(); p++) {
+                                    System.out.println("[" + (p + 1) + "] - " + availablePirates.get(p).GetName());
+                                }
+                                System.out.print("> ");
+                                int addChoice = getChoice();
+                                if (addChoice > 0 && addChoice <= availablePirates.size()) {
+                                    selectedCrew.AddCrewMember(availablePirates.get(addChoice - 1));
+                                    System.out.println("Pirate successfully added to the crew.");
+                                }
+                            }
+                        } else if (action == 2) { // Remove
+                            if (selectedCrew.GetCrewMembers().isEmpty()) {
+                                System.out.println("This crew has no members to remove.");
+                            } else {
+                                System.out.println("[ Select Pirate to Remove ]");
+                                System.out.println("[0] - Cancel");
+                                for (int p = 0; p < selectedCrew.GetCrewMembers().size(); p++) {
+                                    System.out.println("[" + (p + 1) + "] - " + selectedCrew.GetCrewMembers().get(p).GetName());
+                                }
+                                System.out.print("> ");
+                                int remChoice = getChoice();
+                                if (remChoice > 0 && remChoice <= selectedCrew.GetCrewMembers().size()) {
+                                    selectedCrew.RemoveCrewMember(selectedCrew.GetCrewMembers().get(remChoice - 1));
+                                    System.out.println("Pirate successfully removed from the crew.");
+                                }
+                            }
+                        }
+                        break;
+                    case 5:
                         break;
                     default:
                         System.out.println("Invalid option.");
                         break;
                 }
-            } while (modChoice != 4);
+            } while (modChoice != 5);
         }
     }
 
@@ -1576,7 +1625,7 @@ public class Driver {
         {
             Marine commander = (Marine)CharacterList.get(marineIndex.get(commIndex));
             corp = new MarineCorp(baseLocation, commander, funds);
-        } else if (commIndex == 0 && !(members.isEmpty()))
+        } else if (commIndex == 0)
         {
             corp = new MarineCorp(baseLocation, null, funds, members);
         } else
@@ -1673,7 +1722,8 @@ public class Driver {
                 System.out.println("[1] - Base Location");
                 System.out.println("[2] - Operational Funds");
                 System.out.println("[3] - Assign Corps Commander");
-                System.out.println("[4] - Return");
+                System.out.println("[4] - Add/Remove Member");
+                System.out.println("[5] - Return");
                 System.out.print("> ");
 
                 modChoice = getChoice();
@@ -1701,7 +1751,6 @@ public class Driver {
                         selectedCorp.SetOperationalFunds(newFunds);
                         break;
                     case 3:
-                        // List members of the corp to promote
                         if (selectedCorp.GetCorpMembers().isEmpty()) {
                             System.out.println("This Corp has no members to promote.");
                         } else {
@@ -1723,12 +1772,61 @@ public class Driver {
                         }
                         break;
                     case 4:
+                        System.out.println("\n[ Add / Remove Member ]");
+                        System.out.println("[1] - Add Member");
+                        System.out.println("[2] - Remove Member");
+                        System.out.println("[0] - Cancel");
+                        System.out.print("> ");
+
+                        int action = getChoice();
+                        if (action == 1) { // Add
+                            List<Marine> availableMarines = new ArrayList<>();
+                            for (Character c : CharacterList) {
+                                // Find marines not currently in this specific corp
+                                if (c instanceof Marine && ((Marine)c).GetMCorps() != selectedCorp) {
+                                    availableMarines.add((Marine)c);
+                                }
+                            }
+                            if (availableMarines.isEmpty()) {
+                                System.out.println("No available Marines to add.");
+                            } else {
+                                System.out.println("[ Select Marine to Add ]");
+                                System.out.println("[0] - Cancel");
+                                for (int p = 0; p < availableMarines.size(); p++) {
+                                    System.out.println("[" + (p + 1) + "] - " + availableMarines.get(p).GetName());
+                                }
+                                System.out.print("> ");
+                                int addChoice = getChoice();
+                                if (addChoice > 0 && addChoice <= availableMarines.size()) {
+                                    selectedCorp.AddCorpMember(availableMarines.get(addChoice - 1));
+                                    System.out.println("Marine successfully enlisted to the corp.");
+                                }
+                            }
+                        } else if (action == 2) { // Remove
+                            if (selectedCorp.GetCorpMembers().isEmpty()) {
+                                System.out.println("This corp has no members to remove.");
+                            } else {
+                                System.out.println("[ Select Marine to Remove ]");
+                                System.out.println("[0] - Cancel");
+                                for (int p = 0; p < selectedCorp.GetCorpMembers().size(); p++) {
+                                    System.out.println("[" + (p + 1) + "] - " + selectedCorp.GetCorpMembers().get(p).GetName());
+                                }
+                                System.out.print("> ");
+                                int remChoice = getChoice();
+                                if (remChoice > 0 && remChoice <= selectedCorp.GetCorpMembers().size()) {
+                                    selectedCorp.RemoveCorpMember(selectedCorp.GetCorpMembers().get(remChoice - 1));
+                                    System.out.println("Marine successfully removed from the corp.");
+                                }
+                            }
+                        }
+                        break;
+                    case 5:
                         break;
                     default:
                         System.out.println("Invalid option.");
                         break;
                 }
-            } while (modChoice != 4);
+            } while (modChoice != 5);
         }
     }
 
