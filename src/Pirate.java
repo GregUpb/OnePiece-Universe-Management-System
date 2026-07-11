@@ -5,9 +5,9 @@ public class Pirate extends Character{
 
     private int Bounty;
     private String PirateRole;
-    private Boolean IsCaptain = false;
+    private Boolean IsCaptain;
     private PirateCrew Crew = null;
-    final List<String[]> Roles = new ArrayList<>(List.of(
+    public static final List<String[]> Roles = new ArrayList<>(List.of(
             new String[] {"None", "Doing nothing..."},
             new String[] {"Captain", "Leading the crew..."},
             new String[] {"First Mate", "Assisting the captain..."},
@@ -106,7 +106,7 @@ public class Pirate extends Character{
 
     public List<String[]> GetRoles()
     {
-        return this.Roles;
+        return Roles;
     }
 
     public void SetBounty(int Bounty)
@@ -140,7 +140,7 @@ public class Pirate extends Character{
             {
                 this.GetPirateCrew().SetCaptain(this);
             }
-        } else if (this.Crew == null & IsCaptain == true)
+        } else if (IsCaptain)
         {
             System.out.println(this.GetName() + " cannot be a captain without a crew");
         }
@@ -195,7 +195,7 @@ public class Pirate extends Character{
     {
         super.displayProfile();
 
-        System.out.println(""); // Buffer
+        System.out.println(); // Buffer
 
         System.out.println("Bounty: " + this.Bounty);
         System.out.println("Role: " + this.PirateRole);

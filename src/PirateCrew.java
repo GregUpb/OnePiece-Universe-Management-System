@@ -122,13 +122,8 @@ public class PirateCrew {
                     this.Captain.SetPirateRole("Crew Member");
         
                 }
-                // Checks if the new captain is not null
-                if (Captain != null)
-                {
-                    Captain.SetIsCaptain(true);
-                    Captain.SetPirateRole("Captain");
-                }
-                
+                Captain.SetIsCaptain(true);
+                Captain.SetPirateRole("Captain");
                 Captain.SetPirateCrew(this);
                 this.Captain = Captain;
             } else
@@ -202,7 +197,7 @@ public class PirateCrew {
     protected void GenerateID()
     {
         LocalDateTime rn = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yMdHms"); //Year-Month-Day-Hours-Minutes-Seconds
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss"); //Year-Month-Day-Hours-Minutes-Seconds
         this.ID = Long.parseLong(rn.format(formatter));
     }
 }

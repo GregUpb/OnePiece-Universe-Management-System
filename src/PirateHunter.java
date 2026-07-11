@@ -1,7 +1,7 @@
 //Module 1: Characters
 public class PirateHunter extends Character{
     private String CombatStyle = "None";
-    private int Captures = 0;
+    private int Captures;
 
     PirateHunter(String Name, String Alias, String Origin, String Status, int Wallet, int Captures)
     {
@@ -75,7 +75,7 @@ public class PirateHunter extends Character{
     {
         super.displayProfile();
 
-        System.out.println(""); // Buffer
+        System.out.println(); // Buffer
 
         System.out.println("Combat Style: " + this.CombatStyle);
         System.out.println("Captures: " + this.Captures);

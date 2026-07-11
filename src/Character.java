@@ -2,7 +2,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-abstract class Character{
+public abstract class Character{
     private long ID;
     private String Name;
     private String Alias;
@@ -115,6 +115,12 @@ abstract class Character{
 
     public void SetDFPower(DevilFruit DFPower)
     {
+        if (DFPower == null)
+        {
+            this.DFPower = null;
+            return; // Exit the method early so it doesn't run the rest of the code
+        }
+
         if (!(DFPower.GetHistoricalOwners().contains(this)))
         {
             if (this.DFPower == null)
@@ -126,10 +132,7 @@ abstract class Character{
                     this.DFPower = DFPower;
                     DFPower.SetCurrentOwner(this);
                 }
-            } else if (DFPower == null)
-            {
-                System.out.println("Cannot remove devil fruit from " + this.Name);
-            } else if (this.DFPower != DFPower)
+            }else if (this.DFPower != DFPower)
             {
                 System.out.println("Already have a devil fruit");
             }

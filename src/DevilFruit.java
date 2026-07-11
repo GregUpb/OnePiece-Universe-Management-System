@@ -129,13 +129,7 @@ public class DevilFruit{
     }
 
     public boolean HasCurrentOwner(){ // Validation checks for Character Constructor
-        if (this.CurrentOwner == null)
-        {
-            return false;
-        } else
-        {
-            return true;
-        }
+        return this.CurrentOwner != null;
     }
 
     /* STUFF */

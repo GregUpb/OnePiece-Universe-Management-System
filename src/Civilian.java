@@ -5,7 +5,7 @@ public class Civilian extends Character{
 
     private String Profession;
     private String Residence;
-    final List<String[]> CivProfessions = new ArrayList<>(List.of(
+    public static final List<String[]> CivProfessions = new ArrayList<>(List.of(
             new String[] {"None", "Doing nothing..."},
             new String[] {"Boatswain", "Maintaning ships..."},
             new String[] {"Cook", "Cooking food..."},
@@ -48,22 +48,17 @@ public class Civilian extends Character{
 
     public List<String[]> GetCivProfessions()
     {
-        return this.CivProfessions;
+        return CivProfessions;
     }
 
     public String GetProfession()
     { 
-        return this.Profession; 
+        return this.Profession;
     }
 
     public String GetResidence()
     {
         return this.Residence;
-    }
-
-    public List<String[]> GetRoles()
-    {
-        return this.CivProfessions;
     }
 
     public void SetProfession(String Profession)
@@ -93,7 +88,7 @@ public class Civilian extends Character{
     {
         super.displayProfile();
 
-        System.out.println(""); // Buffer
+        System.out.println(); // Buffer
 
         System.out.println("Profession: " + this.Profession);
         System.out.println("Residence: " + this.Residence);
@@ -101,7 +96,7 @@ public class Civilian extends Character{
 
     public void performDuty()
     {
-        for (String[] s : this.GetRoles())
+        for (String[] s : this.GetCivProfessions())
         {
             if (this.Profession.equalsIgnoreCase(s[0]))
             {

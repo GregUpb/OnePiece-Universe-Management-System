@@ -7,9 +7,8 @@ public class Marine extends Character{
     private String Rank;
     private MarineCorp MCorps = null;
 
-    final List<String[]> Ranks = new ArrayList<>(List.of(
+    public static final List<String[]> Ranks = new ArrayList<>(List.of(
         new String[] {"None", "Doing nothing..."},
-        new String[] {"World Government Commander-In-Chief", "KING KINGINA MO"},
         new String[] {"Fleet Admiral", "KING KINGINA MO"},
         new String[] {"Admiral", "KING KINGINA MO"},
         new String[] {"Vice Admiral", "KING KINGINA MO"},
@@ -73,7 +72,7 @@ public class Marine extends Character{
 
     public List<String[]> GetRanks()
     {
-        return this.Ranks;
+        return Ranks;
     }
 
     public void SetRank(String Rank)
@@ -111,7 +110,7 @@ public class Marine extends Character{
     {
         super.displayProfile();
 
-        System.out.println(""); // Buffer
+        System.out.println(); // Buffer
 
         System.out.println("Rank: " + this.Rank);
         if (this.MCorps != null)
