@@ -854,7 +854,7 @@ public class Driver {
                 }
             }
 
-        } while ((currOwnerIndex < 0 || currOwnerIndex > CharacterList.size()) || CharacterList.get(currOwnerIndex-1).GetDFPower() != null);
+        } while ((currOwnerIndex < 0 || currOwnerIndex > CharacterList.size()) || (CharacterList.get(currOwnerIndex-1).GetDFPower() != null && currOwnerIndex >0));
 
         // Historical Owner Verification
         do {
