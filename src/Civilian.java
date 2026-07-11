@@ -5,7 +5,7 @@ public class Civilian extends Character{
 
     private String Profession;
     private String Residence;
-    public static final List<String[]> CivProfessions = new ArrayList<>(List.of(
+    public static final List<String[]> CIVPROFESSIONS = new ArrayList<>(List.of(
             new String[] {"None", "Doing nothing..."},
             new String[] {"Boatswain", "Maintaning ships..."},
             new String[] {"Cook", "Cooking food..."},
@@ -58,7 +58,7 @@ public class Civilian extends Character{
 
     public void SetProfession(String Profession)
     {
-        for (String[] s : CivProfessions)
+        for (String[] s : CIVPROFESSIONS)
         {
             if (Profession.equalsIgnoreCase(s[0]))
             {
@@ -91,7 +91,7 @@ public class Civilian extends Character{
 
     public void performDuty()
     {
-        for (String[] s : CivProfessions)
+        for (String[] s : CIVPROFESSIONS)
         {
             if (this.Profession.equalsIgnoreCase(s[0]))
             {

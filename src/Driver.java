@@ -301,34 +301,34 @@ public class Driver {
                     displayRole();
                     RoleIndex = getChoice();
 
-                    if (RoleIndex < 0 || RoleIndex > (Pirate.Roles.size() - 1))
+                    if (RoleIndex < 0 || RoleIndex > (Pirate.ROLES.size() - 1))
                     {
                         System.out.println("Invalid Index");
                     } else if (RoleIndex > 0 && RoleIndex < 3)
                     {
                         if (CrewIndex == 0)
                         {
-                            System.out.println("Need a crew to be " + Pirate.Roles.get(RoleIndex)[0]);
+                            System.out.println("Need a crew to be " + Pirate.ROLES.get(RoleIndex)[0]);
                         }
                     }
 
-                } while ((RoleIndex < 0 || RoleIndex > (Pirate.Roles.size() - 1)) || ((RoleIndex > 0 && RoleIndex < 3) && CrewIndex == 0));
+                } while ((RoleIndex < 0 || RoleIndex > (Pirate.ROLES.size() - 1)) || ((RoleIndex > 0 && RoleIndex < 3) && CrewIndex == 0));
 
 
                 Pirate tempPirate;
                 // Selection of modified creation
                 if (dfIndex == 0 && CrewIndex == 0)
                 {
-                    tempPirate = new Pirate(name, alias, origin, status, wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain);
+                    tempPirate = new Pirate(name, alias, origin, status, wallet, Bounty, Pirate.ROLES.get(RoleIndex)[0], IsCaptain);
                 } else if (dfIndex > 0 && CrewIndex == 0)
                 {
-                    tempPirate = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain);
+                    tempPirate = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Pirate.ROLES.get(RoleIndex)[0], IsCaptain);
                 } else if (dfIndex == 0)
                 {
-                    tempPirate = new Pirate(name, alias, origin, status, wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain, PirateCrewList.get(CrewIndex));
+                    tempPirate = new Pirate(name, alias, origin, status, wallet, Bounty, Pirate.ROLES.get(RoleIndex)[0], IsCaptain, PirateCrewList.get(CrewIndex));
                 } else
                 {
-                    tempPirate = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Pirate.Roles.get(RoleIndex)[0], IsCaptain, PirateCrewList.get(CrewIndex));
+                    tempPirate = new Pirate(name, alias, origin, status, DevilFruitList.get(dfIndex-1), wallet, Bounty, Pirate.ROLES.get(RoleIndex)[0], IsCaptain, PirateCrewList.get(CrewIndex));
                 }
 
                 CharacterList.add(tempPirate);
@@ -346,10 +346,10 @@ public class Driver {
                     displayRank();
                     rankIndex = getChoice();
 
-                    if (rankIndex < 0 || rankIndex > (Marine.Ranks.size() - 1)) {
+                    if (rankIndex < 0 || rankIndex > (Marine.RANKS.size() - 1)) {
                         System.out.println("Invalid Index");
                     }
-                } while (rankIndex < 0 || rankIndex > (Marine.Ranks.size() - 1));
+                } while (rankIndex < 0 || rankIndex > (Marine.RANKS.size() - 1));
 
                 // Marine Corp Verification
                 do {
@@ -386,7 +386,7 @@ public class Driver {
                 }
 
                 Marine tempMarine;
-                String selectedRank = Marine.Ranks.get(rankIndex)[0];
+                String selectedRank = Marine.RANKS.get(rankIndex)[0];
 
                 // Selection of modified creation
                 if (dfIndex == 0 && mCorpIndex == 0) {
@@ -438,21 +438,21 @@ public class Driver {
                     System.out.print("> ");
                     civRoleIndex = getChoice();
 
-                    if (civRoleIndex < 0 || civRoleIndex > (Civilian.CivProfessions.size() - 1 ))
+                    if (civRoleIndex < 0 || civRoleIndex > (Civilian.CIVPROFESSIONS.size() - 1 ))
                     {
                         System.out.println("Invalid Index");
                     }
 
-                } while (civRoleIndex < 0 || civRoleIndex > (Civilian.CivProfessions.size() - 1 ));
+                } while (civRoleIndex < 0 || civRoleIndex > (Civilian.CIVPROFESSIONS.size() - 1 ));
 
                 residence = getInput("Residence");
 
                 Civilian tempCiv;
 
                 if (dfIndex == 0) {
-                    tempCiv = new Civilian(name, alias, origin, status, wallet, Civilian.CivProfessions.get(civRoleIndex)[0], residence);
+                    tempCiv = new Civilian(name, alias, origin, status, wallet, Civilian.CIVPROFESSIONS.get(civRoleIndex)[0], residence);
                 } else {
-                    tempCiv = new Civilian(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, Civilian.CivProfessions.get(civRoleIndex)[0], residence);
+                    tempCiv = new Civilian(name, alias, origin, status, DevilFruitList.get(dfIndex - 1), wallet, Civilian.CIVPROFESSIONS.get(civRoleIndex)[0], residence);
                 }
 
                 CharacterList.add(tempCiv);
@@ -620,8 +620,8 @@ public class Driver {
                         displayRole();
                         System.out.print("> ");
                         int roleIndex = getChoice();
-                        if (roleIndex > 0 && roleIndex < Pirate.Roles.size()) {
-                            p.SetPirateRole(Pirate.Roles.get(roleIndex)[0]);
+                        if (roleIndex > 0 && roleIndex < Pirate.ROLES.size()) {
+                            p.SetPirateRole(Pirate.ROLES.get(roleIndex)[0]);
                         }
                     } else if (choice == 9) {
                         displayCrew();
@@ -639,7 +639,7 @@ public class Driver {
                         displayRank();
                         System.out.print("> ");
                         int rankIndex = getChoice();
-                        if (rankIndex > 0 && rankIndex < Marine.Ranks.size()) m.SetRank(Marine.Ranks.get(rankIndex)[0]);
+                        if (rankIndex > 0 && rankIndex < Marine.RANKS.size()) m.SetRank(Marine.RANKS.get(rankIndex)[0]);
                     } else if (choice == 8) {
                         displayCorp();
                         System.out.print("> ");
@@ -668,9 +668,9 @@ public class Driver {
                         System.out.print("> ");
                         civRoleIndex = getChoice();
 
-                        if (civRoleIndex >= 0 && civRoleIndex < Civilian.CivProfessions.size())
+                        if (civRoleIndex >= 0 && civRoleIndex < Civilian.CIVPROFESSIONS.size())
                         {
-                            c.SetProfession(Civilian.CivProfessions.get(civRoleIndex)[0]);
+                            c.SetProfession(Civilian.CIVPROFESSIONS.get(civRoleIndex)[0]);
                         }
 
 
@@ -1849,27 +1849,27 @@ public class Driver {
     public static void displayRole()
     {
         System.out.println("[ Role ]");
-        for (int i = 0; i < Pirate.Roles.size(); i++)
+        for (int i = 0; i < Pirate.ROLES.size(); i++)
         {
-            System.out.println("[" + i + "] - " + Pirate.Roles.get(i)[0]);
+            System.out.println("[" + i + "] - " + Pirate.ROLES.get(i)[0]);
         }
     }
 
     public static void displayCivRole()
     {
         System.out.println("[ Profession ]");
-        for (int i = 0; i < Civilian.CivProfessions.size(); i++)
+        for (int i = 0; i < Civilian.CIVPROFESSIONS.size(); i++)
         {
-            System.out.println("[" + i + "] - " + Civilian.CivProfessions.get(i)[0]);
+            System.out.println("[" + i + "] - " + Civilian.CIVPROFESSIONS.get(i)[0]);
         }
     }
 
     public static void displayRank()
     {
         System.out.println("[ Rank ]");
-        for (int i = 0; i < Marine.Ranks.size(); i++)
+        for (int i = 0; i < Marine.RANKS.size(); i++)
         {
-            System.out.println("[" + i + "] - " + Marine.Ranks.get(i)[0]);
+            System.out.println("[" + i + "] - " + Marine.RANKS.get(i)[0]);
         }
     }
 

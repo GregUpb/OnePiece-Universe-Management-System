@@ -8,7 +8,7 @@ public class Marine extends Character{
     private MarineCorp MCorps = null;
     private boolean isCorpCommander;
 
-    public static final List<String[]> Ranks = new ArrayList<>(List.of(
+    public static final List<String[]> RANKS = new ArrayList<>(List.of(
         new String[] {"None", "Doing nothing..."},
         new String[] {"Fleet Admiral", "KING KINGINA MO"},
         new String[] {"Admiral", "KING KINGINA MO"},
@@ -82,7 +82,7 @@ public class Marine extends Character{
 
     public void SetRank(String Rank)
     {
-        for (String[] s : Ranks)
+        for (String[] s : RANKS)
         {
             if (Rank.equalsIgnoreCase(s[0]))
             {
@@ -138,7 +138,7 @@ public class Marine extends Character{
 
     public void performDuty()
     {
-        for (String[] s : Ranks)
+        for (String[] s : RANKS)
         {
             if (this.Rank.equalsIgnoreCase(s[0]))
             {

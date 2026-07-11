@@ -7,7 +7,7 @@ public class Pirate extends Character{
     private String PirateRole;
     private Boolean IsCaptain;
     private PirateCrew Crew = null;
-    public static final List<String[]> Roles = new ArrayList<>(List.of(
+    public static final List<String[]> ROLES = new ArrayList<>(List.of(
             new String[] {"None", "Doing nothing..."},
             new String[] {"Captain", "Leading the crew..."},
             new String[] {"First Mate", "Assisting the captain..."},
@@ -99,9 +99,9 @@ public class Pirate extends Character{
         return this.Crew;
     }
 
-    public List<String[]> GetRoles()
+    public List<String[]> GetROLES()
     {
-        return Roles;
+        return ROLES;
     }
 
     public void SetBounty(int Bounty)
@@ -116,7 +116,7 @@ public class Pirate extends Character{
 
     public void SetPirateRole(String PirateRole)
     {
-        for (String[] s : this.GetRoles())
+        for (String[] s : this.GetROLES())
         {
             if (PirateRole.equalsIgnoreCase(s[0]))
             {
@@ -212,7 +212,7 @@ public class Pirate extends Character{
 
     public void performDuty()
     {
-        for (String[] s : this.GetRoles())
+        for (String[] s : this.GetROLES())
         {
             if (this.PirateRole.equalsIgnoreCase(s[0]))
             {
