@@ -1,6 +1,6 @@
 //Module 1: Characters
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 public class Pirate extends Character{
 
     private int Bounty;
@@ -12,13 +12,13 @@ public class Pirate extends Character{
             new String[] {"Captain", "Leading the crew..."},
             new String[] {"First Mate", "Assisting the captain..."},
             new String[] {"Second Mate", "Ordering commands..."},
+            new String[] {"Crew Member", "Obeying captain's orders..."},
             new String[] {"Boatswain", "Maintaining ship..."},
             new String[] {"Cook", "Cooking food..."},
             new String[] {"Doctor", "Healing injuries..."},
             new String[] {"Navigator", "Checking the map..."},
             new String[] {"Shipwright", "Repairing the ship..."},
             new String[] {"Sniper", "Training marksmanship..."},
-            new String[] {"Crew Member", "Obeying captain's orders..."},
             new String[] {"Archaeologist", "Examining artifacts..."},
             new String[] {"Assassin", "Hiding..."},
             new String[] {"Barber", "Cutting hair..."},
@@ -45,34 +45,6 @@ public class Pirate extends Character{
             new String[] {"Swordsman", "Training swordmanship..."},
             new String[] {"Tailor", "Sewing clothes..."}
     ));
-
-    Pirate(String Name, String Alias, String Origin, String Status, int Wallet, int Bounty, String PirateRole, Boolean IsCaptain)
-    {
-        super(Name, Alias, Origin, Status, Wallet);
-
-        this.Bounty = Bounty;
-        this.PirateRole = PirateRole;
-        this.IsCaptain = IsCaptain;
-    }
-
-    Pirate(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, int Bounty, String PirateRole, Boolean IsCaptain)
-    {
-        super(Name, Alias, Origin, Status, DFPower, Wallet);
-
-        this.Bounty = Bounty;
-        this.PirateRole = PirateRole;
-        this.IsCaptain = IsCaptain;
-    }
-
-    Pirate(String Name, String Alias, String Origin, String Status, int Wallet, int Bounty, String PirateRole, Boolean IsCaptain, PirateCrew Crew)
-    {
-        super(Name, Alias, Origin, Status, Wallet);
-
-        this.Bounty = Bounty;
-        this.PirateRole = PirateRole;
-        this.IsCaptain = IsCaptain;
-        this.Crew = Crew;
-    }
 
     Pirate(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, int Bounty, String PirateRole, Boolean IsCaptain, PirateCrew Crew)
     {

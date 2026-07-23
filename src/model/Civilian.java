@@ -1,6 +1,8 @@
+package model;
+
 //Module 1: Characters
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 public class Civilian extends Character{
 
     private String Profession;
@@ -29,14 +31,6 @@ public class Civilian extends Character{
             new String[] {"Scientist", "Conducting experiments..."},
             new String[] {"Tailor", "Sewing clothes..."}
     ));
-
-    Civilian(String Name, String Alias, String Origin, String Status, int Wallet, String Profession, String Residence)
-    {
-        super(Name, Alias, Origin, Status, Wallet);
-
-        this.Profession = Profession;
-        this.Residence = Residence;
-    }
 
     Civilian(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Profession, String Residence)
     {

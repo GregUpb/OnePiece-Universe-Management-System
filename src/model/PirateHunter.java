@@ -1,29 +1,9 @@
+package model;
+
 //Module 1: Characters
 public class PirateHunter extends Character{
     private String CombatStyle = "None";
     private int Captures;
-
-    PirateHunter(String Name, String Alias, String Origin, String Status, int Wallet, int Captures)
-    {
-        super(Name, Alias, Origin, Status, Wallet);
-
-        this.Captures = Captures;
-    }
-
-    PirateHunter(String Name, String Alias, String Origin, String Status, int Wallet, String CombatStyle, int Captures)
-    {
-        super(Name, Alias, Origin, Status, Wallet);
-
-        this.CombatStyle = CombatStyle;
-        this.Captures = Captures;
-    }
-
-    PirateHunter(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, int Captures)
-    {
-        super(Name, Alias, Origin, Status, DFPower, Wallet);
-
-        this.Captures = Captures;
-    }
 
     PirateHunter(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String CombatStyle, int Captures)
     {

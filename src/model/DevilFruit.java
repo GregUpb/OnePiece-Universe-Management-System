@@ -1,8 +1,10 @@
+package model;
+
 //Module 3: Devil Fruit
-import java.util.List;
-import java.util.ArrayList;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DevilFruit{
 
@@ -12,35 +14,6 @@ public class DevilFruit{
     private String PrimaryAbility;
     private Character CurrentOwner = null;
     private List<Character> HistoricalOwners = new ArrayList<>();
-
-    DevilFruit(String FruitName, String Category, String PrimaryAbility)
-    {
-        this.GenerateID();
-
-        this.FruitName = FruitName;
-        this.Category = Category;
-        this.PrimaryAbility = PrimaryAbility;
-    }
-
-    DevilFruit(String FruitName, String Category, String PrimaryAbility, Character CurrentOwner)
-    {
-        this.GenerateID();
-
-        this.FruitName = FruitName;
-        this.Category = Category;
-        this.PrimaryAbility = PrimaryAbility;
-        this.CurrentOwner = CurrentOwner;
-    }
-
-    DevilFruit(String FruitName, String Category, String PrimaryAbility, List<Character> HistoricalOwners)
-    {
-        this.GenerateID();
-
-        this.FruitName = FruitName;
-        this.Category = Category;
-        this.PrimaryAbility = PrimaryAbility;
-        this.HistoricalOwners = HistoricalOwners;
-    }
 
     DevilFruit(String FruitName, String Category, String PrimaryAbility, Character CurrentOwner, List<Character> HistoricalOwners)
     {

@@ -1,8 +1,8 @@
 //Module 2: Affiliation
-import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PirateCrew {
 
@@ -12,37 +12,6 @@ public class PirateCrew {
     private Pirate Captain = null;
     private List<Pirate> CrewMembers = new ArrayList<>();
     private int TotalCrewBounty;
-
-    PirateCrew(String CrewName, String ShipsName)
-    {
-        this.GenerateID();
-
-        this.CrewName = CrewName;
-        this.ShipsName = ShipsName;
-    }
-
-    PirateCrew(String CrewName, String ShipsName, Pirate Captain)
-    {
-        this.GenerateID();
-
-        this.CrewName = CrewName;
-        this.ShipsName = ShipsName;
-        this.Captain = Captain;
-        CrewMembers.add(Captain);
-        
-        CalculateTotalCrewBounty();
-    }
-
-    PirateCrew(String CrewName, String ShipsName, List<Pirate> CrewMembers)
-    {
-        this.GenerateID();
-
-        this.CrewName = CrewName;
-        this.ShipsName = ShipsName;
-        this.CrewMembers = CrewMembers;
-        
-        CalculateTotalCrewBounty();
-    }
     
     PirateCrew(String CrewName, String ShipsName, Pirate Captain, List<Pirate> CrewMembers)
     {
@@ -51,11 +20,17 @@ public class PirateCrew {
         this.CrewName = CrewName;
         this.ShipsName = ShipsName;
         this.Captain = Captain;
-        CrewMembers.add(Captain);
-
         this.CrewMembers = CrewMembers;
+
+        if (Captain != null)
+        {
+            CrewMembers.add(Captain);
+        }
         
-        CalculateTotalCrewBounty();
+        if (!(CrewMembers.isEmpty()))
+        {
+            this.CalculateTotalCrewBounty();
+        }
     }
 
     public Long GetCrewID()

@@ -1,8 +1,10 @@
+package model;
+
 //Module 2: Affiliation
-import java.util.List;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MarineCorp{
 
@@ -11,17 +13,6 @@ public class MarineCorp{
     private Marine CorpsCommander = null;
     private int OperationalFunds;
     private List<Marine> CorpMembers = new ArrayList<>();
-
-    MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds)
-    {
-        this.GenerateID();
-
-        this.BaseLocation = BaseLocation;
-        this.CorpsCommander = CorpsCommander;
-        this.OperationalFunds = OperationalFunds;
-
-        CorpMembers.add(CorpsCommander);
-    }
 
     MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds, List<Marine> CorpMembers)
     {

@@ -30,31 +30,6 @@ public class Marine extends Character{
         new String[] {"Seaman Recruit", "Undergoing basic training and ship duties..."},
         new String[] {"Chore Boy", "Cleaning the deck and doing basic chores..."}
     ));
-
-    Marine(String Name, String Alias, String Origin, String Status, int Wallet, String Rank, boolean isCorpCommander)
-    {
-        super(Name, Alias, Origin, Status, Wallet);
-
-        this.Rank = Rank;
-        this.isCorpCommander = isCorpCommander;
-    }
-    
-    Marine(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Rank, boolean isCorpCommander)
-    {
-        super(Name, Alias, Origin, Status, DFPower, Wallet);
-
-        this.Rank = Rank;
-        this.isCorpCommander = isCorpCommander;
-    }
-
-    Marine(String Name, String Alias, String Origin, String Status, int Wallet, String Rank, MarineCorp MCorps, boolean isCorpCommander)
-    {
-        super(Name, Alias, Origin, Status, Wallet);
-
-        this.Rank = Rank;
-        this.MCorps = MCorps;
-        this.isCorpCommander = isCorpCommander;
-    }
     
     Marine(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Rank, MarineCorp MCorps, boolean isCorpCommander)
     {
