@@ -103,6 +103,12 @@ public abstract class Character{
 
     public void SetStatus(String Status)
     {
+        if (this.Status != null && this.Status.equalsIgnoreCase("dead"))
+        {
+            System.out.println("Invalid operation: " + this.GetName() + " is already dead.");
+            return;
+        }
+
         if (this instanceof Pirate)
         {
             if (Status.equalsIgnoreCase("alive") || Status.equalsIgnoreCase("captured") || Status.equalsIgnoreCase("dead"))
@@ -121,7 +127,6 @@ public abstract class Character{
         if (this.Status.equalsIgnoreCase("dead") && this.DFPower != null) {
             this.DFPower.TriggerReinc();
         }
-
     }
 
     public void SetDFPower(DevilFruit DFPower)

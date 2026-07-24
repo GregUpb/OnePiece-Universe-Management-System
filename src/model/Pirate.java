@@ -148,6 +148,11 @@ public class Pirate extends Character{
             if (this.GetStatus().equalsIgnoreCase("captured") && this.Crew != null)
             {
                 this.Crew.CalculateTotalCrewBounty();
+            } else if (this.GetStatus().equalsIgnoreCase("dead") && this.Crew != null) {
+                this.GetDFPower().TriggerReinc();
+                this.SetPirateRole("None");
+                this.Crew.RemoveCrewMember(this);
+                this.Crew = null;
             }
 
         } else
