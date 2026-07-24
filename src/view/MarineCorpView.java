@@ -3,20 +3,20 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
-public class DevilFruitView
+public class MarineCorpView
 {
     public JPanel panel;
-    public JButton createButton, viewButton, assignButton, backButton;
+    public JButton createButton, viewButton, editButton, backButton;
 
     public Font buttonFont = new Font(Font.MONOSPACED, Font.BOLD, 20);
     
-    public DevilFruitView()
+    public MarineCorpView()
     {
 
         panel = new JPanel(new GridLayout(4, 1));
 
-        /* Create Devil Fruit Button */
-        createButton = new JButton("Create Devil Fruit");
+        /* Create Button */
+        createButton = new JButton("Create Pirate");
         createButton.setSize(400, 50);
         createButton.setBackground(Color.RED);
         createButton.setFont(buttonFont);
@@ -24,8 +24,8 @@ public class DevilFruitView
         panel.add(createButton);
         
 
-        /* View Devil Fruit Button */
-        viewButton = new JButton("View Devil Fruit");
+        /* View Button */
+        viewButton = new JButton("Create Marine");
         viewButton.setSize(400, 50);
         viewButton.setBackground(Color.RED);
         viewButton.setFont(buttonFont);
@@ -34,15 +34,15 @@ public class DevilFruitView
         
 
 
-        /* Assign Devil Fruit Button */
-        assignButton = new JButton("Assign Devil Fruit");
-        assignButton.setSize(400, 50);
-        assignButton.setBackground(Color.RED);
-        assignButton.setFont(buttonFont);
-        assignButton.setFocusPainted(false);
-        panel.add(assignButton);
+        /* Modify Button */
+        editButton = new JButton("Create Pirate Hunter");
+        editButton.setSize(400, 50);
+        editButton.setBackground(Color.RED);
+        editButton.setFont(buttonFont);
+        editButton.setFocusPainted(false);
+        panel.add(editButton);
         
-
+        
 
         /* Back Button */
         backButton = new JButton("Back");
