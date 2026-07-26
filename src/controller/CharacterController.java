@@ -9,6 +9,7 @@ import view.CharacterModifyView;
 import view.CharacterView;
 import view.CharacterViewView;
 import view.MainView;
+import model.*;
 
 public class CharacterController implements ActionListener
 {
@@ -24,13 +25,14 @@ public class CharacterController implements ActionListener
     {
         this.mainview = mainView;
 
-        characterCreateController = new CharacterCreateController(mainview, new CharacterCreateView());
+        CharacterDatabase charDatabase = new CharacterDatabase();
+        characterCreateController = new CharacterCreateController(mainview, new CharacterCreateView(), charDatabase);
         this.mainview.addPanel(characterCreateController.getFrame(), "CHARACTERCREATE");
-        characterViewController = new CharacterViewController(mainView, new CharacterViewView());
+        characterViewController = new CharacterViewController(mainView, new CharacterViewView(), charDatabase);
         this.mainview.addPanel(characterViewController.getFrame(), "CHARACTERVIEW");
-        characterModifyController = new CharacterModifyController(mainView, new CharacterModifyView());
+        characterModifyController = new CharacterModifyController(mainView, new CharacterModifyView(), charDatabase);
         this.mainview.addPanel(characterModifyController.getFrame(), "CHARACTERMODIFY");
-        characterDeleteController = new CharacterDeleteController(mainView, new CharacterDeleteView());
+        characterDeleteController = new CharacterDeleteController(mainView, new CharacterDeleteView(), charDatabase);
         this.mainview.addPanel(characterDeleteController.getFrame(), "CHARACTERDELETE");
 
         this.characterView = charView;
@@ -62,14 +64,17 @@ public class CharacterController implements ActionListener
         } else if (e.getSource() == characterView.viewButton)
         {
             this.mainview.setInfoText("Viewing a Character");
+            characterViewController.refreshComboBox();
             this.mainview.showPanel("CHARACTERVIEW");
         } else if (e.getSource() == characterView.modifyButton)
         {
             this.mainview.setInfoText("Modifying a Character");
+            characterModifyController.refreshComboBox();
             this.mainview.showPanel("CHARACTERMODIFY");
         } else if (e.getSource() == characterView.deleteButton)
         {
             this.mainview.setInfoText("Unaliving a Character");
+            characterDeleteController.refreshComboBox();
             this.mainview.showPanel("CHARACTERDELETE");
         }
         if (e.getSource() == characterView.backButton)

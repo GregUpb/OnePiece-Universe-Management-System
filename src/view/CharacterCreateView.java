@@ -1,5 +1,6 @@
 package view;
 
+import model.*;
 import java.awt.*;
 import javax.swing.*;
 
@@ -14,35 +15,39 @@ public class CharacterCreateView
     public JPanel namePanel, aliasPanel, originPanel, typePanel, statusPanel, dfPanel, walletPanel, rolePanel, ranksPanel, civrolePanel, bountyPanel, crewPanel, corpPanel, combatPanel, capturePanel, residencePanel;
     public JButton exitButton, submitButton;
 
-    private JLabel nameLabel, aliasLabel, originLabel, statusLabel, dfLabel, walletLabel, roleLabel, ranksLabel, civroleLabel, typeLabel;
+    public JLabel nameLabel, aliasLabel, originLabel, statusLabel, dfLabel, walletLabel, roleLabel, ranksLabel, civroleLabel, typeLabel;
 
-    private JTextField nameTextField, aliasTextField, originTextField, walletTextField;
+    //private
+    public JTextField nameTextField, aliasTextField, originTextField, walletTextField;
     public JRadioButton aliveRadioButton, captureRadioButton, deadRadioButton;
     public JRadioButton pirateRadioButton, marineRadioButton, hunterRadioButton, civRadioButton;
     public ButtonGroup statusButtonGroup, typeButtonGroup;
-    private JComboBox devilfruitComboBox;
+    //private
+    public JComboBox devilfruitComboBox;
 
     // Roles, Ranks, CivRoles
-    private JComboBox rolesComboBox;
-    private JComboBox ranksComboBox;
-    private JComboBox civrolesComboBox;
+    //private all 3
+    public JComboBox rolesComboBox;
+    public JComboBox ranksComboBox;
+    public JComboBox civrolesComboBox;
 
     // Pirate
+    //private all 3
     private JLabel bountyLabel, crewLabel;
-    private JTextField bountyTextField;
-    private JComboBox crewComboBox;
+    public JTextField bountyTextField;
+    public JComboBox crewComboBox;
 
     // Marine
     private JLabel corpLabel;
-    private JComboBox corpComboBox;
+    public JComboBox corpComboBox;
 
     // Pirate Hunter
     private JLabel combatLabel, captureLabel;
-    private JTextField combatTextField, captureTextField;
+    public JTextField combatTextField, captureTextField;
 
     // Civilian
     private JLabel residenceLabel;
-    private JTextField residenceTextField;
+    public JTextField residenceTextField;
 
     CardLayout cardLayout;
 
@@ -205,7 +210,10 @@ public class CharacterCreateView
         roleLabel = new JLabel("Pirate Role: ");
         roleLabel.setFont(textFont);
         roleLabel.setPreferredSize(new Dimension(150, 0));
-        rolesComboBox = new JComboBox<>(temp);
+        rolesComboBox = new JComboBox<>();
+        for (String[] role : Pirate.ROLES) {
+            rolesComboBox.addItem(role[0]); // role[0] gets "Captain", "Navigator", and more
+        }
 
         rolePanel = new JPanel(new BorderLayout());
         rolePanel.add(roleLabel, BorderLayout.LINE_START);
@@ -227,7 +235,10 @@ public class CharacterCreateView
         ranksLabel = new JLabel("Marine Rank: ");
         ranksLabel.setFont(textFont);
         ranksLabel.setPreferredSize(new Dimension(150, 0));
-        ranksComboBox = new JComboBox<>(temp);
+        ranksComboBox = new JComboBox<>();
+        for (String[] rank : Marine.RANKS) {
+            ranksComboBox.addItem(rank[0]);
+        }
 
         ranksPanel = new JPanel(new BorderLayout());
         ranksPanel.add(ranksLabel, BorderLayout.LINE_START);
@@ -273,7 +284,10 @@ public class CharacterCreateView
         civroleLabel = new JLabel("Profession: ");
         civroleLabel.setFont(textFont);
         civroleLabel.setPreferredSize(new Dimension(150, 0));
-        civrolesComboBox = new JComboBox<>(temp);
+        civrolesComboBox = new JComboBox<>();
+        for (String[] profession : Civilian.CIVPROFESSIONS) {
+            civrolesComboBox.addItem(profession[0]);
+        }
 
         civrolePanel = new JPanel(new BorderLayout());
         civrolePanel.add(civroleLabel, BorderLayout.LINE_START);

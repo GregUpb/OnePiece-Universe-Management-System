@@ -5,7 +5,6 @@ import javax.swing.*;
 
 public class CharacterDeleteView
 {
-    String[] temp = {"Cheese", "STUFFF", "McMuffin", "JACOB na backshot"};
 
     public JPanel mainPanel, topPanel, centerPanel;
     public JButton backButton, deleteButton;
@@ -28,7 +27,7 @@ public class CharacterDeleteView
         topPanel.add(backButton, BorderLayout.PAGE_START);
 
         centerPanel = new JPanel(new GridLayout(2, 1));
-        charSelectComboBox = new JComboBox<>(temp);
+        charSelectComboBox = new JComboBox<>();
         charSelectComboBox.setPreferredSize(new Dimension(300, 150));
         deleteButton = new JButton("Delete");
         deleteButton.setFont(buttonFont);

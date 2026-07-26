@@ -18,10 +18,13 @@ public class CharacterModifyView
 
     private JLabel nameLabel, aliasLabel, originLabel, statusLabel, dfLabel, walletLabel, roleLabel, ranksLabel, civroleLabel, typeLabel;
 
-    private JTextField nameTextField, aliasTextField, originTextField, walletTextField;
+    public JTextField nameTextField;
+    public JTextField aliasTextField;
+    public JTextField originTextField;
+    public JTextField walletTextField;
     public JRadioButton aliveRadioButton, captureRadioButton, deadRadioButton;
     public ButtonGroup statusButtonGroup, typeButtonGroup;
-    private JComboBox devilfruitComboBox;
+    public JComboBox devilfruitComboBox;
 
     public JLabel specified1Label, specified2Label, specified3Label, specified4Label;
     public JTextField specified1TextField, specified2TextField;
@@ -49,7 +52,7 @@ public class CharacterModifyView
         submitButton = new JButton("SUBMIT");
         submitButton.setFont(buttonFont);
 
-        charSelectComboBox = new JComboBox<>(temp);
+        charSelectComboBox = new JComboBox<>();
         topPanel.add(charSelectComboBox);
 
         // Name

@@ -5,13 +5,12 @@ import javax.swing.*;
 
 public class CharacterViewView
 {
-    String[] temp = {"Cheese", "STUFFF", "McMuffin", "JACOB na backshot"};
 
     public JPanel mainPanel, topPanel, infoPanel;
     public JButton backButton;
     public JComboBox charSelectComboBox;
 
-    private JLabel nameLabel, aliasLabel, originLabel, statusLabel, dfLabel, walletLabel, specifiedLabel1, specifiedLabel2, specifiedLabel3, specifiedLabel4;
+    public JLabel nameLabel, aliasLabel, originLabel, statusLabel, dfLabel, walletLabel, specifiedLabel1, specifiedLabel2, specifiedLabel3, specifiedLabel4;
 
     private Font buttonFont = new Font(Font.MONOSPACED, Font.BOLD, 20);
     private Font textFont = new Font(Font.SERIF, Font.CENTER_BASELINE, 15);
@@ -26,7 +25,7 @@ public class CharacterViewView
         backButton.setFont(buttonFont);
         topPanel.add(backButton, BorderLayout.PAGE_START);
 
-        charSelectComboBox = new JComboBox<>(temp);
+        charSelectComboBox = new JComboBox<>();
         topPanel.add(charSelectComboBox, BorderLayout.CENTER);
 
         // Character Information
