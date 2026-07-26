@@ -141,14 +141,15 @@ public abstract class Character{
         {
             if (this.DFPower == null)
             {
-                // Check if the Devil Fruit has a current owner
-                if (!(DFPower.HasCurrentOwner()))
+                // Accept and save the fruit immediately
+                this.DFPower = DFPower;
+
+                // Tell the fruit to save this character as the owner, PAG di pa alam ng fruit
+                if (DFPower.GetCurrentOwner() != this)
                 {
-                    // set this character as the new current owner
-                    this.DFPower = DFPower;
                     DFPower.SetCurrentOwner(this);
                 }
-            }else if (this.DFPower != DFPower)
+            } else if (this.DFPower != DFPower)
             {
                 System.out.println("Already have a devil fruit");
             }
@@ -156,7 +157,6 @@ public abstract class Character{
         {
             System.out.println(this.Name + " is already a former " + DFPower.GetFruitName() + " user");
         }
-
     }
 
     public void SetWallet(int Wallet)

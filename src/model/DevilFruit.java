@@ -15,7 +15,7 @@ public class DevilFruit{
     private Character CurrentOwner = null;
     private List<Character> HistoricalOwners = new ArrayList<>();
 
-    DevilFruit(String FruitName, String Category, String PrimaryAbility, Character CurrentOwner, List<Character> HistoricalOwners)
+    public DevilFruit(String FruitName, String Category, String PrimaryAbility, Character CurrentOwner, List<Character> HistoricalOwners)
     {
         this.GenerateID();
 

@@ -14,13 +14,15 @@ public class CharacterCreateController implements ActionListener
     MainView mainview;
     CharacterCreateView characterCreateView;
     CharacterDatabase charDatabase;
+    DevilFruitDatabase devilFruitDatabase;
     
-    public CharacterCreateController(MainView mainview, CharacterCreateView characterCreateView, CharacterDatabase charDatabase)
+    public CharacterCreateController(MainView mainview, CharacterCreateView characterCreateView, CharacterDatabase charDatabase, DevilFruitDatabase devilFruitDatabase)
     {
         this.mainview = mainview;
 
         this.characterCreateView = characterCreateView;
         this.charDatabase = charDatabase;
+        this.devilFruitDatabase = devilFruitDatabase;
         addActionListener();
     }
 
@@ -97,6 +99,12 @@ public class CharacterCreateController implements ActionListener
 
                 // Ala pa devil fruit database kaya null ka muna boss
                 DevilFruit dfPower = null;
+                int selectedDFIndex = characterCreateView.devilfruitComboBox.getSelectedIndex();
+
+                // Index 0 is "None", legit fruits start at index 1.
+                if (selectedDFIndex > 0) {
+                    dfPower = devilFruitDatabase.getAllDF().get(selectedDFIndex - 1);
+                }
 
                 Character newCharacter = null;
 
@@ -132,6 +140,9 @@ public class CharacterCreateController implements ActionListener
                 if (newCharacter != null) {
                     this.charDatabase.addCharacter(newCharacter);
                     System.out.println("Successfully added " + newCharacter.GetName() + " to the Module 1 Database.");
+                    if (dfPower != null) {
+                        dfPower.SetCurrentOwner(newCharacter);
+                    }
                 }
 
                 JOptionPane.showMessageDialog(characterCreateView.panel, "Character Created Successfully!");
@@ -147,5 +158,15 @@ public class CharacterCreateController implements ActionListener
         }
     }
 
+    public void refreshDFComboBox()
+    {
+        // Clean whole list
+        characterCreateView.devilfruitComboBox.removeAllItems();
+        characterCreateView.devilfruitComboBox.addItem("None"); // Default option
 
+        //Populate combo box with devil fruits from database
+        for (DevilFruit df : devilFruitDatabase.getAllDF()) {
+            characterCreateView.devilfruitComboBox.addItem(df.GetFruitID() + " - " + df.GetFruitName());
+        }
+    }
 }

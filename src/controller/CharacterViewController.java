@@ -14,13 +14,15 @@ public class CharacterViewController implements ActionListener
     MainView mainview;
     CharacterViewView characterViewView;
     CharacterDatabase charDatabase;
+    DevilFruitDatabase devilFruitDatabase;
     
-    public CharacterViewController(MainView mainview, CharacterViewView characterViewView, CharacterDatabase charDatabase)
+    public CharacterViewController(MainView mainview, CharacterViewView characterViewView, CharacterDatabase charDatabase, DevilFruitDatabase devilFruitDatabase)
     {
         this.mainview = mainview;
 
         this.characterViewView = characterViewView;
         this.charDatabase = charDatabase;
+        this.devilFruitDatabase = devilFruitDatabase;
         addActionListener();
     }
 

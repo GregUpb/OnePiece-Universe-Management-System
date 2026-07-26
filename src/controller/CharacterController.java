@@ -20,17 +20,20 @@ public class CharacterController implements ActionListener
     CharacterViewController characterViewController;
     CharacterModifyController characterModifyController;
     CharacterDeleteController characterDeleteController;
+    CharacterDatabase charDatabase;
+    DevilFruitDatabase devilFruitDatabase;
     
-    public CharacterController(MainView mainView, CharacterView charView)
+    public CharacterController(MainView mainView, CharacterView charView, CharacterDatabase charDatabase, DevilFruitDatabase devilFruitDatabase)
     {
         this.mainview = mainView;
 
-        CharacterDatabase charDatabase = new CharacterDatabase();
-        characterCreateController = new CharacterCreateController(mainview, new CharacterCreateView(), charDatabase);
+        this.charDatabase = charDatabase;
+        this.devilFruitDatabase = devilFruitDatabase;
+        characterCreateController = new CharacterCreateController(mainview, new CharacterCreateView(), charDatabase, devilFruitDatabase);
         this.mainview.addPanel(characterCreateController.getFrame(), "CHARACTERCREATE");
-        characterViewController = new CharacterViewController(mainView, new CharacterViewView(), charDatabase);
+        characterViewController = new CharacterViewController(mainView, new CharacterViewView(), charDatabase, devilFruitDatabase);
         this.mainview.addPanel(characterViewController.getFrame(), "CHARACTERVIEW");
-        characterModifyController = new CharacterModifyController(mainView, new CharacterModifyView(), charDatabase);
+        characterModifyController = new CharacterModifyController(mainView, new CharacterModifyView(), charDatabase, devilFruitDatabase);
         this.mainview.addPanel(characterModifyController.getFrame(), "CHARACTERMODIFY");
         characterDeleteController = new CharacterDeleteController(mainView, new CharacterDeleteView(), charDatabase);
         this.mainview.addPanel(characterDeleteController.getFrame(), "CHARACTERDELETE");
@@ -60,6 +63,7 @@ public class CharacterController implements ActionListener
         if (e.getSource() == characterView.createButton)
         {
             this.mainview.setInfoText("Creating a Character");  // Set the text to show some info
+            characterCreateController.refreshDFComboBox();
             this.mainview.showPanel("CHARACTERCREATE"); // need a key to show it
         } else if (e.getSource() == characterView.viewButton)
         {
@@ -70,6 +74,7 @@ public class CharacterController implements ActionListener
         {
             this.mainview.setInfoText("Modifying a Character");
             characterModifyController.refreshComboBox();
+            characterModifyController.refreshDFComboBox();
             this.mainview.showPanel("CHARACTERMODIFY");
         } else if (e.getSource() == characterView.deleteButton)
         {

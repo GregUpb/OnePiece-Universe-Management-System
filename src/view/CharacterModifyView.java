@@ -131,7 +131,7 @@ public class CharacterModifyView
         dfLabel = new JLabel("Devil Fruit: ");
         dfLabel.setFont(textFont);
         dfLabel.setPreferredSize(new Dimension(150, 0));
-        devilfruitComboBox = new JComboBox<>(temp);
+        devilfruitComboBox = new JComboBox<>();
         dfCheckBox = new JCheckBox();
 
         dfPanel = new JPanel(new BorderLayout());

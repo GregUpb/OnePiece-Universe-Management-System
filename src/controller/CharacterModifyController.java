@@ -14,13 +14,15 @@ public class CharacterModifyController implements ActionListener
     MainView mainview;
     CharacterModifyView characterModifyView;
     CharacterDatabase charDatabase;
+    DevilFruitDatabase devilFruitDatabase;
     
-    public CharacterModifyController(MainView mainview, CharacterModifyView characterModifyView, CharacterDatabase charDatabase)
+    public CharacterModifyController(MainView mainview, CharacterModifyView characterModifyView, CharacterDatabase charDatabase, DevilFruitDatabase devilFruitDatabase)
     {
         this.mainview = mainview;
 
         this.characterModifyView = characterModifyView;
         this.charDatabase = charDatabase;
+        this.devilFruitDatabase = devilFruitDatabase;
         addActionListener();
 
         // set it so the first character is already set to modify
@@ -141,6 +143,17 @@ public class CharacterModifyController implements ActionListener
                         if (characterModifyView.captureRadioButton.isSelected()) selectedChar.SetStatus("Captured");
                         if (characterModifyView.deadRadioButton.isSelected()) selectedChar.SetStatus("Dead");
                     }
+                    if (characterModifyView.dfCheckBox.isSelected()) {
+                        int selectedDFIndex = characterModifyView.devilfruitComboBox.getSelectedIndex();
+
+                        if (selectedDFIndex == 0) {
+                            selectedChar.SetDFPower(null); // Set to None
+                        } else {
+                            DevilFruit newDF = devilFruitDatabase.getAllDF().get(selectedDFIndex - 1);
+                            selectedChar.SetDFPower(newDF);
+                            newDF.SetCurrentOwner(selectedChar); // Ensure bidirectional linking
+                        }
+                    }
 
                     // Does child class modifications
                     if (selectedChar instanceof Pirate p) {
@@ -198,6 +211,16 @@ public class CharacterModifyController implements ActionListener
         if (characterModifyView.charSelectComboBox.getItemCount() > 0) {
             ActionEvent refreshEvent = new ActionEvent(characterModifyView.charSelectComboBox, ActionEvent.ACTION_PERFORMED, "Refresh");
             this.actionPerformed(refreshEvent);
+        }
+    }
+
+    public void refreshDFComboBox()
+    {
+        characterModifyView.devilfruitComboBox.removeAllItems();
+        characterModifyView.devilfruitComboBox.addItem("None"); // Default option
+
+        for (DevilFruit df : devilFruitDatabase.getAllDF()) {
+            characterModifyView.devilfruitComboBox.addItem(df.GetFruitID() + " - " + df.GetFruitName());
         }
     }
 }

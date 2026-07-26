@@ -3,6 +3,9 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+
+import model.CharacterDatabase;
+import model.DevilFruitDatabase;
 import view.CharacterView;
 import view.DevilFruitView;
 import view.MainView;
@@ -30,10 +33,11 @@ public class MainController implements ActionListener
         this.mainView = mainView;
 
         addActionListener();
-
-        characterController = new CharacterController(mainView, new CharacterView());
+        DevilFruitDatabase devilFruitDatabase = new DevilFruitDatabase();
+        CharacterDatabase characterDatabase = new CharacterDatabase();
+        characterController = new CharacterController(mainView, new CharacterView(), characterDatabase, devilFruitDatabase);
         mainView.addPanel(characterController.getFrame(), "CHARACTER");
-        devilFruitController = new DevilFruitController(new DevilFruitView());
+        devilFruitController = new DevilFruitController(mainView, new DevilFruitView(), characterDatabase, devilFruitDatabase);
         mainView.addPanel(devilFruitController.getFrame(), "DEVILFRUIT");
         pirateCrewController = new PirateCrewController(new PirateCrewView());
         mainView.addPanel(pirateCrewController.getFrame(), "PIRATECREW");
