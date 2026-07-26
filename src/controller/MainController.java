@@ -11,10 +11,16 @@ import view.PirateCrewView;
 
 public class MainController implements ActionListener
 {
-    MainView mainView;
+
+    // /* Datas */
+    // public List<DevilFruit> devilfruitList = new ArrayList<>();
+
+
+    public MainView mainView;
 
     /* Controller */
     CharacterController characterController;
+    CharacterCreateController characterCreateController;
     DevilFruitController devilFruitController;
     PirateCrewController pirateCrewController;
     MarineCorpController marineCorpController;
@@ -25,7 +31,7 @@ public class MainController implements ActionListener
 
         addActionListener();
 
-        characterController = new CharacterController(new CharacterView());
+        characterController = new CharacterController(mainView, new CharacterView());
         mainView.addPanel(characterController.getFrame(), "CHARACTER");
         devilFruitController = new DevilFruitController(new DevilFruitView());
         mainView.addPanel(devilFruitController.getFrame(), "DEVILFRUIT");
@@ -64,7 +70,8 @@ public class MainController implements ActionListener
             mainView.showPanel("DEVILFRUIT");
         } else if (e.getSource() == mainView.crewButton)
         {
-
+            mainView.setInfoText("Pirate Crew");
+            mainView.showPanel("PIRATECREW");
         } else if (e.getSource() == mainView.corpButton)
         {
             mainView.setInfoText("Marine Corp");

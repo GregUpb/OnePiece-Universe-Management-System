@@ -19,7 +19,7 @@ public class MarineCorpController implements ActionListener
 
     public JPanel getFrame()
     {
-        return marineCorpView.panel;
+        return marineCorpView.setFrame();
     }
 
     public void addActionListener()

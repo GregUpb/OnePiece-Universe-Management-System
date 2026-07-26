@@ -6,7 +6,7 @@ import javax.swing.*;
 public class CharacterView
 {
     public JPanel panel;
-    public JButton pirateButton, marineButton, hunterButton, civButton, backButton;
+    public JButton createButton, viewButton, modifyButton, deleteButton, backButton;
 
     public Font buttonFont = new Font(Font.MONOSPACED, Font.BOLD, 20);
     
@@ -16,41 +16,41 @@ public class CharacterView
         panel = new JPanel(new GridLayout(5, 1));
 
         /* Create Pirate Button */
-        pirateButton = new JButton("Create Pirate");
-        pirateButton.setSize(400, 50);
-        pirateButton.setBackground(Color.RED);
-        pirateButton.setFont(buttonFont);
-        pirateButton.setFocusPainted(false);
-        panel.add(pirateButton);
+        createButton = new JButton("Create Character");
+        createButton.setSize(400, 50);
+        createButton.setBackground(Color.RED);
+        createButton.setFont(buttonFont);
+        createButton.setFocusPainted(false);
+        panel.add(createButton);
         
 
         /* Create Marine Button */
-        marineButton = new JButton("Create Marine");
-        marineButton.setSize(400, 50);
-        marineButton.setBackground(Color.RED);
-        marineButton.setFont(buttonFont);
-        marineButton.setFocusPainted(false);
-        panel.add(marineButton);
+        viewButton = new JButton("View Character");
+        viewButton.setSize(400, 50);
+        viewButton.setBackground(Color.RED);
+        viewButton.setFont(buttonFont);
+        viewButton.setFocusPainted(false);
+        panel.add(viewButton);
         
 
 
         /* Create Hunter Button */
-        hunterButton = new JButton("Create Pirate Hunter");
-        hunterButton.setSize(400, 50);
-        hunterButton.setBackground(Color.RED);
-        hunterButton.setFont(buttonFont);
-        hunterButton.setFocusPainted(false);
-        panel.add(hunterButton);
+        modifyButton = new JButton("Modify Character");
+        modifyButton.setSize(400, 50);
+        modifyButton.setBackground(Color.RED);
+        modifyButton.setFont(buttonFont);
+        modifyButton.setFocusPainted(false);
+        panel.add(modifyButton);
         
 
 
         /* Create Civilian Button */
-        civButton = new JButton("Create Civilian");
-        civButton.setSize(400, 50);
-        civButton.setBackground(Color.RED);
-        civButton.setFont(buttonFont);
-        civButton.setFocusPainted(false);
-        panel.add(civButton);
+        deleteButton = new JButton("Unalive Character");
+        deleteButton.setSize(400, 50);
+        deleteButton.setBackground(Color.RED);
+        deleteButton.setFont(buttonFont);
+        deleteButton.setFocusPainted(false);
+        panel.add(deleteButton);
         
 
 

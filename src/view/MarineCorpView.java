@@ -8,7 +8,7 @@ public class MarineCorpView
     public JPanel panel;
     public JButton createButton, viewButton, editButton, backButton;
 
-    public Font buttonFont = new Font(Font.MONOSPACED, Font.BOLD, 20);
+    private Font buttonFont = new Font(Font.MONOSPACED, Font.BOLD, 20);
     
     public MarineCorpView()
     {

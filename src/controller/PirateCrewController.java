@@ -13,13 +13,13 @@ public class PirateCrewController implements ActionListener
     
     public PirateCrewController(PirateCrewView pirateCrewView)
     {
-        this.PirateCrewView = pirateCrewView;
+        this.pirateCrewView = pirateCrewView;
         addActionListener();
     }
 
     public JPanel getFrame()
     {
-        return pirateCrewView.panel;
+        return pirateCrewView.setFrame();
     }
 
     public void addActionListener()

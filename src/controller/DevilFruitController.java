@@ -18,7 +18,7 @@ public class DevilFruitController implements ActionListener
 
     public JPanel getFrame()
     {
-        return devilFruitView.panel;
+        return devilFruitView.setFrame();
     }
 
     public void addActionListener()
