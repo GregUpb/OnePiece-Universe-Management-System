@@ -5,7 +5,7 @@ public class PirateHunter extends Character{
     private String CombatStyle = "None";
     private int Captures;
 
-    PirateHunter(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String CombatStyle, int Captures)
+    public PirateHunter(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String CombatStyle, int Captures)
     {
         super(Name, Alias, Origin, Status, DFPower, Wallet);
 

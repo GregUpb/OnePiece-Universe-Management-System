@@ -26,7 +26,7 @@ public abstract class Character{
         this.Wallet = Wallet;
     }
 
-    public Character(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet)
+     public Character(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet)
     {
         this.GenerateID();
 

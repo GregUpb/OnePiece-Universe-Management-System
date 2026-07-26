@@ -48,7 +48,7 @@ public class Pirate extends Character{
             new String[] {"Tailor", "Sewing clothes..."}
     ));
 
-    Pirate(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, int Bounty, String PirateRole, Boolean IsCaptain, PirateCrew Crew)
+    public Pirate(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, int Bounty, String PirateRole, Boolean IsCaptain, PirateCrew Crew)
     {
         super(Name, Alias, Origin, Status, DFPower, Wallet);
 
@@ -62,6 +62,8 @@ public class Pirate extends Character{
     {
         return this.Bounty;
     }
+
+    public String GetPirateRole(){return this.PirateRole;}
 
     public Boolean IsCaptain()
     {

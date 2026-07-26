@@ -32,7 +32,7 @@ public class Civilian extends Character{
             new String[] {"Tailor", "Sewing clothes..."}
     ));
 
-    Civilian(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Profession, String Residence)
+    public Civilian(String Name, String Alias, String Origin, String Status, DevilFruit DFPower, int Wallet, String Profession, String Residence)
     {
         super(Name, Alias, Origin, Status, DFPower, Wallet);
 
