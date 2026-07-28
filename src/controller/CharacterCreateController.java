@@ -1,11 +1,10 @@
 package controller;
 
+import exceptions.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
 import model.*;
-import model.Character;
 import view.CharacterCreateView;
 import view.MainView;
 
@@ -84,6 +83,14 @@ public class CharacterCreateController implements ActionListener
                 String alias = characterCreateView.aliasTextField.getText();
                 String origin = characterCreateView.originTextField.getText();
 
+                if (name.isBlank())
+                {
+                    throw new EmptyInputException("Name cannot be empty");
+                } else if (origin.isBlank())
+                {
+                    throw new EmptyInputException("Origin cannot be empty");
+                }
+
                 // Determine Status
                 String status = "";
                 if (characterCreateView.aliveRadioButton.isSelected()) {
@@ -106,7 +113,7 @@ public class CharacterCreateController implements ActionListener
                     dfPower = devilFruitDatabase.getAllDF().get(selectedDFIndex - 1);
                 }
 
-                Character newCharacter = null;
+                model.Character newCharacter = null;
 
                 if (characterCreateView.pirateRadioButton.isSelected()) {
                     int bounty = Integer.parseInt(characterCreateView.bountyTextField.getText());

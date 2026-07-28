@@ -1,8 +1,8 @@
 package view;
 
-import model.*;
 import java.awt.*;
 import javax.swing.*;
+import model.*;
 
 public class CharacterCreateView
 {
@@ -114,7 +114,7 @@ public class CharacterCreateView
         generalPanel.add(namePanel);
 
         // Alias
-        aliasLabel = new JLabel("Alias: ");
+        aliasLabel = new JLabel("Alias (Optional): ");
         aliasLabel.setFont(textFont);
         aliasLabel.setPreferredSize(new Dimension(150, 0));
         aliasTextField = new JTextField();

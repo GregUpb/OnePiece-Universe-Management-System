@@ -1,12 +1,10 @@
 package controller;
 
+import exceptions.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
 import model.*;
-import model.DevilFruit;
-
 import view.DevilFruitCreateView;
 import view.MainView;
 
@@ -52,6 +50,14 @@ public class DevilFruitCreateController implements ActionListener {
                 // Get Name and Ability
                 String name = devilFruitCreateView.nameTextField.getText();
                 String ability = devilFruitCreateView.abilityTextField.getText();
+
+                if (name.isBlank())
+                {
+                    throw new EmptyInputException("Name cannot be empty");
+                } else if (ability.isBlank())
+                {
+                    throw new EmptyInputException("Ability cannot be empty");
+                }
 
                 // Determine Category
                 String category = "";
