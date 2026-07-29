@@ -3,13 +3,13 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import model.*;
 import view.CharacterCreateView;
 import view.CharacterDeleteView;
 import view.CharacterModifyView;
 import view.CharacterView;
 import view.CharacterViewView;
 import view.MainView;
-import model.*;
 
 public class CharacterController implements ActionListener
 {
@@ -84,6 +84,7 @@ public class CharacterController implements ActionListener
         }
         if (e.getSource() == characterView.backButton)
         {
+            this.mainview.setInfoText("Main Menu");
             characterView.panel.setVisible(false);
         }
 

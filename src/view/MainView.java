@@ -13,7 +13,7 @@ public class MainView
 
     JPanel mainPanel;
 
-    public JButton characterButton, devilfruitButton, crewButton, corpButton, backButton;
+    public JButton characterButton, devilfruitButton, crewButton, corpButton, bountyButton, backButton;
 
     CardLayout cardLayout;
 
@@ -47,7 +47,7 @@ public class MainView
 
         mainPanel = new JPanel(new CardLayout());
 
-        menuPanel = new JPanel(new GridLayout(4, 1));
+        menuPanel = new JPanel(new GridLayout(5, 1));
 
         characterButton = new JButton("Character");
         characterButton.setSize(400, 50);
@@ -76,6 +76,13 @@ public class MainView
         corpButton.setFont(buttonFont);
         corpButton.setFocusPainted(false);
         menuPanel.add(corpButton);
+
+        bountyButton = new JButton("Bounty");
+        bountyButton.setSize(400, 50);
+        bountyButton.setBackground(Color.RED);
+        bountyButton.setFont(buttonFont);
+        bountyButton.setFocusPainted(false);
+        menuPanel.add(bountyButton);
         
         mainPanel.add(menuPanel, "MENU");
 

@@ -3,9 +3,9 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
-
 import model.CharacterDatabase;
 import model.DevilFruitDatabase;
+import view.BountyView;
 import view.CharacterView;
 import view.DevilFruitView;
 import view.MainView;
@@ -27,6 +27,7 @@ public class MainController implements ActionListener
     DevilFruitController devilFruitController;
     PirateCrewController pirateCrewController;
     MarineCorpController marineCorpController;
+    BountyController bountyController;
     
     public MainController(MainView mainView)
     {
@@ -39,10 +40,12 @@ public class MainController implements ActionListener
         mainView.addPanel(characterController.getFrame(), "CHARACTER");
         devilFruitController = new DevilFruitController(mainView, new DevilFruitView(), characterDatabase, devilFruitDatabase);
         mainView.addPanel(devilFruitController.getFrame(), "DEVILFRUIT");
-        pirateCrewController = new PirateCrewController(new PirateCrewView());
+        pirateCrewController = new PirateCrewController(mainView, new PirateCrewView());
         mainView.addPanel(pirateCrewController.getFrame(), "PIRATECREW");
-        marineCorpController = new MarineCorpController(new MarineCorpView());
+        marineCorpController = new MarineCorpController(mainView, new MarineCorpView());
         mainView.addPanel(marineCorpController.getFrame(), "MARINECORP");
+        bountyController = new BountyController(mainView, new BountyView());
+        mainView.addPanel(bountyController.getFrame(), "BOUNTY");
 
     }
 
@@ -57,6 +60,7 @@ public class MainController implements ActionListener
         mainView.devilfruitButton.addActionListener(this);
         mainView.crewButton.addActionListener(this);
         mainView.corpButton.addActionListener(this);
+        mainView.bountyButton.addActionListener(this);
     }
 
 
@@ -80,6 +84,10 @@ public class MainController implements ActionListener
         {
             mainView.setInfoText("Marine Corp");
             mainView.showPanel("MARINECORP");
+        } else if (e.getSource() == mainView.bountyButton)
+        {
+            mainView.setInfoText("Bounty");
+            mainView.showPanel("BOUNTY");
         }
 
     }

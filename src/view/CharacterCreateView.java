@@ -58,13 +58,18 @@ public class CharacterCreateView
     {
         panel = new JPanel(new BorderLayout());
 
-        generalPanel = new JPanel(new GridLayout(0, 1));
+        generalPanel = new JPanel();
+        generalPanel.setLayout(new BoxLayout(generalPanel, BoxLayout.Y_AXIS));
         specifiedPanel = new JPanel(new CardLayout());
 
-        piratePanel = new JPanel(new GridLayout(0, 2));
-        marinePanel = new JPanel(new GridLayout(0, 2));
-        hunterPanel = new JPanel(new GridLayout(0, 2));
-        civPanel = new JPanel(new GridLayout(0, 2));
+        piratePanel = new JPanel();
+        piratePanel.setLayout(new BoxLayout(piratePanel, BoxLayout.Y_AXIS));
+        marinePanel = new JPanel();
+        marinePanel.setLayout(new BoxLayout(marinePanel, BoxLayout.Y_AXIS));
+        hunterPanel = new JPanel();
+        hunterPanel.setLayout(new BoxLayout(hunterPanel, BoxLayout.Y_AXIS));
+        civPanel = new JPanel();
+        civPanel.setLayout(new BoxLayout(civPanel, BoxLayout.Y_AXIS));
 
         exitButton = new JButton("CANCEL");
         exitButton.setFont(buttonFont);
@@ -96,6 +101,7 @@ public class CharacterCreateView
         typeButtonPanel.add(civRadioButton);
 
         typePanel = new JPanel(new BorderLayout());
+        typePanel.setPreferredSize(new Dimension(0, 50));
         typePanel.add(typeLabel, BorderLayout.LINE_START);
         typePanel.add(typeButtonPanel, BorderLayout.CENTER);
 
@@ -109,6 +115,7 @@ public class CharacterCreateView
         nameTextField.setFont(textFont);
         
         namePanel = new JPanel(new BorderLayout());
+        namePanel.setPreferredSize(new Dimension(0, 50));
         namePanel.add(nameLabel, BorderLayout.LINE_START);
         namePanel.add(nameTextField, BorderLayout.CENTER);
         generalPanel.add(namePanel);
@@ -121,6 +128,7 @@ public class CharacterCreateView
         aliasTextField.setFont(textFont);
         
         aliasPanel = new JPanel(new BorderLayout());
+        aliasPanel.setPreferredSize(new Dimension(0, 50));
         aliasPanel.add(aliasLabel, BorderLayout.LINE_START);
         aliasPanel.add(aliasTextField, BorderLayout.CENTER);
         generalPanel.add(aliasPanel);
@@ -133,6 +141,7 @@ public class CharacterCreateView
         originTextField.setFont(textFont);
 
         originPanel = new JPanel(new BorderLayout());
+        originPanel.setPreferredSize(new Dimension(0, 50));
         originPanel.add(originLabel, BorderLayout.LINE_START);
         originPanel.add(originTextField, BorderLayout.CENTER);
         generalPanel.add(originPanel);
@@ -160,6 +169,7 @@ public class CharacterCreateView
         statusButtonPanel.add(deadRadioButton);
 
         statusPanel = new JPanel(new BorderLayout());
+        statusPanel.setPreferredSize(new Dimension(0, 50));
         statusPanel.add(statusLabel, BorderLayout.LINE_START);
         statusPanel.add(statusButtonPanel, BorderLayout.CENTER);
 
@@ -172,6 +182,7 @@ public class CharacterCreateView
         devilfruitComboBox = new JComboBox<>();
 
         dfPanel = new JPanel(new BorderLayout());
+        dfPanel.setPreferredSize(new Dimension(0, 50));
         dfPanel.add(dfLabel, BorderLayout.LINE_START);
         dfPanel.add(devilfruitComboBox, BorderLayout.CENTER);
         generalPanel.add(dfPanel);
@@ -184,6 +195,7 @@ public class CharacterCreateView
         walletTextField.setFont(textFont);
 
         walletPanel = new JPanel(new BorderLayout());
+        walletPanel.setPreferredSize(new Dimension(0, 50));
         walletPanel.add(walletLabel, BorderLayout.LINE_START);
         walletPanel.add(walletTextField, BorderLayout.CENTER);
         generalPanel.add(walletPanel);
@@ -202,6 +214,7 @@ public class CharacterCreateView
         bountyTextField.setFont(textFont);
 
         bountyPanel = new JPanel(new BorderLayout());
+        bountyPanel.setPreferredSize(new Dimension(0, 50));
         bountyPanel.add(bountyLabel, BorderLayout.LINE_START);
         bountyPanel.add(bountyTextField, BorderLayout.CENTER);
         piratePanel.add(bountyPanel);
@@ -216,6 +229,7 @@ public class CharacterCreateView
         }
 
         rolePanel = new JPanel(new BorderLayout());
+        rolePanel.setPreferredSize(new Dimension(0, 50));
         rolePanel.add(roleLabel, BorderLayout.LINE_START);
         rolePanel.add(rolesComboBox, BorderLayout.CENTER);
         piratePanel.add(rolePanel);
@@ -227,6 +241,7 @@ public class CharacterCreateView
         crewComboBox = new JComboBox<>(temp);
 
         crewPanel = new JPanel(new BorderLayout());
+        crewPanel.setPreferredSize(new Dimension(0, 50));
         crewPanel.add(crewLabel, BorderLayout.LINE_START);
         crewPanel.add(crewComboBox, BorderLayout.CENTER);
         piratePanel.add(crewPanel);
@@ -241,6 +256,7 @@ public class CharacterCreateView
         }
 
         ranksPanel = new JPanel(new BorderLayout());
+        ranksPanel.setPreferredSize(new Dimension(0, 50));
         ranksPanel.add(ranksLabel, BorderLayout.LINE_START);
         ranksPanel.add(ranksComboBox, BorderLayout.CENTER);
         marinePanel.add(ranksPanel);
@@ -252,6 +268,7 @@ public class CharacterCreateView
         corpComboBox = new JComboBox<>(temp);
 
         corpPanel = new JPanel(new BorderLayout());
+        corpPanel.setPreferredSize(new Dimension(0, 50));
         corpPanel.add(corpLabel, BorderLayout.LINE_START);
         corpPanel.add(corpComboBox, BorderLayout.CENTER);
         marinePanel.add(corpPanel);
@@ -264,6 +281,7 @@ public class CharacterCreateView
         combatTextField.setFont(textFont);
 
         combatPanel = new JPanel(new BorderLayout());
+        combatPanel.setPreferredSize(new Dimension(0, 50));
         combatPanel.add(combatLabel, BorderLayout.LINE_START);
         combatPanel.add(combatTextField, BorderLayout.CENTER);
         hunterPanel.add(combatPanel);
@@ -276,6 +294,7 @@ public class CharacterCreateView
         captureTextField.setFont(textFont);
 
         capturePanel = new JPanel(new BorderLayout());
+        capturePanel.setPreferredSize(new Dimension(0, 50));
         capturePanel.add(captureLabel, BorderLayout.LINE_START);
         capturePanel.add(captureTextField, BorderLayout.CENTER);
         hunterPanel.add(capturePanel);
@@ -290,6 +309,7 @@ public class CharacterCreateView
         }
 
         civrolePanel = new JPanel(new BorderLayout());
+        civrolePanel.setPreferredSize(new Dimension(0, 50));
         civrolePanel.add(civroleLabel, BorderLayout.LINE_START);
         civrolePanel.add(civrolesComboBox, BorderLayout.CENTER);
         civPanel.add(civrolePanel);
@@ -302,6 +322,7 @@ public class CharacterCreateView
         residenceTextField.setFont(textFont);
 
         residencePanel = new JPanel(new BorderLayout());
+        residencePanel.setPreferredSize(new Dimension(0, 50));
         residencePanel.add(residenceLabel, BorderLayout.LINE_START);
         residencePanel.add(residenceTextField, BorderLayout.CENTER);
         civPanel.add(residencePanel);
@@ -315,7 +336,8 @@ public class CharacterCreateView
         specifiedPanel.add(hunterPanel, "HUNTER");
         specifiedPanel.add(civPanel, "CIVILIAN");
 
-        centerPanel = new JPanel(new GridLayout(2, 1));
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
         centerPanel.add(generalPanel);
         centerPanel.add(specifiedPanel);
 

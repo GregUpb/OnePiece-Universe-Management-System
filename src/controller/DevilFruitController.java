@@ -3,10 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
-
 import model.CharacterDatabase;
 import model.DevilFruitDatabase;
-import view.DevilFruitView;
 import view.*;
 
 public class DevilFruitController implements ActionListener
@@ -55,6 +53,7 @@ public class DevilFruitController implements ActionListener
         /* Start Creation Buttons */
         if (e.getSource() == devilFruitView.backButton)
         {
+            this.mainview.setInfoText("Main Menu");
             devilFruitView.panel.setVisible(false);
         }
         else if (e.getSource() == devilFruitView.createButton)

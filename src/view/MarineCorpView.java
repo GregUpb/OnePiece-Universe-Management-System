@@ -16,7 +16,7 @@ public class MarineCorpView
         panel = new JPanel(new GridLayout(4, 1));
 
         /* Create Button */
-        createButton = new JButton("Create Pirate");
+        createButton = new JButton("Create Marine Corp");
         createButton.setSize(400, 50);
         createButton.setBackground(Color.RED);
         createButton.setFont(buttonFont);
@@ -25,7 +25,7 @@ public class MarineCorpView
         
 
         /* View Button */
-        viewButton = new JButton("Create Marine");
+        viewButton = new JButton("View Marine Corp");
         viewButton.setSize(400, 50);
         viewButton.setBackground(Color.RED);
         viewButton.setFont(buttonFont);
@@ -35,7 +35,7 @@ public class MarineCorpView
 
 
         /* Modify Button */
-        editButton = new JButton("Create Pirate Hunter");
+        editButton = new JButton("Modify Marine Corp");
         editButton.setSize(400, 50);
         editButton.setBackground(Color.RED);
         editButton.setFont(buttonFont);
