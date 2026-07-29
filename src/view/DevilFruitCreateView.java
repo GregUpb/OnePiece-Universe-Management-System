@@ -21,7 +21,8 @@ public class DevilFruitCreateView
     public DevilFruitCreateView()
     {
         panel = new JPanel(new BorderLayout());
-        centerPanel = new JPanel(new GridLayout(0, 1)); // Single column layout
+        centerPanel = new JPanel(); // Single column layout
+        centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 
         exitButton = new JButton("CANCEL");
         exitButton.setFont(buttonFont);
@@ -51,6 +52,7 @@ public class DevilFruitCreateView
         typeButtonPanel.add(logiaRadioButton);
 
         typePanel = new JPanel(new BorderLayout());
+        typePanel.setPreferredSize(new Dimension(0, 50));
         typePanel.add(typeLabel, BorderLayout.LINE_START);
         typePanel.add(typeButtonPanel, BorderLayout.CENTER);
         centerPanel.add(typePanel);
@@ -63,6 +65,7 @@ public class DevilFruitCreateView
         nameTextField.setFont(textFont);
 
         namePanel = new JPanel(new BorderLayout());
+        namePanel.setPreferredSize(new Dimension(0, 50));
         namePanel.add(nameLabel, BorderLayout.LINE_START);
         namePanel.add(nameTextField, BorderLayout.CENTER);
         centerPanel.add(namePanel);
@@ -75,6 +78,7 @@ public class DevilFruitCreateView
         abilityTextField.setFont(textFont);
 
         abilityPanel = new JPanel(new BorderLayout());
+        abilityPanel.setPreferredSize(new Dimension(0, 50));
         abilityPanel.add(abilityLabel, BorderLayout.LINE_START);
         abilityPanel.add(abilityTextField, BorderLayout.CENTER);
         centerPanel.add(abilityPanel);

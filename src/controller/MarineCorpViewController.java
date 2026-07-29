@@ -33,6 +33,8 @@ public class MarineCorpViewController implements ActionListener
             this.mainView.showPanel("MARINECORP");
         }
         
+
+        // When a corp is selected call setMembers(corp.GetCorpMembers)
     }
 
     public JPanel getFrame()

@@ -42,8 +42,9 @@ public class CharacterModifyView
     {
         panel = new JPanel(new BorderLayout());
 
-        generalPanel = new JPanel(new GridLayout(0, 1));
         topPanel = new JPanel(new GridLayout(0, 1));
+        generalPanel = new JPanel();
+        generalPanel.setLayout(new BoxLayout(generalPanel, BoxLayout.Y_AXIS));
 
         exitButton = new JButton("CANCEL");
         exitButton.setFont(buttonFont);
@@ -64,6 +65,7 @@ public class CharacterModifyView
         nameCheckBox = new JCheckBox();
         
         namePanel = new JPanel(new BorderLayout());
+        namePanel.setPreferredSize(new Dimension(0, 50));
         namePanel.add(nameLabel, BorderLayout.LINE_START);
         namePanel.add(nameTextField, BorderLayout.CENTER);
         namePanel.add(nameCheckBox, BorderLayout.LINE_END);
@@ -78,6 +80,7 @@ public class CharacterModifyView
         aliasCheckBox = new JCheckBox();
         
         aliasPanel = new JPanel(new BorderLayout());
+        aliasPanel.setPreferredSize(new Dimension(0, 50));
         aliasPanel.add(aliasLabel, BorderLayout.LINE_START);
         aliasPanel.add(aliasTextField, BorderLayout.CENTER);
         aliasPanel.add(aliasCheckBox, BorderLayout.LINE_END);
@@ -92,6 +95,7 @@ public class CharacterModifyView
         originCheckBox = new JCheckBox();
 
         originPanel = new JPanel(new BorderLayout());
+        originPanel.setPreferredSize(new Dimension(0, 50));
         originPanel.add(originLabel, BorderLayout.LINE_START);
         originPanel.add(originTextField, BorderLayout.CENTER);
         originPanel.add(originCheckBox, BorderLayout.LINE_END);
@@ -121,6 +125,7 @@ public class CharacterModifyView
         statusCheckBox = new JCheckBox();
 
         statusPanel = new JPanel(new BorderLayout());
+        statusPanel.setPreferredSize(new Dimension(0, 50));
         statusPanel.add(statusLabel, BorderLayout.LINE_START);
         statusPanel.add(statusButtonPanel, BorderLayout.CENTER);
         statusPanel.add(statusCheckBox, BorderLayout.LINE_END);
@@ -135,6 +140,7 @@ public class CharacterModifyView
         dfCheckBox = new JCheckBox();
 
         dfPanel = new JPanel(new BorderLayout());
+        dfPanel.setPreferredSize(new Dimension(0, 50));
         dfPanel.add(dfLabel, BorderLayout.LINE_START);
         dfPanel.add(devilfruitComboBox, BorderLayout.CENTER);
         dfPanel.add(dfCheckBox, BorderLayout.LINE_END);
@@ -149,6 +155,7 @@ public class CharacterModifyView
         walletCheckBox = new JCheckBox();
 
         walletPanel = new JPanel(new BorderLayout());
+        walletPanel.setPreferredSize(new Dimension(0, 50));
         walletPanel.add(walletLabel, BorderLayout.LINE_START);
         walletPanel.add(walletTextField, BorderLayout.CENTER);
         walletPanel.add(walletCheckBox, BorderLayout.LINE_END);
@@ -163,6 +170,7 @@ public class CharacterModifyView
         specified1CheckBox = new JCheckBox();
         
         specified1Panel = new JPanel(new BorderLayout());
+        specified1Panel.setPreferredSize(new Dimension(0, 50));
         specified1Panel.add(specified1Label, BorderLayout.LINE_START);
         specified1Panel.add(specified1TextField, BorderLayout.CENTER);
         specified1Panel.add(specified1CheckBox, BorderLayout.LINE_END);
@@ -177,6 +185,7 @@ public class CharacterModifyView
         specified2CheckBox = new JCheckBox();
         
         specified2Panel = new JPanel(new BorderLayout());
+        specified2Panel.setPreferredSize(new Dimension(0, 50));
         specified2Panel.add(specified2Label, BorderLayout.LINE_START);
         specified2Panel.add(specified2TextField, BorderLayout.CENTER);
         specified2Panel.add(specified2CheckBox, BorderLayout.LINE_END);
@@ -190,6 +199,7 @@ public class CharacterModifyView
         specified3CheckBox = new JCheckBox();
         
         specified3Panel = new JPanel(new BorderLayout());
+        specified3Panel.setPreferredSize(new Dimension(0, 50));
         specified3Panel.add(specified3Label, BorderLayout.LINE_START);
         specified3Panel.add(specified3ComboBox, BorderLayout.CENTER);
         specified3Panel.add(specified3CheckBox, BorderLayout.LINE_END);
@@ -203,6 +213,7 @@ public class CharacterModifyView
         specified4CheckBox = new JCheckBox();
         
         specified4Panel = new JPanel(new BorderLayout());
+        specified4Panel.setPreferredSize(new Dimension(0, 50));
         specified4Panel.add(specified4Label, BorderLayout.LINE_START);
         specified4Panel.add(specified4ComboBox, BorderLayout.CENTER);
         specified4Panel.add(specified4CheckBox, BorderLayout.LINE_END);

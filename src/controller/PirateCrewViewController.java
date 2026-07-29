@@ -33,6 +33,8 @@ public class PirateCrewViewController implements ActionListener
             this.mainView.showPanel("PIRATECREW");
         }
         
+
+        // When a crew is selected call setMembers(crew.GetCrewMembers)
     }
 
     public JPanel getFrame()

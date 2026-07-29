@@ -19,7 +19,8 @@ public class CharacterViewView
     {
         mainPanel = new JPanel(new BorderLayout());
         topPanel = new JPanel(new BorderLayout());
-        infoPanel = new JPanel(new GridLayout(0, 1));
+        infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 
         backButton = new JButton("Back");
         backButton.setFont(buttonFont);
@@ -31,42 +32,52 @@ public class CharacterViewView
         // Character Information
         nameLabel = new JLabel("Name: ");
         nameLabel.setFont(textFont);
+        nameLabel.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(nameLabel);
 
         aliasLabel = new JLabel("Alias: ");
         aliasLabel.setFont(textFont);
+        aliasLabel.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(aliasLabel);
         
         originLabel = new JLabel("Origin: ");
         originLabel.setFont(textFont);
+        originLabel.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(originLabel);
         
         statusLabel = new JLabel("Status: ");
         statusLabel.setFont(textFont);
+        statusLabel.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(statusLabel);
         
         dfLabel = new JLabel("Devil Fruit: ");
         dfLabel.setFont(textFont);
+        dfLabel.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(dfLabel);
         
         walletLabel = new JLabel("Wallet: ");
         walletLabel.setFont(textFont);
+        walletLabel.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(walletLabel);
         
         specifiedLabel1 = new JLabel("Name: ");
         specifiedLabel1.setFont(textFont);
+        specifiedLabel1.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(specifiedLabel1);
         
         specifiedLabel2 = new JLabel("Name: ");
         specifiedLabel2.setFont(textFont);
+        specifiedLabel2.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(specifiedLabel2);
         
         specifiedLabel3 = new JLabel("Name: ");
         specifiedLabel3.setFont(textFont);
+        specifiedLabel3.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(specifiedLabel3);
         
         specifiedLabel4 = new JLabel("Name: ");
         specifiedLabel4.setFont(textFont);
+        specifiedLabel4.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(specifiedLabel4);
 
         mainPanel.add(topPanel, BorderLayout.PAGE_START);

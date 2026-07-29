@@ -60,23 +60,8 @@ public class DevilFruitViewController implements ActionListener
                     devilFruitViewView.currentOwnerLabel.setText("Current Owner: None");
                 }
 
-                // Build a list of Historical Owners' names
-                java.util.List<model.Character> pastOwnersList = selectedFruit.GetHistoricalOwners();
-
-                if (pastOwnersList.isEmpty()) {
-                    devilFruitViewView.historicalOwnersLabel.setText("Historical Owners: None");
-                } else {
-                    StringBuilder ownersString = new StringBuilder("Historical Owners: ");
-                    for (int i = 0; i < pastOwnersList.size(); i++) {
-                        ownersString.append(pastOwnersList.get(i).GetName());
-
-                        // Add a comma if it's not the last owner in the list
-                        if (i < pastOwnersList.size() - 1) {
-                            ownersString.append(", ");
-                        }
-                    }
-                    devilFruitViewView.historicalOwnersLabel.setText(ownersString.toString());
-                }
+                // Set Historical Owners
+                devilFruitViewView.setHistoricalOwners(selectedFruit.GetHistoricalOwners());
             }
         }
     }
