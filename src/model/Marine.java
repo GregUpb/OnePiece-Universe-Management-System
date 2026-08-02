@@ -1,10 +1,11 @@
 package model;
 
 //Module 1: Characters
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Marine extends Character{
+public class Marine extends Character implements Serializable{
 
     private String Rank;
     private MarineCorp MCorps = null;

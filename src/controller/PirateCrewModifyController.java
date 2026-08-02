@@ -147,6 +147,10 @@ public class PirateCrewModifyController implements ActionListener
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(pirateCrewModifyView.panel, "Error: " + ex.getMessage(), "Modification Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    // Save
+                    charDatabase.writeDatabase();
+                    pirateCrewDatabase.writeDatabase();
                 }
             }
         }

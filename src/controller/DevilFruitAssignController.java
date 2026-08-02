@@ -74,6 +74,10 @@ public class DevilFruitAssignController implements ActionListener
                 JOptionPane.showMessageDialog(devilFruitAssignView.mainPanel,
                         "Please ensure both a Devil Fruit and a Character are selected.", "Selection Error", JOptionPane.WARNING_MESSAGE);
             }
+
+            // Save
+            charDatabase.writeDatabase();
+            devilFruitDatabase.writeDatabase();
         }
     }
 

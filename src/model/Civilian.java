@@ -1,9 +1,10 @@
 package model;
 
 //Module 1: Characters
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class Civilian extends Character{
+public class Civilian extends Character implements Serializable{
 
     private String Profession;
     private String Residence;

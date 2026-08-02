@@ -1,10 +1,11 @@
 package model;
 
 //Module 1: Characters
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Character{
+public abstract class Character implements Serializable{
     private long ID;
     private String Name;
     private String Alias;

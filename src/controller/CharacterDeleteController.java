@@ -81,6 +81,9 @@ public class CharacterDeleteController implements ActionListener
             } else {
                 JOptionPane.showMessageDialog(characterDeleteView.mainPanel, "No character selected!", "Error", JOptionPane.ERROR_MESSAGE);
             }
+
+            // Save
+            charDatabase.writeDatabase();
         }
 
     }

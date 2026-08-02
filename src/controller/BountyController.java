@@ -3,19 +3,27 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
-
-import view.*;
 import model.*;
+import view.*;
 
 public class BountyController implements ActionListener
 {
     MainView mainview;
     BountyView bountyView;
+    BountyManager bountyDatabase;
+    BountyRegisterController bountyRegisterController;
+    BountyViewController bountyViewController;
     
-    public BountyController(MainView mainView, BountyView bountyView)
+    public BountyController(MainView mainView, BountyView bountyView, BountyManager bountyDatabase)
     {
         this.mainview = mainView;
         this.bountyView = bountyView;
+        this.bountyDatabase = bountyDatabase;
+
+        this.bountyRegisterController = new BountyRegisterController(mainView, new BountyRegisterView(), bountyDatabase);
+        mainview.addPanel(bountyRegisterController.getFrame(), "BOUNTYREGISTER");
+        this.bountyViewController = new BountyViewController(mainView, new BountyViewView());
+        mainview.addPanel(bountyViewController.getFrame(), "BOUNTYVIEW");
         
         addActionListener();
     }

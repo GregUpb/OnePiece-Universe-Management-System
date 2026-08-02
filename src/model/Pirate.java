@@ -1,9 +1,11 @@
 package model;
 
 //Module 1: Characters
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-public class Pirate extends Character{
+
+public class Pirate extends Character implements Serializable{
 
     private int Bounty;
     private String PirateRole;

@@ -1,12 +1,13 @@
 package model;
 
 //Module 2: Affiliation
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MarineCorp{
+public class MarineCorp implements Serializable{
 
     private Long ID;
     private String BaseLocation;

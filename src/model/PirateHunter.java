@@ -1,7 +1,9 @@
 package model;
 
+import java.io.Serializable;
+
 //Module 1: Characters
-public class PirateHunter extends Character{
+public class PirateHunter extends Character implements Serializable{
     private String CombatStyle = "None";
     private int Captures;
 

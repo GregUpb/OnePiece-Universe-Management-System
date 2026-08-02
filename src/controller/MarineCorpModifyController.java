@@ -148,7 +148,11 @@ public class MarineCorpModifyController implements ActionListener
 
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(marineCorpModifyView.panel, "Funds must be a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-                }
+                } finally {
+                // Save
+                charDatabase.writeDatabase();
+                marineCorpDatabase.writeDatabase();
+            }
             }
         }
     }

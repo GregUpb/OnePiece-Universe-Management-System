@@ -1,12 +1,13 @@
 package model;
 
 //Module 2: Affiliation
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PirateCrew {
+public class PirateCrew implements Serializable {
 
     private Long ID;
     private String CrewName;

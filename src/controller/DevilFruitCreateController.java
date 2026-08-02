@@ -77,6 +77,9 @@ public class DevilFruitCreateController implements ActionListener {
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(devilFruitCreateView.panel, "Error: " + ex.getMessage(), "Creation Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                // Save
+                devilFruitDatabase.writeDatabase();
             }
         }
     }

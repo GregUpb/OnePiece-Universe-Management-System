@@ -1,12 +1,13 @@
 package model;
 
 //Module 3: Devil Fruit
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DevilFruit{
+public class DevilFruit implements Serializable{
 
     private Long ID;
     private String FruitName;

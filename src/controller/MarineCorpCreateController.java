@@ -118,6 +118,10 @@ public class MarineCorpCreateController implements ActionListener
                 JOptionPane.showMessageDialog(marineCorpCreateView.panel, "Operational Funds must be a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(marineCorpCreateView.panel, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                // Save
+                charDatabase.writeDatabase();
+                marineCorpDatabase.writeDatabase();
             }
         }
     }

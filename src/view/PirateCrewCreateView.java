@@ -103,6 +103,6 @@ public class PirateCrewCreateView
     {
         this.innerPanel.add(new CharacterSelectionPanel(name));
     }
-
+    
 
 }

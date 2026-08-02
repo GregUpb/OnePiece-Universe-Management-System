@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class CaptureRecord {
+public class CaptureRecord implements Serializable{
     private long ID;
     private Pirate nahuli;
     private Character nanghuli;

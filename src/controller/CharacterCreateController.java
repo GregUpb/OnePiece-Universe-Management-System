@@ -174,6 +174,12 @@ public class CharacterCreateController implements ActionListener
                 JOptionPane.showMessageDialog(characterCreateView.panel, "Please ensure Wallet, Bounty, and Captures contain only numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(characterCreateView.panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                // Save
+                charDatabase.writeDatabase();
+                devilFruitDatabase.writeDatabase();
+                pirateCrewDatabase.writeDatabase();
+                marineCorpDatabase.writeDatabase();
             }
         }
     }

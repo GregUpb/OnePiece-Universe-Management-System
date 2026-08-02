@@ -1,7 +1,6 @@
 package controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.JPanel;
 
 import model.*;
@@ -34,10 +33,17 @@ public class MainController implements ActionListener
         this.mainView = mainView;
 
         addActionListener();
-        DevilFruitDatabase devilFruitDatabase = new DevilFruitDatabase();
         CharacterDatabase characterDatabase = new CharacterDatabase();
+        characterDatabase.readDatabase();
+        DevilFruitDatabase devilFruitDatabase = new DevilFruitDatabase();
+        devilFruitDatabase.readDatabase();
         MarineCorpDatabase marineCorpDatabase = new MarineCorpDatabase();
+        marineCorpDatabase.readDatabase();
         PirateCrewDatabase pirateCrewDatabase = new PirateCrewDatabase();
+        pirateCrewDatabase.readDatabase();
+        BountyManager bountyDatabase = new BountyManager();
+        bountyDatabase.readDatabase();
+
         characterController = new CharacterController(mainView, new CharacterView(), characterDatabase, devilFruitDatabase, marineCorpDatabase, pirateCrewDatabase);
         mainView.addPanel(characterController.getFrame(), "CHARACTER");
         devilFruitController = new DevilFruitController(mainView, new DevilFruitView(), characterDatabase, devilFruitDatabase);
@@ -46,7 +52,7 @@ public class MainController implements ActionListener
         mainView.addPanel(pirateCrewController.getFrame(), "PIRATECREW");
         marineCorpController = new MarineCorpController(mainView, new MarineCorpView(), marineCorpDatabase, characterDatabase);
         mainView.addPanel(marineCorpController.getFrame(), "MARINECORP");
-        bountyController = new BountyController(mainView, new BountyView());
+        bountyController = new BountyController(mainView, new BountyView(), bountyDatabase);
         mainView.addPanel(bountyController.getFrame(), "BOUNTY");
 
     }
@@ -63,6 +69,8 @@ public class MainController implements ActionListener
         mainView.crewButton.addActionListener(this);
         mainView.corpButton.addActionListener(this);
         mainView.bountyButton.addActionListener(this);
+
+        
     }
 
 
@@ -95,3 +103,4 @@ public class MainController implements ActionListener
     }
 
 }
+

@@ -262,6 +262,12 @@ public class CharacterModifyController implements ActionListener
 
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(characterModifyView.panel, "Numeric fields (Wallet, Bounty, Captures) must contain valid numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    // Save
+                    charDatabase.writeDatabase();
+                    devilFruitDatabase.writeDatabase();
+                    pirateCrewDatabase.writeDatabase();
+                    marineCorpDatabase.writeDatabase();
                 }
             }
         }
