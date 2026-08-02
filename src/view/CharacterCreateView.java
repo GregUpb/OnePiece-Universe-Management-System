@@ -7,7 +7,6 @@ import model.*;
 public class CharacterCreateView
 {
 
-    String[] temp = {"None", "Cheese", "McBalls", "McMc"};
 
     public JPanel panel, centerPanel, generalPanel, specifiedPanel;
     public JPanel piratePanel, marinePanel, hunterPanel, civPanel;
@@ -238,7 +237,7 @@ public class CharacterCreateView
         crewLabel = new JLabel("Pirate Crew: ");
         crewLabel.setFont(textFont);
         crewLabel.setPreferredSize(new Dimension(150, 0));
-        crewComboBox = new JComboBox<>(temp);
+        crewComboBox = new JComboBox<>();
 
         crewPanel = new JPanel(new BorderLayout());
         crewPanel.setPreferredSize(new Dimension(0, 50));
@@ -265,7 +264,7 @@ public class CharacterCreateView
         corpLabel = new JLabel("Marine Corp: ");
         corpLabel.setFont(textFont);
         corpLabel.setPreferredSize(new Dimension(150, 0));
-        corpComboBox = new JComboBox<>(temp);
+        corpComboBox = new JComboBox<>();
 
         corpPanel = new JPanel(new BorderLayout());
         corpPanel.setPreferredSize(new Dimension(0, 50));

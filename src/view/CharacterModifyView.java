@@ -6,7 +6,6 @@ import javax.swing.*;
 public class CharacterModifyView
 {
 
-    String[] temp = {"None", "Cheese", "McBalls", "McMc"};
 
     public JPanel panel, generalPanel, topPanel;
     public JPanel specified1Panel, specified2Panel, specified3Panel, specified4Panel;
@@ -195,7 +194,7 @@ public class CharacterModifyView
         specified3Label = new JLabel("3: ");
         specified3Label.setFont(textFont);
         specified3Label.setPreferredSize(new Dimension(150, 0));
-        specified3ComboBox = new JComboBox<>(temp);
+        specified3ComboBox = new JComboBox<>();
         specified3CheckBox = new JCheckBox();
         
         specified3Panel = new JPanel(new BorderLayout());
@@ -209,7 +208,7 @@ public class CharacterModifyView
         specified4Label = new JLabel("4: ");
         specified4Label.setFont(textFont);
         specified4Label.setPreferredSize(new Dimension(150, 0));
-        specified4ComboBox = new JComboBox<>(temp);
+        specified4ComboBox = new JComboBox<>();
         specified4CheckBox = new JCheckBox();
         
         specified4Panel = new JPanel(new BorderLayout());

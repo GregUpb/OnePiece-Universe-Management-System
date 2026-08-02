@@ -9,7 +9,6 @@ public class CharacterDatabase {
     public CharacterDatabase() {
         this.characterList = new ArrayList<>();
     }
-
     public void addCharacter(Character newCharacter) {
         this.characterList.add(newCharacter);
     }

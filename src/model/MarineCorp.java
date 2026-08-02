@@ -14,7 +14,7 @@ public class MarineCorp{
     private int OperationalFunds;
     private List<Marine> CorpMembers = new ArrayList<>();
 
-    MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds, List<Marine> CorpMembers)
+    public MarineCorp(String BaseLocation, Marine CorpsCommander, int OperationalFunds, List<Marine> CorpMembers)
     {
         this.GenerateID();
         
@@ -23,7 +23,7 @@ public class MarineCorp{
         this.OperationalFunds = OperationalFunds;
         this.CorpMembers = CorpMembers;
 
-        CorpMembers.add(CorpsCommander);
+        if (CorpsCommander != null) { CorpMembers.add(CorpsCommander); }
     }
 
     public Long GetCorpID()

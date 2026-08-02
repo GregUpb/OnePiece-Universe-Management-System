@@ -15,7 +15,7 @@ public class PirateCrew {
     private List<Pirate> CrewMembers = new ArrayList<>();
     private int TotalCrewBounty;
     
-    PirateCrew(String CrewName, String ShipsName, Pirate Captain, List<Pirate> CrewMembers)
+    public PirateCrew(String CrewName, String ShipsName, Pirate Captain, List<Pirate> CrewMembers)
     {
         this.GenerateID();
 

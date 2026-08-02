@@ -87,19 +87,22 @@ public class CharacterViewController implements ActionListener
                         // Assuming you add a standard public String GetPirateRole() getter in Pirate.java
                         characterViewView.specifiedLabel3.setText("Role: " + p.GetPirateRole());
                     }
-
-                    characterViewView.specifiedLabel4.setText("Crew: " + (p.GetPirateCrew() != null ? p.GetPirateCrew().GetCrewName() : "None"));
+                    if (p.GetPirateCrew() != null) {
+                        characterViewView.specifiedLabel4.setText("Crew: " + p.GetPirateCrew().GetCrewName());
+                    } else {
+                        characterViewView.specifiedLabel4.setText("Crew: None");
+                    }
                 }
                 else if (selectedChar instanceof Marine m) {
                     characterViewView.specifiedLabel1.setText("Faction: Marine");
                     characterViewView.specifiedLabel2.setText("Rank: " + m.GetRank());
                     characterViewView.specifiedLabel3.setText("Is a Corp Commander: " + m.GetIsCorpCommander());
+
                     if (m.GetMCorps() == null){
                         characterViewView.specifiedLabel4.setText("Corps: None");
                     } else{
-                        characterViewView.specifiedLabel4.setText("Corps: " + m.GetMCorps());
+                        characterViewView.specifiedLabel4.setText("Corps: " + m.GetMCorps().GetBaseLocation());
                     }
-
                 }
                 else if (selectedChar instanceof PirateHunter ph) {
                     characterViewView.specifiedLabel1.setText("Faction: Pirate Hunter");

@@ -76,9 +76,10 @@ public class MarineCorpViewView
 
         for (model.Marine m : members)
         {
-            this.innerPanel.add(new CharacterViewPanel(m.GetName()));
+            if (m != null) {
+                this.innerPanel.add(new CharacterViewPanel(m.GetName()));
+            }
         }
-
     }
 
 }

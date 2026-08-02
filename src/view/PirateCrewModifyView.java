@@ -7,28 +7,27 @@ import panel.*;
 
 public class PirateCrewModifyView
 {
-
     String[] temp = {"None", "Cheese", "McBalls", "McMc"};
 
     public JPanel panel, centerPanel, topPanel;
-    public JPanel namePanel, shipPanel, bountyPanel, captainPanel, membersPanel, innerPanel;
+    public JPanel namePanel, shipPanel, captainPanel, membersPanel, innerPanel;
     public JScrollPane scrollPanel;
     public JButton exitButton, submitButton;
 
-    public JComboBox charSelectComboBox;
+    public JComboBox<String> charSelectComboBox;
 
-    private JLabel nameLabel, shipLabel, bountyLabel, captainLabel, membersLabel;
+    private JLabel nameLabel, shipLabel, captainLabel, membersLabel;
 
-    public JTextField nameTextField, shipTextField, bountyTextField;
-    public JComboBox captainComboBox;
+    public JTextField nameTextField, shipTextField;
+    public JComboBox<String> captainComboBox;
 
-    public JComboBox crewSelectComboBox;
+    public JComboBox<String> crewSelectComboBox;
 
-    public JCheckBox nameCheckBox, shipCheckBox, bountyCheckBox, captainCheckBox, membersCheckBox;
+    public JCheckBox nameCheckBox, shipCheckBox, captainCheckBox, membersCheckBox;
 
     private Font buttonFont = new Font(Font.MONOSPACED, Font.BOLD, 20);
     private Font textFont = new Font(Font.SERIF, Font.CENTER_BASELINE, 15);
-    
+
     public PirateCrewModifyView()
     {
         panel = new JPanel(new BorderLayout());
@@ -40,7 +39,7 @@ public class PirateCrewModifyView
         exitButton = new JButton("CANCEL");
         exitButton.setFont(buttonFont);
         topPanel.add(exitButton);
-        
+
         submitButton = new JButton("SUBMIT");
         submitButton.setFont(buttonFont);
 
@@ -77,21 +76,6 @@ public class PirateCrewModifyView
         shipPanel.add(shipCheckBox, BorderLayout.LINE_END);
         centerPanel.add(shipPanel);
 
-        // Total Crew Bounty
-        bountyLabel = new JLabel("Total Crew Bounty: ");
-        bountyLabel.setFont(textFont);
-        bountyLabel.setPreferredSize(new Dimension(150, 0));
-        bountyTextField = new JTextField();
-        bountyTextField.setFont(textFont);
-
-        bountyPanel = new JPanel(new BorderLayout());
-        bountyPanel.setPreferredSize(new Dimension(0, 50));
-        bountyCheckBox = new JCheckBox();
-        bountyPanel.add(bountyLabel, BorderLayout.LINE_START);
-        bountyPanel.add(bountyTextField, BorderLayout.CENTER);
-        bountyPanel.add(bountyCheckBox, BorderLayout.LINE_END);
-        centerPanel.add(bountyPanel);
-
         // Captain
         captainLabel = new JLabel("Captain's Name: ");
         captainLabel.setFont(textFont);
@@ -125,11 +109,9 @@ public class PirateCrewModifyView
 
         centerPanel.add(scrollPanel);
 
-        // hehehe
         panel.add(topPanel, BorderLayout.PAGE_START);
         panel.add(centerPanel, BorderLayout.CENTER);
         panel.add(submitButton, BorderLayout.PAGE_END);
-
     }
 
     public JPanel setFrame()
@@ -141,6 +123,4 @@ public class PirateCrewModifyView
     {
         this.innerPanel.add(new CharacterSelectionPanel(name));
     }
-
-
 }

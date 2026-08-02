@@ -25,6 +25,8 @@ public class CharacterSelectionPanel extends JPanel {
         return this.checkBox.isSelected();
     }
 
+    public void setChecked(boolean isMember) {this.checkBox.setSelected(isMember);}
+
     public String getName()
     {
         return this.label.getText();

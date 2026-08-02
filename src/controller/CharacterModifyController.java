@@ -15,17 +15,18 @@ public class CharacterModifyController implements ActionListener
     CharacterModifyView characterModifyView;
     CharacterDatabase charDatabase;
     DevilFruitDatabase devilFruitDatabase;
-    
-    public CharacterModifyController(MainView mainview, CharacterModifyView characterModifyView, CharacterDatabase charDatabase, DevilFruitDatabase devilFruitDatabase)
+    PirateCrewDatabase pirateCrewDatabase;
+    MarineCorpDatabase marineCorpDatabase;
+
+    public CharacterModifyController(MainView mainview, CharacterModifyView characterModifyView, CharacterDatabase charDatabase, DevilFruitDatabase devilFruitDatabase, PirateCrewDatabase pirateCrewDatabase, MarineCorpDatabase marineCorpDatabase)
     {
         this.mainview = mainview;
-
         this.characterModifyView = characterModifyView;
         this.charDatabase = charDatabase;
         this.devilFruitDatabase = devilFruitDatabase;
+        this.pirateCrewDatabase = pirateCrewDatabase;
+        this.marineCorpDatabase = marineCorpDatabase;
         addActionListener();
-
-        // set it so the first character is already set to modify
     }
 
     public JPanel getFrame()
@@ -85,19 +86,65 @@ public class CharacterModifyController implements ActionListener
                     characterModifyView.specified1Label.setText("Bounty: ");
                     characterModifyView.specified1TextField.setText(String.valueOf(p.GetBounty()));
                     characterModifyView.specified1Panel.setVisible(true);
+
                     characterModifyView.specified3Label.setText("Role: ");
                     characterModifyView.specified3ComboBox.removeAllItems();
                     for (String[] role : Pirate.ROLES) {
                         characterModifyView.specified3ComboBox.addItem(role[0]);
                     }
-                    // Need Crew combo box
+                    characterModifyView.specified3Panel.setVisible(true);
+                    //Crew Stuff
+                    characterModifyView.specified4Label.setText("Crew: ");
+                    characterModifyView.specified4ComboBox.removeAllItems();
+                    characterModifyView.specified4ComboBox.addItem("None");
+                    for (model.PirateCrew crew : pirateCrewDatabase.getAllPCrew()) {
+                        characterModifyView.specified4ComboBox.addItem(crew.GetCrewID() + " - " + crew.GetCrewName());
+                    }
+
+                    if (p.GetPirateCrew() != null) {
+                        for (int i = 1; i < characterModifyView.specified4ComboBox.getItemCount(); i++) {
+                            if (((String)characterModifyView.specified4ComboBox.getItemAt(i)).startsWith(p.GetPirateCrew().GetCrewID() + " -")) {
+                                characterModifyView.specified4ComboBox.setSelectedIndex(i);
+                                break;
+                            }
+                        }
+                    }
+                    characterModifyView.specified4Panel.setVisible(true);
                 }
                 else if (selectedChar instanceof Marine m) {
-                    characterModifyView.specified1Label.setText("Rank: ");
-                    characterModifyView.specified1TextField.setText(m.GetRank());
-                    characterModifyView.specified1Panel.setVisible(true);
+                    // Rank Stuff
+                    characterModifyView.specified3Label.setText("Rank: ");
+                    characterModifyView.specified3ComboBox.removeAllItems();
+                    for (String[] rank : Marine.RANKS) {
+                        characterModifyView.specified3ComboBox.addItem(rank[0]);
+                    }
 
-                    // Add MarineCorp mods can be added here later once database is built
+                    // Set current rank in the dropdown
+                    for (int i = 0; i < characterModifyView.specified3ComboBox.getItemCount(); i++) {
+                        if (((String)characterModifyView.specified3ComboBox.getItemAt(i)).equalsIgnoreCase(m.GetRank())) {
+                            characterModifyView.specified3ComboBox.setSelectedIndex(i);
+                            break;
+                        }
+                    }
+                    characterModifyView.specified3Panel.setVisible(true);
+
+                    // Corp Stuff
+                    characterModifyView.specified4Label.setText("Marine Corp: ");
+                    characterModifyView.specified4ComboBox.removeAllItems();
+                    characterModifyView.specified4ComboBox.addItem("None");
+                    for (model.MarineCorp corp : marineCorpDatabase.getAllMCorp()) {
+                        characterModifyView.specified4ComboBox.addItem(corp.GetCorpID() + " - " + corp.GetBaseLocation());
+                    }
+
+                    if (m.GetMCorps() != null) {
+                        for (int i = 1; i < characterModifyView.specified4ComboBox.getItemCount(); i++) {
+                            if (((String)characterModifyView.specified4ComboBox.getItemAt(i)).startsWith(m.GetMCorps().GetCorpID() + " -")) {
+                                characterModifyView.specified4ComboBox.setSelectedIndex(i);
+                                break;
+                            }
+                        }
+                    }
+                    characterModifyView.specified4Panel.setVisible(true);
                 }
                 else if (selectedChar instanceof PirateHunter ph) {
                     characterModifyView.specified1Label.setText("Combat Style: ");
@@ -151,7 +198,7 @@ public class CharacterModifyController implements ActionListener
                         } else {
                             DevilFruit newDF = devilFruitDatabase.getAllDF().get(selectedDFIndex - 1);
                             selectedChar.SetDFPower(newDF);
-                            newDF.SetCurrentOwner(selectedChar); // Ensure bidirectional linking
+                            newDF.SetCurrentOwner(selectedChar);
                         }
                     }
 
@@ -164,6 +211,32 @@ public class CharacterModifyController implements ActionListener
                             String selectedRole = (String) characterModifyView.specified3ComboBox.getSelectedItem();
                             p.SetPirateRole(selectedRole);
                             p.SetIsCaptain(selectedRole.equalsIgnoreCase("Captain"));
+                        }
+                        if (characterModifyView.specified4CheckBox.isSelected()) {
+                            int crewIndex = characterModifyView.specified4ComboBox.getSelectedIndex();
+                            if (crewIndex == 0) {
+                                p.SetPirateCrew(null);
+                            } else {
+                                model.PirateCrew newCrew = pirateCrewDatabase.getAllPCrew().get(crewIndex - 1);
+                                p.SetPirateCrew(newCrew);
+                            }
+                        }
+                    }
+                    else if (selectedChar instanceof Marine m) {
+                        // Save Rank Modification
+                        if (characterModifyView.specified3CheckBox.isSelected()) {
+                            m.SetRank((String) characterModifyView.specified3ComboBox.getSelectedItem());
+                        }
+
+                        // Save Corp Modification
+                        if (characterModifyView.specified4CheckBox.isSelected()) {
+                            int corpIndex = characterModifyView.specified4ComboBox.getSelectedIndex();
+                            if (corpIndex == 0) {
+                                m.SetMCorps(null);
+                            } else {
+                                model.MarineCorp newCorp = marineCorpDatabase.getAllMCorp().get(corpIndex - 1);
+                                m.SetMCorps(newCorp);
+                            }
                         }
                     }
                     else if (selectedChar instanceof PirateHunter ph) {
