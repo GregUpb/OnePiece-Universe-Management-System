@@ -2,7 +2,6 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
-import panel.*;
 
 public class BountyRegisterView
 {
@@ -11,9 +10,12 @@ public class BountyRegisterView
 
     public JPanel panel, centerPanel;
     
-    public JPanel captorPanel, capturedPanel;
-    public JLabel captorLabel, capturedLabel;
+    public JPanel captorPanel, capturedPanel, statusPanel, statusButtonPanel;
+    public JLabel captorLabel, capturedLabel, statusLabel;
     public JComboBox captorComboBox, capturedComboBox;
+
+    public JRadioButton aliveRadioButton, deadRadioButton;
+    public ButtonGroup statusButtonGroup;
 
     public JButton exitButton, submitButton;
 
@@ -39,6 +41,29 @@ public class BountyRegisterView
         capturedPanel.add(capturedLabel, BorderLayout.LINE_START);
         capturedPanel.add(capturedComboBox, BorderLayout.CENTER);
         centerPanel.add(capturedPanel);
+
+        // Status
+        statusLabel = new JLabel("Dead or Alive: ");
+        statusLabel.setFont(textFont);
+        statusLabel.setPreferredSize(new Dimension(150, 0));
+
+        aliveRadioButton = new JRadioButton("Alive");
+        aliveRadioButton.setFont(textFont);
+        aliveRadioButton.setSelected(true);
+        deadRadioButton = new JRadioButton("Dead");
+        deadRadioButton.setFont(textFont);
+        statusButtonGroup = new ButtonGroup();
+        statusButtonGroup.add(aliveRadioButton);
+        statusButtonGroup.add(deadRadioButton);
+        statusButtonPanel = new JPanel(new GridLayout(1 , 0));
+        statusButtonPanel.add(aliveRadioButton);
+        statusButtonPanel.add(deadRadioButton);
+
+        statusPanel = new JPanel(new BorderLayout());
+        statusPanel.setPreferredSize(new Dimension(0, 50));
+        statusPanel.add(statusLabel, BorderLayout.LINE_START);
+        statusPanel.add(statusButtonPanel, BorderLayout.CENTER);
+        centerPanel.add(statusPanel);
 
         // Captor
         captorLabel = new JLabel("Captor: ");

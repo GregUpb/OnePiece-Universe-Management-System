@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import view.*;
 import model.*;
 import model.Character;
+import view.*;
 
 public class BountyRegisterController implements ActionListener
 {
@@ -55,8 +54,8 @@ public class BountyRegisterController implements ActionListener
 
 
             if (c instanceof Pirate) {
-                // Cannot capture a pirate that is already dead
-                if (!c.GetStatus().equalsIgnoreCase("dead")) {
+                // Cannot capture a pirate that is already dead and already captured
+                if (!c.GetStatus().equalsIgnoreCase("captured") && !c.GetStatus().equalsIgnoreCase("dead")) {
                     availableTargets.add((Pirate) c);
                     bountyRegisterView.capturedComboBox.addItem(c.GetID() + " - " + c.GetName());
                 }
@@ -95,6 +94,14 @@ public class BountyRegisterController implements ActionListener
                 JOptionPane.showMessageDialog(bountyRegisterView.panel,
                         "Bounty successfully claimed by " + captor.GetName() + "!");
 
+                if (bountyRegisterView.aliveRadioButton.isSelected() && target.GetStatus().equalsIgnoreCase("alive"))
+                {
+                    target.SetStatus("Captured");
+                } else if (bountyRegisterView.deadRadioButton.isSelected())
+                {
+                    target.SetStatus("Dead");
+                }
+
                 this.mainview.setInfoText("Bounty");
                 this.mainview.showPanel("BOUNTY");
 
@@ -104,6 +111,7 @@ public class BountyRegisterController implements ActionListener
             } finally {
                 // Make sure the bounty database saves the new record even if an error is thrown
                 bountyDatabase.writeDatabase();
+                charDatabase.writeDatabase();
             }
         }
     }

@@ -15,6 +15,7 @@ public class CharacterSelectionPanel extends JPanel {
         label.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(200, 30));
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         add(checkBox, BorderLayout.LINE_START);
         add(label, BorderLayout.CENTER);
