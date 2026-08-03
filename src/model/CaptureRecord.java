@@ -61,6 +61,8 @@ public class CaptureRecord implements Serializable{
             this.nanghuli.SetWallet(newWalletBalance);
             System.out.println(bountyReward + " Berries added to " + this.nanghuli.GetName() + "'s wallet.");
         }
+
+        this.nahuli.SetBounty(0);
     }
 
     public void updateCapturedStatus()

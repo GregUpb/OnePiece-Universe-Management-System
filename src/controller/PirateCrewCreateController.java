@@ -1,5 +1,6 @@
 package controller;
 
+import exceptions.EmptyInputException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -81,16 +82,28 @@ public class PirateCrewCreateController implements ActionListener
                 Pirate captain = null;
                 int selectedIndex = pirateCrewCreateView.captainComboBox.getSelectedIndex();
 
+                if (pirateCrewCreateView.nameTextField.getText().isBlank())
+                {
+                    throw new EmptyInputException("Name cannot be empty");
+                } else if (pirateCrewCreateView.shipTextField.getText().isBlank())
+                {
+                    throw new EmptyInputException("Ship's Name cannot be empty");
+                }
+
                 // Create a list of just the Pirates to match the ComboBox index
                 List<Pirate> pirates = new ArrayList<>();
                 for (model.Character c : charDatabase.getAllCharacters()) {
                     if (c instanceof Pirate) {
-                        pirates.add((Pirate) c);
+                        if (((Pirate) c).GetPirateCrew() == null)
+                        {
+                            pirates.add((Pirate) c);
+                        }
                     }
                 }
                 if (selectedIndex > 0) {
                     captain = pirates.get(selectedIndex - 1);
                 }
+
                 PirateCrew newCrew = new PirateCrew(name, ship, null, new ArrayList<>());
                 if (captain != null) {
                     newCrew.SetCaptain(captain);

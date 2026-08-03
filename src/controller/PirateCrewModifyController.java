@@ -142,7 +142,7 @@ public class PirateCrewModifyController implements ActionListener
                     mainView.showPanel("PIRATECREW");
 
                     refreshComboBox();
-
+ 
                     // Reset Checkboxes
                     pirateCrewModifyView.nameCheckBox.setSelected(false);
                     pirateCrewModifyView.shipCheckBox.setSelected(false);

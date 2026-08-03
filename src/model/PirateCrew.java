@@ -90,9 +90,13 @@ public class PirateCrew implements Serializable {
 
     public void SetCaptain(Pirate Captain)
     {
-        // Checks whether the supposed new captain is not in a crew or is already part of the crew
-        if (Captain.GetPirateCrew() == null || Captain.GetPirateCrew() == this)
+        if (Captain == null)
         {
+            this.Captain.SetIsCaptain(false);
+            this.Captain.SetPirateRole("Crew Member");
+        } else if (Captain.GetPirateCrew() == null || Captain.GetPirateCrew() == this)
+        {
+            // Checks whether the supposed new captain is not in a crew or is already part of the crew
             if (this.Captain != Captain)
             {
                 if (this.Captain != null) { //Checks if there is already an existing captain

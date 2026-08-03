@@ -12,7 +12,7 @@ public class CharacterViewPanel extends JPanel {
         label = new JLabel(name);
         label.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(200, 20));
+        setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5), BorderFactory.createLineBorder(Color.BLACK)));
 
         add(label, BorderLayout.CENTER);
     }

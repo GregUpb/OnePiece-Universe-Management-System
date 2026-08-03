@@ -2,11 +2,7 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
-
 import model.CaptureRecord;
-
-import java.util.*;
-
 import panel.*;
 
 public class BountyViewView

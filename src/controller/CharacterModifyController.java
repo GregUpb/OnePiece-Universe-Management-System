@@ -273,9 +273,12 @@ public class CharacterModifyController implements ActionListener
                         }
                     }
 
-                    JOptionPane.showMessageDialog(characterModifyView.panel, "Character Modified Successfully!");
-                    characterModifyView.panel.setVisible(false);
-                    mainview.showPanel("CHARACTER");
+                    if (characterModifyView.nameCheckBox.isSelected() || characterModifyView.aliasCheckBox.isSelected() || characterModifyView.originCheckBox.isSelected() || characterModifyView.statusCheckBox.isSelected() || characterModifyView.walletCheckBox.isSelected() || characterModifyView.dfCheckBox.isSelected() || characterModifyView.specified1CheckBox.isSelected() || characterModifyView.specified2CheckBox.isSelected() || characterModifyView.specified3CheckBox.isSelected() || characterModifyView.specified4CheckBox.isSelected())
+                    {
+                        JOptionPane.showMessageDialog(characterModifyView.panel, "Character Modified Successfully!");
+                        characterModifyView.panel.setVisible(false);
+                        mainview.showPanel("CHARACTER");
+                    }
 
                     // Refresh the combo box to reflect name changes
                     refreshComboBox();

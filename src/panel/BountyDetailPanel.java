@@ -2,7 +2,6 @@ package panel;
 
 import java.awt.*;
 import javax.swing.*;
-
 import model.*;
 
 public class BountyDetailPanel extends JPanel {
@@ -24,9 +23,10 @@ public class BountyDetailPanel extends JPanel {
 
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(200, 20));
+        setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5), BorderFactory.createLineBorder(Color.BLACK)));
 
         add(idLabel, BorderLayout.PAGE_START);
-        add(capturedLabel, BorderLayout.LINE_START);
+        add(capturedLabel, BorderLayout.LINE_END);
         add(captorLabel, BorderLayout.LINE_START);
 
     }
