@@ -4,12 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import view.*;
 import model.*;
+import view.*;
 
 public class PirateCrewModifyController implements ActionListener
 {
@@ -144,6 +142,12 @@ public class PirateCrewModifyController implements ActionListener
                     mainView.showPanel("PIRATECREW");
 
                     refreshComboBox();
+
+                    // Reset Checkboxes
+                    pirateCrewModifyView.nameCheckBox.setSelected(false);
+                    pirateCrewModifyView.shipCheckBox.setSelected(false);
+                    pirateCrewModifyView.captainCheckBox.setSelected(false);
+                    pirateCrewModifyView.membersCheckBox.setSelected(false);
 
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(pirateCrewModifyView.panel, "Error: " + ex.getMessage(), "Modification Error", JOptionPane.ERROR_MESSAGE);

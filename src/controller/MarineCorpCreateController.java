@@ -2,14 +2,10 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import model.*;
 import view.*;
-import  model.*;
-import panel.CharacterSelectionPanel;
 
 public class MarineCorpCreateController implements ActionListener
 {
@@ -113,6 +109,18 @@ public class MarineCorpCreateController implements ActionListener
                 JOptionPane.showMessageDialog(marineCorpCreateView.panel, "Marine Corp Created Successfully!");
                 marineCorpCreateView.panel.setVisible(false);
                 mainView.showPanel("MARINECORP");
+
+                // Reset Fields
+                marineCorpCreateView.locationTextField.setText("");
+                marineCorpCreateView.fundsTextField.setText("");
+                marineCorpCreateView.commanderComboBox.setSelectedIndex(0);
+
+                for (java.awt.Component comp : marineCorpCreateView.innerPanel.getComponents()) {
+                    if (comp instanceof panel.CharacterSelectionPanel) {
+                        panel.CharacterSelectionPanel csp = (panel.CharacterSelectionPanel) comp;
+                        csp.checkBox.setSelected(false);
+                    }
+                }
 
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(marineCorpCreateView.panel, "Operational Funds must be a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);

@@ -4,12 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import view.*;
 import model.*;
+import view.*;
 
 public class MarineCorpModifyController implements ActionListener
 {
@@ -145,6 +143,12 @@ public class MarineCorpModifyController implements ActionListener
                     mainView.showPanel("MARINECORP");
 
                     refreshComboBox();
+
+                    // Reset checkboxes
+                    marineCorpModifyView.locationCheckBox.setSelected(false);
+                    marineCorpModifyView.fundsCheckBox.setSelected(false);
+                    marineCorpModifyView.commanderCheckBox.setSelected(false);
+                    marineCorpModifyView.membersCheckBox.setSelected(false);
 
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(marineCorpModifyView.panel, "Funds must be a valid number.", "Input Error", JOptionPane.ERROR_MESSAGE);

@@ -16,7 +16,7 @@ public class CharacterDatabase {
         this.characterList = new ArrayList<>();
 
         try {
-            database = new File("database\\characterdatabase.ser");
+            database = new File("characterdatabase.dat");
             if (database.createNewFile())
             {
                 System.out.println("Database Created");

@@ -16,7 +16,7 @@ public class MarineCorpDatabase {
         this.MCorpList = new ArrayList<>();
 
         try {
-            database = new File("database\\marinecorpdatabase.ser");
+            database = new File("marinecorpdatabase.dat");
             if (database.createNewFile())
             {
                 System.out.println("Database Created");

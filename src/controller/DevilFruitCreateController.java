@@ -75,6 +75,11 @@ public class DevilFruitCreateController implements ActionListener {
                 devilFruitCreateView.panel.setVisible(false);
                 mainview.showPanel("DEVILFRUIT");
 
+                // Reset Fields
+                devilFruitCreateView.nameTextField.setText("");
+                devilFruitCreateView.parameciaRadioButton.setSelected(true);
+                devilFruitCreateView.abilityTextField.setText("");
+
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(devilFruitCreateView.panel, "Error: " + ex.getMessage(), "Creation Error", JOptionPane.ERROR_MESSAGE);
             } finally {

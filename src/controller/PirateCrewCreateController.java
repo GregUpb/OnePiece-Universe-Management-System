@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import view.*;
 import model.*;
+import view.*;
 
 public class PirateCrewCreateController implements ActionListener
 {
@@ -123,6 +122,18 @@ public class PirateCrewCreateController implements ActionListener
                 JOptionPane.showMessageDialog(pirateCrewCreateView.panel, "Pirate Crew Created Successfully!");
                 pirateCrewCreateView.panel.setVisible(false);
                 mainView.showPanel("PIRATECREW");
+
+                // Reset Fields
+                pirateCrewCreateView.nameTextField.setText("");
+                pirateCrewCreateView.shipTextField.setText("");
+                pirateCrewCreateView.captainComboBox.setSelectedIndex(0);
+                
+                for (java.awt.Component comp : pirateCrewCreateView.innerPanel.getComponents()) {
+                    if (comp instanceof panel.CharacterSelectionPanel) {
+                        panel.CharacterSelectionPanel csp = (panel.CharacterSelectionPanel) comp;
+                        csp.checkBox.setSelected(false);
+                    }
+                }
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(pirateCrewCreateView.panel, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

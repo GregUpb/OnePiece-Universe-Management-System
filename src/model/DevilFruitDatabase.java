@@ -16,7 +16,7 @@ public class DevilFruitDatabase {
         this.dftList = new ArrayList<>();
 
         try {
-            database = new File("database\\devilfruitdatabase.ser");
+            database = new File("devilfruitdatabase.dat");
             if (database.createNewFile())
             {
                 System.out.println("Database Created");

@@ -1,9 +1,9 @@
 package controller;
 
+import exceptions.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-
 import model.*;
 import model.Character;
 import view.CharacterModifyView;
@@ -174,15 +174,27 @@ public class CharacterModifyController implements ActionListener
                 try {
                     // Execute Setters IF AND ONLY IF the respective checkbox is checked
                     if (characterModifyView.nameCheckBox.isSelected()) {
+                        if (characterModifyView.nameTextField.getText().isBlank())
+                        {
+                            throw new EmptyInputException("Name cannot be empty");
+                        }
                         selectedChar.SetName(characterModifyView.nameTextField.getText());
                     }
                     if (characterModifyView.aliasCheckBox.isSelected()) {
                         selectedChar.SetAlias(characterModifyView.aliasTextField.getText());
                     }
                     if (characterModifyView.originCheckBox.isSelected()) {
+                        if (characterModifyView.originTextField.getText().isBlank())
+                        {
+                            throw new EmptyInputException("Origin cannot be empty");
+                        }
                         selectedChar.SetOrigin(characterModifyView.originTextField.getText());
                     }
                     if (characterModifyView.walletCheckBox.isSelected()) {
+                        if (Integer.parseInt(characterModifyView.walletTextField.getText()) < 0)
+                        {
+                            throw new EmptyInputException("Wallet cannot be negative");
+                        }
                         selectedChar.SetWallet(Integer.parseInt(characterModifyView.walletTextField.getText()));
                     }
                     if (characterModifyView.statusCheckBox.isSelected()) {
@@ -205,6 +217,10 @@ public class CharacterModifyController implements ActionListener
                     // Does child class modifications
                     if (selectedChar instanceof Pirate p) {
                         if (characterModifyView.specified1CheckBox.isSelected()) {
+                            if (Integer.parseInt(characterModifyView.specified1TextField.getText()) < 0)
+                            {
+                                throw new EmptyInputException("Bounty cannot be negative");
+                            }
                             p.SetBounty(Integer.parseInt(characterModifyView.specified1TextField.getText()));
                         }
                         if (characterModifyView.specified3CheckBox.isSelected()) {
@@ -244,6 +260,10 @@ public class CharacterModifyController implements ActionListener
                             ph.SetCombatStyle(characterModifyView.specified1TextField.getText());
                         }
                         if (characterModifyView.specified2CheckBox.isSelected()) {
+                            if (Integer.parseInt(characterModifyView.specified2TextField.getText()) < 0)
+                            {
+                                throw new EmptyInputException("Captures cannot be negative");
+                            }
                             ph.SetCaptures(Integer.parseInt(characterModifyView.specified2TextField.getText()));
                         }
                     }
@@ -260,8 +280,22 @@ public class CharacterModifyController implements ActionListener
                     // Refresh the combo box to reflect name changes
                     refreshComboBox();
 
+                    // Reset checkboxes
+                    characterModifyView.nameCheckBox.setSelected(false);
+                    characterModifyView.aliasCheckBox.setSelected(false);
+                    characterModifyView.originCheckBox.setSelected(false);
+                    characterModifyView.statusCheckBox.setSelected(false);
+                    characterModifyView.dfCheckBox.setSelected(false);
+                    characterModifyView.walletCheckBox.setSelected(false);
+                    characterModifyView.specified1CheckBox.setSelected(false);
+                    characterModifyView.specified2CheckBox.setSelected(false);
+                    characterModifyView.specified3CheckBox.setSelected(false);
+                    characterModifyView.specified4CheckBox.setSelected(false);
+
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(characterModifyView.panel, "Numeric fields (Wallet, Bounty, Captures) must contain valid numbers.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(characterModifyView.panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
                     // Save
                     charDatabase.writeDatabase();

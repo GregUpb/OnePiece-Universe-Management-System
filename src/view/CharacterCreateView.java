@@ -224,7 +224,11 @@ public class CharacterCreateView
         roleLabel.setPreferredSize(new Dimension(150, 0));
         rolesComboBox = new JComboBox<>();
         for (String[] role : Pirate.ROLES) {
-            rolesComboBox.addItem(role[0]); // role[0] gets "Captain", "Navigator", and more
+            // Skip roles that needed crew
+            if (!(role[0].equalsIgnoreCase("captain")||role[0].equalsIgnoreCase("first mate")||role[0].equalsIgnoreCase("second mate")||role[0].equalsIgnoreCase("crew member")))
+            {
+                rolesComboBox.addItem(role[0]); // role[0] gets "Captain", "Navigator", and more
+            }
         }
 
         rolePanel = new JPanel(new BorderLayout());

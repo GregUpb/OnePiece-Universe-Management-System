@@ -16,7 +16,7 @@ public class PirateCrewDatabase {
         this.PCrewList = new ArrayList<>();
 
         try {
-            database = new File("database\\piratecrewdatabase.ser");
+            database = new File("piratecrewdatabase.dat");
             if (database.createNewFile())
             {
                 System.out.println("Database Created");

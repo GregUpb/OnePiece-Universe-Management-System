@@ -18,7 +18,7 @@ public class BountyManager implements Serializable {
         this.captureHistory = new ArrayList<>();
 
         try {
-            database = new File("database\\bountydatabase.ser");
+            database = new File("bountydatabase.dat");
             if (database.createNewFile())
             {
                 System.out.println("Database Created");

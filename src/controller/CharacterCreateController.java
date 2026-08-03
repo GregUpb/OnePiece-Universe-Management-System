@@ -165,6 +165,26 @@ public class CharacterCreateController implements ActionListener
                     }
                 }
 
+                characterCreateView.nameTextField.setText("");
+                characterCreateView.aliasTextField.setText("");
+                characterCreateView.originTextField.setText("");
+                characterCreateView.aliveRadioButton.setSelected(true);
+                characterCreateView.devilfruitComboBox.setSelectedIndex(0);
+                characterCreateView.walletTextField.setText("");
+
+                characterCreateView.bountyTextField.setText("");
+                characterCreateView.rolesComboBox.setSelectedIndex(0);
+                characterCreateView.crewComboBox.setSelectedIndex(0);
+                
+                characterCreateView.ranksComboBox.setSelectedIndex(0);
+                characterCreateView.corpComboBox.setSelectedIndex(0);
+                
+                characterCreateView.combatTextField.setText("");
+                characterCreateView.captureTextField.setText("");
+                
+                characterCreateView.civrolesComboBox.setSelectedIndex(0);
+                characterCreateView.residenceTextField.setText("");
+
                 JOptionPane.showMessageDialog(characterCreateView.panel, "Character Created Successfully!");
                 characterCreateView.panel.setVisible(false);
                 mainview.showPanel("CHARACTER");

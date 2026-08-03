@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class CharacterSelectionPanel extends JPanel {
 
-    private JCheckBox checkBox;
+    public JCheckBox checkBox;
     private JLabel label;
 
     public CharacterSelectionPanel(String name) {
