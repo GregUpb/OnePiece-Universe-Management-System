@@ -11,12 +11,14 @@ public class BountyViewController implements ActionListener
 {
     MainView mainview;
     BountyViewView bountyViewView;
-    
-    public BountyViewController(MainView mainView, BountyViewView bountyViewView)
+    BountyManager bountyDatabase;
+
+    public BountyViewController(MainView mainView, BountyViewView bountyViewView, BountyManager bountyDatabase)
     {
         this.mainview = mainView;
         this.bountyViewView = bountyViewView;
-        
+        this.bountyDatabase = bountyDatabase;
+
         addActionListener();
     }
 
@@ -30,17 +32,21 @@ public class BountyViewController implements ActionListener
         bountyViewView.backButton.addActionListener(this);
     }
 
+    public void refreshView()
+    {
+        // Pass the historical captures from the database into the View
+        bountyViewView.setHistoricalCaptures(bountyDatabase.getCaptureHistory());
+        bountyViewView.innerPanel.revalidate();
+        bountyViewView.innerPanel.repaint();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        /* Start Creation Buttons */
         if (e.getSource() == bountyViewView.backButton)
         {
             this.mainview.setInfoText("Bounty");
             this.mainview.showPanel("BOUNTY");
         }
-
     }
-
-
 }

@@ -114,6 +114,30 @@ public class CharacterViewController implements ActionListener
                     characterViewView.specifiedLabel2.setText("Profession: " + c.GetProfession());
                     characterViewView.specifiedLabel3.setText("Residence: " + c.GetResidence());
                 }
+                //Perform Duty Display
+                if (!selectedChar.GetStatus().equalsIgnoreCase("Dead")) {
+                    String dutyText = "Doing nothing...";
+
+                    if (selectedChar instanceof Pirate p) {
+                        for (String[] s : Pirate.ROLES) {
+                            if (p.GetPirateRole().equalsIgnoreCase(s[0])) dutyText = s[1];
+                        }
+                    } else if (selectedChar instanceof Marine m) {
+                        for (String[] s : Marine.RANKS) {
+                            if (m.GetRank().equalsIgnoreCase(s[0])) dutyText = s[1];
+                        }
+                    } else if (selectedChar instanceof Civilian c) {
+                        for (String[] s : Civilian.CIVPROFESSIONS) {
+                            if (c.GetProfession().equalsIgnoreCase(s[0])) dutyText = s[1];
+                        }
+                    } else if (selectedChar instanceof PirateHunter) {
+                        dutyText = "Hunting while drunk...";
+                    }
+
+                    characterViewView.dutyLabel.setText("Duty: " + dutyText);
+                } else {
+                    characterViewView.dutyLabel.setText("Duty: Cannot perform duty (Dead)");
+                }
             }
         }
     }

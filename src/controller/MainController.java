@@ -52,7 +52,7 @@ public class MainController implements ActionListener
         mainView.addPanel(pirateCrewController.getFrame(), "PIRATECREW");
         marineCorpController = new MarineCorpController(mainView, new MarineCorpView(), marineCorpDatabase, characterDatabase);
         mainView.addPanel(marineCorpController.getFrame(), "MARINECORP");
-        bountyController = new BountyController(mainView, new BountyView(), bountyDatabase);
+        bountyController = new BountyController(mainView, new BountyView(), bountyDatabase, characterDatabase);
         mainView.addPanel(bountyController.getFrame(), "BOUNTY");
 
     }

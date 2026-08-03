@@ -13,18 +13,21 @@ public class BountyController implements ActionListener
     BountyManager bountyDatabase;
     BountyRegisterController bountyRegisterController;
     BountyViewController bountyViewController;
-    
-    public BountyController(MainView mainView, BountyView bountyView, BountyManager bountyDatabase)
+    CharacterDatabase charDatabase;
+
+    public BountyController(MainView mainView, BountyView bountyView, BountyManager bountyDatabase, CharacterDatabase charDatabase)
     {
         this.mainview = mainView;
         this.bountyView = bountyView;
         this.bountyDatabase = bountyDatabase;
+        this.charDatabase = charDatabase;
 
-        this.bountyRegisterController = new BountyRegisterController(mainView, new BountyRegisterView(), bountyDatabase);
+        this.bountyRegisterController = new BountyRegisterController(mainView, new BountyRegisterView(), bountyDatabase, charDatabase);
         mainview.addPanel(bountyRegisterController.getFrame(), "BOUNTYREGISTER");
-        this.bountyViewController = new BountyViewController(mainView, new BountyViewView());
+
+        this.bountyViewController = new BountyViewController(mainView, new BountyViewView(), bountyDatabase);
         mainview.addPanel(bountyViewController.getFrame(), "BOUNTYVIEW");
-        
+
         addActionListener();
     }
 
@@ -46,11 +49,13 @@ public class BountyController implements ActionListener
         /* Start Creation Buttons */
         if (e.getSource() == bountyView.registerButton)
         {
-            this.mainview.setInfoText("Registering a Bounty");  // Set the text to show some info
+            this.mainview.setInfoText("Registering a Bounty");// Set the text to show some info
+            bountyRegisterController.refreshComboBoxes();
             this.mainview.showPanel("BOUNTYREGISTER"); // need a key to show it
         } else if (e.getSource() == bountyView.viewButton)
         {
             this.mainview.setInfoText("Viewing a Historical Bounty");
+            bountyViewController.refreshView();
             this.mainview.showPanel("BOUNTYVIEW");
         }
         if (e.getSource() == bountyView.backButton)

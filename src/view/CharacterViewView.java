@@ -10,7 +10,7 @@ public class CharacterViewView
     public JButton backButton;
     public JComboBox charSelectComboBox;
 
-    public JLabel nameLabel, aliasLabel, originLabel, statusLabel, dfLabel, walletLabel, specifiedLabel1, specifiedLabel2, specifiedLabel3, specifiedLabel4;
+    public JLabel nameLabel, aliasLabel, originLabel, statusLabel, dfLabel, walletLabel, specifiedLabel1, specifiedLabel2, specifiedLabel3, specifiedLabel4, dutyLabel;
 
     private Font buttonFont = new Font(Font.MONOSPACED, Font.BOLD, 20);
     private Font textFont = new Font(Font.SERIF, Font.CENTER_BASELINE, 15);
@@ -79,6 +79,11 @@ public class CharacterViewView
         specifiedLabel4.setFont(textFont);
         specifiedLabel4.setPreferredSize(new Dimension(0, 50));
         infoPanel.add(specifiedLabel4);
+
+        dutyLabel = new JLabel("Duty: ");
+        dutyLabel.setFont(textFont);
+        dutyLabel.setPreferredSize(new Dimension(0, 50));
+        infoPanel.add(dutyLabel);
 
         mainPanel.add(topPanel, BorderLayout.PAGE_START);
         mainPanel.add(infoPanel, BorderLayout.CENTER);
